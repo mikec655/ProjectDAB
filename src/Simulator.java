@@ -18,7 +18,6 @@ public class Simulator {
     private int day = 0;
     private int hour = 0;
     private int minute = 0;
-    private int onzin = 10;
 
     private int tickPause = 100;
 
