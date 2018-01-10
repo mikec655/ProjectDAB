@@ -4,7 +4,11 @@ import java.util.Random;
 
 public class Simulator {
 	
-
+	public static void main(String[] args) {
+		Simulator sim = new Simulator();
+		sim.run();
+	}
+	
 	private static final String AD_HOC = "1";
 	private static final String PASS = "2";
 	
@@ -38,11 +42,6 @@ public class Simulator {
         simulatorView = new SimulatorView(3, 6, 30);
     }
     
-    public static void main(String[] args) {
-		Simulator sim = new Simulator();
-		sim.run();
-	}
-
     public void run() {
         for (int i = 0; i < 10000; i++) {
             tick();
