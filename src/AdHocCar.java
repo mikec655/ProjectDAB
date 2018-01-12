@@ -1,5 +1,3 @@
- 
-
 import java.util.Random;
 import java.awt.*;
 
@@ -17,4 +15,3 @@ public class AdHocCar extends Car {
     	return COLOR;
     }
 }
-//ff testen123123123123123

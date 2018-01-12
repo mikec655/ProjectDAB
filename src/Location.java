@@ -1,6 +1,4 @@
- 
-
-public class Location {
+ public class Location {
 
     private int floor;
     private int row;
@@ -68,4 +66,3 @@ public class Location {
     }
 
 }
-//hoi21312312312312321123
