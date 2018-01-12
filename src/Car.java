@@ -1,7 +1,6 @@
 /*
  * miketestboyo v2
-* berry
- *  
+*berry
  */
 
 import java.awt.*;
