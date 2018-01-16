@@ -1,3 +1,4 @@
+package ParkeerGarage;
 import javax.swing.*;
 import java.awt.*;
 
@@ -25,7 +26,7 @@ public class SimulatorView extends JFrame {
         contentPane.add(carParkView, BorderLayout.CENTER);
         pack();
         setVisible(true);
-
+        //set the contentPane 
         updateView();
     }
 

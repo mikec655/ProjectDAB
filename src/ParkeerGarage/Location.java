@@ -1,3 +1,4 @@
+package ParkeerGarage;
  public class Location {
 
     private int floor;

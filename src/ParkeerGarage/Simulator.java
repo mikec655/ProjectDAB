@@ -1,16 +1,19 @@
+package ParkeerGarage;
+
 //package Parkeersimulator;
 /*
- * test
+ * @author Mike Clarke , Jeffrey Mijer, Youri ..., Gerben Bunt, Bernt-jan Bosma
+ * @version 1.0
  */
 import java.util.Random;
 
 public class Simulator {
-	
+	// Call the first main methode.
 	public static void main(String[] args) {
 		Simulator sim = new Simulator();
 		sim.run();
 	}
-	
+	//Fields and encapsulation
 	private static final String AD_HOC = "1";
 	private static final String PASS = "2";
 	
@@ -20,7 +23,7 @@ public class Simulator {
     private CarQueue paymentCarQueue;
     private CarQueue exitCarQueue;
     private SimulatorView simulatorView;
-
+    //initialising from variable
     private int day = 0;
     private int hour = 0;
     private int minute = 0;
@@ -36,7 +39,9 @@ public class Simulator {
     int paymentSpeed = 7; // number of cars that can pay per minute
     int exitSpeed = 5; // number of cars that can leave per minute
     
+    //constructor
     public Simulator() {
+    	//Make new Objects
         entranceCarQueue = new CarQueue();
         entrancePassQueue = new CarQueue();
         paymentCarQueue = new CarQueue();
@@ -44,12 +49,18 @@ public class Simulator {
         simulatorView = new SimulatorView(3, 6, 30);
     }
     
+    /**
+     * This methode start run by call the tick() methode.
+     */
     public void run() {
         for (int i = 0; i < 10000; i++) {
             tick();
         }
     }
-
+    /**
+     * This methode call advanceTime(); ,handleExit(); ,updateViews();
+     * Afther he have called the methodes he start with exception throwing principles
+     */
     private void tick() {
     	advanceTime();
     	handleExit();
@@ -62,7 +73,9 @@ public class Simulator {
         }
     	handleEntrance();
     }
-
+    /**
+     * This methode organized the time the minutes, hour and days.
+     */
     private void advanceTime(){
         // Advance the time by one minute.
         minute++;
@@ -86,18 +99,24 @@ public class Simulator {
     	carsEntering(entranceCarQueue);  	
     }
     
+    /**
+     * This methode handle the exit of cars. 
+     */
     private void handleExit(){
         carsReadyToLeave();
         carsPaying();
         carsLeaving();
     }
     
+    /**
+     * This methode update the views
+     */
     private void updateViews(){
     	simulatorView.tick();
         // Update the car park view.
         simulatorView.updateView();	
     }
-    
+
     private void carsArriving(){
     	int numberOfCars=getNumberOfCars(weekDayArrivals, weekendArrivals);
         addArrivingCars(numberOfCars, AD_HOC);    	
