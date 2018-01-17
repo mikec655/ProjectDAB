@@ -81,7 +81,9 @@ public class SimulatorView extends JFrame {
         if (!locationIsValid(location)) {
             return null;
         }
-        return cars[location.getFloor()][location.getRow()][location.g
+        return cars[location.getFloor()][location.getRow()][location.getPlace()]; // BJ 17-01-2018 hij gaf een foutmelding ik denk dat dit er achter moet.
+    }
+    
     public boolean setCarAt(Location location, Car car) {
         if (!locationIsValid(location)) {
             return false;

@@ -8,9 +8,13 @@ import java.awt.*;
  *
  */
 public class ParkingPassCar extends Car {
-	//Instance Fields
+	/**
+	 * Instance Fields
+	 */
 	private static final Color COLOR=Color.blue;
-	//Constructor
+	/**
+	 * Constructor
+	 */
     public ParkingPassCar() {
     	Random random = new Random();
     	int stayMinutes = (int) (15 + random.nextFloat() * 3 * 60);
