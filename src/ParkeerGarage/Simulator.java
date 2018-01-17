@@ -23,6 +23,7 @@ public class Simulator {
     private CarQueue paymentCarQueue;
     private CarQueue exitCarQueue;
     private SimulatorView simulatorView;
+    
     //initialising from variable
     private int day = 0;
     private int hour = 0;
