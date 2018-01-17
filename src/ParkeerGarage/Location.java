@@ -37,6 +37,7 @@ package ParkeerGarage;
 
     /**
      * Use the 10 bits for each of the floor, row and place
+     * values. Except for very big car parks, this should give
      * a unique hash code for each (floor, row, place) tupel.
      * @return A hashcode for the location.
      */
