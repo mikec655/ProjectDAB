@@ -81,7 +81,8 @@ public class SimulatorView extends JFrame {
         if (!locationIsValid(location)) {
             return null;
         }
-        return cars[location.getFloor()][location.getRow()][location.g
+        return cars[location.getFloor()][location.getRow()][location.getPlace()];
+    }
     public boolean setCarAt(Location location, Car car) {
         if (!locationIsValid(location)) {
             return false;
