@@ -1,6 +1,8 @@
 package ParkeerGarage;
-import javax.swing.*;
+
 import java.awt.*;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 /**
  * 
  * @author ProjectGroup

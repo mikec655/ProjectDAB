@@ -1,9 +1,4 @@
 package ParkeerGarage;
-/*
- * miketestboyo v2
-* berry
- *  
- */
 
 import java.awt.*;
 
