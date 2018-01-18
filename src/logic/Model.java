@@ -2,6 +2,7 @@ package logic;
 
 import java.util.Random;
 
+//implements runnable zorgt ervoor dat er threading komt. Dus de functies toevoegen aan de infiniteloops.
 public class Model extends AbstractModel implements Runnable{
 	
 	private boolean run;
@@ -51,6 +52,8 @@ public class Model extends AbstractModel implements Runnable{
         cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
 	}
 	
+	//per tick gaat de tijd omhoog en handelt de wachtrijen af en update de views.
+	//sleep zorgt ervoor dat het programma gaat "slapen".
 	public void run() {
 		run = true;
 		while(run) {
@@ -61,6 +64,7 @@ public class Model extends AbstractModel implements Runnable{
 		}
 		
 	}
+	
 	
 	public void start() {
 		new Thread(this).start();

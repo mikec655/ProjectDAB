@@ -14,15 +14,19 @@ public class CarParkView extends AbstractView{
 	private Dimension size;
     private Image carParkImage; 
 
+    //voegt het model toe.
 	public CarParkView(Model model) {
 		super(model);
 		size = new Dimension(0, 0);
 	}
 	
+	//die geeft de waardes aan dimensies van het frame.
     public Dimension getPreferredSize() {
         return new Dimension(800, 500);
     }
 
+    
+    //die tekent de image. (wanneer aanwezig)
     public void paintComponent(Graphics g) {
         if (carParkImage == null) {
             return;
@@ -37,6 +41,7 @@ public class CarParkView extends AbstractView{
         }
     }
 
+    //samenstellen carpark.
     public void updateView() {
         if (!size.equals(getSize())) {
             size = getSize();
@@ -56,6 +61,7 @@ public class CarParkView extends AbstractView{
         repaint();
     }
 
+    //die tekent de parkeervakken.
     private void drawPlace(Graphics graphics, Location location, Color color) {
         graphics.setColor(color);
         graphics.fillRect(

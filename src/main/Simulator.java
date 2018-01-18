@@ -8,13 +8,15 @@ import logic.Model;
 import view.AbstractView;
 import view.CarParkView;
 
-
+//extends maakt het window aan bij de frontend.
 public class Simulator extends JFrame{
 	private static final long serialVersionUID = 8060582986233007360L;
 	private Model model;
 	private AbstractView carParkView;
 	private Controller controller;
 	
+//super zorgt ervoor dat het een titel krijgt, die wordt boven in het frame weergegeven.
+
 	public Simulator() {
 		super("Pakeer Garage Simulator");
 		model = new Model(3, 6, 30);
@@ -22,7 +24,8 @@ public class Simulator extends JFrame{
 		carParkView = new CarParkView(model);
 		setUpFrame();
 	}
-	
+
+//setup frame geeft een grootte aan het frame (hier komt alles in wat ingesteld moet worden binnen het frame)
 	public void setUpFrame() {
 		setLayout(new BorderLayout());
 		getContentPane().add(carParkView, BorderLayout.CENTER);
@@ -32,6 +35,7 @@ public class Simulator extends JFrame{
 		setVisible(true);
 	}
 	
+//addcomponents daarmee kun je views en controllers toevoegen aan het frame.
 	public void addComponents() {
 		
 	}
