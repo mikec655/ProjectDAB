@@ -2,7 +2,7 @@ package ParkeerGarage;
 
 //package Parkeersimulator;
 /*
- * @author Mike Clarke , Jefrey Meijer, Youri Sanders, Gerben Bunt, Bernt-jan Bosma
+ * @author Mike Clarke , Jefrey Meijer, Youri Sanders, Gerben Bunt, Bernt-jan Bosma, Jun Lin
  * @version 1.0
  */
 import java.util.Random;
