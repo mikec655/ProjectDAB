@@ -101,23 +101,14 @@ public class Model extends AbstractModel implements Runnable{
 	
 	private void tick() {
     	//VOLGORDE BEKIJKEN
-    	for (int floor = 0; floor < getNumberOfFloors(); floor++) {
-    		for (int row = 0; row < getNumberOfRows(); row++) {
-    			for (int place = 0; place < getNumberOfPlaces(); place++) {
-    				Location location = new Location(floor, row, place);
-    				Car car = getCarAt(location);
-    				if (car != null) {
-    					car.tick();
-					}
-				}           
-    		}
-		}  	
+    	
     	advanceTime();
     	handleExit();
+    	carTick();
     	notifyViews();
     	handleEntrance();
     }
-	
+		
 	public int getTickPause() {
     	return tickPause;
     }
@@ -314,6 +305,21 @@ public class Model extends AbstractModel implements Runnable{
     }
     
     //Cars methods
+    
+	private void carTick() {
+		for (int floor = 0; floor < getNumberOfFloors(); floor++) {
+    		for (int row = 0; row < getNumberOfRows(); row++) {
+    			for (int place = 0; place < getNumberOfPlaces(); place++) {
+    				Location location = new Location(floor, row, place);
+    				Car car = getCarAt(location);
+    				if (car != null) {
+    					car.tick();
+					}
+				}           
+    		}
+		}  	
+	}
+	
     private int getNumberOfCars(int weekDay, int weekend){
         Random random = new Random();
 
