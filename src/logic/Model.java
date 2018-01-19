@@ -93,7 +93,9 @@ public class Model extends AbstractModel implements Runnable{
 	}
 	
 	public void start() {
-		new Thread(this).start();
+		if (!run) {
+			new Thread(this).start();
+		}
 	}
 	
 	public void stop() {
