@@ -99,6 +99,10 @@ public class Model extends AbstractModel implements Runnable{
 	public void stop() {
 		run = false;
 	}
+	
+	public void setTickPause(int tickPause) {
+		this.tickPause = tickPause;
+	}
     
     private void tick() {
     	advanceTime();
