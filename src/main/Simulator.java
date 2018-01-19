@@ -16,9 +16,10 @@ public class Simulator extends JFrame{
 	private Controller controller;
 	
 //super zorgt ervoor dat het een titel krijgt, die wordt boven in het frame weergegeven.
+
 	public Simulator() {
 		super("Pakeer Garage Simulator");
-		model = new Model();
+		model = new Model(3, 6, 30);
 		controller = new Controller(model);
 		carParkView = new CarParkView(model);
 		setUpFrame();
