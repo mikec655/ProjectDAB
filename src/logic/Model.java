@@ -74,56 +74,16 @@ public class Model extends AbstractModel implements Runnable{
 		run = false;
 	}
 	
-	public int getNumberOfFloors() {
-        return numberOfFloors;
-    }
-
-    public int getNumberOfRows() {
-        return numberOfRows;
-    }
-
-    public int getNumberOfPlaces() {
-        return numberOfPlaces;
-    }
-
-    public int getNumberOfOpenSpots(){
-    	return numberOfOpenSpots;
-    }
-    
-    private void tick() {
-    	for (int floor = 0; floor < getNumberOfFloors(); floor++) {
-    		for (int row = 0; row < getNumberOfRows(); row++) {
-    			for (int place = 0; place < getNumberOfPlaces(); place++) {
-    				Location location = new Location(floor, row, place);
-    				Car car = getCarAt(location);
-    				if (car != null) {
-    					car.tick();
-					}
-				}           
-    		}
-		}  	
-    	
+	private void tick() {
     	advanceTime();
     	handleExit();
+    	carTick();
     	notifyViews();
     	handleEntrance();
     }
-
-    private void advanceTime(){
-        // Advance the time by one minute.
-        minute++;
-        while (minute > 59) {
-            minute -= 60;
-            hour++;
-        }
-        while (hour > 23) {
-            hour -= 24;
-            day++;
-        }
-        while (day > 6) {
-            day -= 7;
-        }
-
+	
+	public int getTickPause() {
+    	return tickPause;
     }
 
     private void handleEntrance(){
@@ -192,7 +152,137 @@ public class Model extends AbstractModel implements Runnable{
             i++;
     	}	
     }
+	
+	//Time methods
+	private void advanceTime(){
+        // Advance the time by one minute.
+        minute++;
+        while (minute > 59) {
+            minute -= 60;
+            hour++;
+        }
+        while (hour > 23) {
+            hour -= 24;
+            day++;
+        }
+        while (day > 6) {
+            day -= 7;
+        }
+
+    }
+	
+	//Getters of places
+	public int getNumberOfFloors() {
+        return numberOfFloors;
+    }
+
+    public int getNumberOfRows() {
+        return numberOfRows;
+    }
+
+    public int getNumberOfPlaces() {
+        return numberOfPlaces;
+    }
+
+    public int getNumberOfOpenSpots(){
+    	return numberOfOpenSpots;
+    }
     
+    //Setters of places
+    public void setNumberOfFloors(int numberofFloors) {
+        this.numberOfFloors = numberofFloors;
+    }
+
+    public void setNumberOfRows(int numberOfRows) {
+        this.numberOfRows = numberOfRows;
+    }
+
+    public void setNumberOfPlaces(int numberOfPlaces) {
+        this.numberOfPlaces = numberOfPlaces;
+    }
+
+    public void setNumberOfOpenSpots(int numberOfOpenSpots){
+    	this.numberOfOpenSpots = numberOfOpenSpots;
+    }
+    
+    //Getters of arrivals 
+    public void getweekDayArrivals(int weekDayArrivals) {
+        this.weekDayArrivals = weekDayArrivals;
+    }
+    
+    public void getweekendArrivals(int weekendArrivals) {
+        this.weekendArrivals = weekendArrivals;
+    }
+    
+    public void getweekDayPassArrivals(int weekDayPassArrivals) {
+        this.weekDayPassArrivals = weekDayPassArrivals;
+    }
+    
+    public void getweekendPassArrivals(int weekendPassArrivals) {
+        this.weekendPassArrivals = weekendPassArrivals;
+    }
+    
+    
+    //Setters of arrivals
+    public void setweekDayArrivals(int weekDayArrivals) {
+        this.weekDayArrivals = weekDayArrivals;
+    }
+    
+    public void setweekendArrivals(int weekendArrivals) {
+        this.weekendArrivals = weekendArrivals;
+    }
+    
+    public void setweekDayPassArrivals(int weekDayPassArrivals) {
+        this.weekDayPassArrivals = weekDayPassArrivals;
+    }
+    
+    public void setweekendPassArrivals(int weekendPassArrivals) {
+        this.weekendPassArrivals = weekendPassArrivals;
+    }
+    
+    
+    //Getters of speeds
+    public void getenterSpeed(int enterSpeed) {
+        this.enterSpeed = enterSpeed;
+    }
+    
+    public void getpaymentSpeed(int paymentSpeed) {
+        this.paymentSpeed = paymentSpeed;
+    }
+    
+    public void getexitSpeed(int exitSpeed) {
+        this.exitSpeed = exitSpeed;
+    }
+    
+    
+    //Setters of speeds
+    public void setenterSpeed(int enterSpeed) {
+        this.enterSpeed = enterSpeed;
+    }
+    
+    public void setpaymentSpeed(int paymentSpeed) {
+        this.paymentSpeed = paymentSpeed;
+    }
+    
+    public void setexitSpeed(int exitSpeed) {
+        this.exitSpeed = exitSpeed;
+    }
+    
+    //Cars methods
+	private void carTick() {
+		for (int floor = 0; floor < getNumberOfFloors(); floor++) {
+    		for (int row = 0; row < getNumberOfRows(); row++) {
+    			for (int place = 0; place < getNumberOfPlaces(); place++) {
+    				Location location = new Location(floor, row, place);
+    				Car car = getCarAt(location);
+    				if (car != null) {
+    					car.tick();
+					}
+				}           
+    		}
+		}  	
+	}
+	
     private int getNumberOfCars(int weekDay, int weekend){
         Random random = new Random();
 
