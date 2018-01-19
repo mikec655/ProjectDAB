@@ -1,4 +1,5 @@
-package ParkeerGarage;
+package logic;
+
 import java.util.Random;
 import java.awt.*;
 
