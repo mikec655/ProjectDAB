@@ -5,55 +5,83 @@ import java.util.Random;
 //implements runnable zorgt ervoor dat er threading komt. Dus de functies toevoegen aan de infiniteloops.
 public class Model extends AbstractModel implements Runnable{
 	
-	private boolean run;
-	
 	private static final String AD_HOC = "1";
 	private static final String PASS = "2";
 	
+	//Run variables
+	private boolean run;
+	private int tickPause;
 	
+	//Queues
 	private CarQueue entranceCarQueue;
     private CarQueue entrancePassQueue;
     private CarQueue paymentCarQueue;
     private CarQueue exitCarQueue;
     
+    //Time
+    private int day;
+    private int hour;
+    private int minute;
+    
+    //Places
+    private int numberOfFloors;
+    private int numberOfRows;
+    private int numberOfPlaces;
+    private int numberOfOpenSpots;
+    
+    //Arrivals
+    private int weekDayArrivals; // average number of arriving cars per hour
+    private int weekendArrivals; // average number of arriving cars per hour
+    private int weekDayPassArrivals; // average number of arriving cars per hour
+    private int weekendPassArrivals; // average number of arriving cars per hour
+    
+    //Speed
+    private int enterSpeed; // number of cars that can enter per minute
+    private int paymentSpeed; // number of cars that can pay per minute
+    private int exitSpeed; // number of cars that can leave per minute
+    
+    //Cars
     private Car[][][] cars;
-    
-
-    private int day = 0;
-    private int hour = 0;
-    private int minute = 0;
-
-    private int tickPause = 100;
-    
-    int numberOfFloors;
-    int numberOfRows;
-    int numberOfPlaces;
-    int numberOfOpenSpots;
-
-    int weekDayArrivals= 100; // average number of arriving cars per hour
-    int weekendArrivals = 200; // average number of arriving cars per hour
-    int weekDayPassArrivals= 50; // average number of arriving cars per hour
-    int weekendPassArrivals = 5; // average number of arriving cars per hour
-
-    int enterSpeed = 3; // number of cars that can enter per minute
-    int paymentSpeed = 7; // number of cars that can pay per minute
-    int exitSpeed = 5; // number of cars that can leave per minute
 	
-	public Model(int numberOfFloors, int numberOfRows, int numberOfPlaces) {
+    //Constructor
+	public Model() {
+		//Run variables
 		run = false;
+		tickPause = 100;
+		
+		//Queues
 		entranceCarQueue = new CarQueue();
         entrancePassQueue = new CarQueue();
         paymentCarQueue = new CarQueue();
         exitCarQueue = new CarQueue();
-        this.numberOfFloors = numberOfFloors;
-        this.numberOfRows = numberOfRows;
-        this.numberOfPlaces = numberOfPlaces;
-        this.numberOfOpenSpots = numberOfFloors * numberOfRows * numberOfPlaces;
+        
+        //Time 
+        day = 0;
+        hour = 0;
+        minute = 0;
+        
+        //Places
+        numberOfFloors = 3;
+        numberOfRows = 6;
+        numberOfPlaces = 30;
+        numberOfOpenSpots = numberOfFloors * numberOfRows * numberOfPlaces;
+        
+        //Arrivals
+        weekDayArrivals = 100; 
+        weekendArrivals = 200; 
+        weekDayPassArrivals= 50; 
+        weekendPassArrivals = 5; 
+        
+        //Speeds
+        enterSpeed = 3; 
+        paymentSpeed = 7; 
+        exitSpeed = 5; 
+        
+        //Cars
         cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
 	}
 	
-	//per tick gaat de tijd omhoog en handelt de wachtrijen af en update de views.
-	//sleep zorgt ervoor dat het programma gaat "slapen".
+	//Run methods
 	public void run() {
 		run = true;
 		while(run) {
@@ -62,9 +90,7 @@ public class Model extends AbstractModel implements Runnable{
 				Thread.sleep(tickPause);
 			} catch (Exception e) {} 
 		}
-		
 	}
-	
 	
 	public void start() {
 		new Thread(this).start();
@@ -73,19 +99,16 @@ public class Model extends AbstractModel implements Runnable{
 	public void stop() {
 		run = false;
 	}
-	
-	private void tick() {
+    
+    private void tick() {
     	advanceTime();
     	handleExit();
     	carTick();
     	notifyViews();
     	handleEntrance();
     }
-	
-	public int getTickPause() {
-    	return tickPause;
-    }
 
+    //Queues
     private void handleEntrance(){
     	carsArriving();
     	carsEntering(entrancePassQueue);
@@ -152,7 +175,7 @@ public class Model extends AbstractModel implements Runnable{
             i++;
     	}	
     }
-	
+    
 	//Time methods
 	private void advanceTime(){
         // Advance the time by one minute.
@@ -168,8 +191,7 @@ public class Model extends AbstractModel implements Runnable{
         while (day > 6) {
             day -= 7;
         }
-
-    }
+	}
 	
 	//Getters of places
 	public int getNumberOfFloors() {
