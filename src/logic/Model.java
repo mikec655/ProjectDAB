@@ -282,7 +282,7 @@ public class Model extends AbstractModel implements Runnable{
     		}
 		}  	
 	}
-	
+
     private int getNumberOfCars(int weekDay, int weekend){
         Random random = new Random();
 
