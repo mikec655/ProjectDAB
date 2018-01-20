@@ -207,6 +207,16 @@ public class Model extends AbstractModel implements Runnable{
         	year++;
         }
 	}
+	//getters of time
+	public int getHour() {
+        return hour;
+    }
+	public int getMinute() {
+        return minute;
+    }
+	public int getDay() {
+        return day;
+    }
 	
 	//Getters of time
 	public int getMinutes() {
