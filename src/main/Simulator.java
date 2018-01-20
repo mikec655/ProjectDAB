@@ -7,7 +7,7 @@ import controller.Controller;
 import logic.Model;
 import view.AbstractView;
 import view.CarParkView;
-import view.tijdView;
+import view.TimeView;
 
 //extends maakt het window aan bij de frontend.
 public class Simulator extends JFrame{
@@ -23,7 +23,7 @@ public class Simulator extends JFrame{
 		model = new Model();
 		controller = new Controller(model);
 		carParkView = new CarParkView(model);
-		tijdView = new tijdView(model);
+		tijdView = new TimeView(model);
 		setUpFrame();
 	}
 
