@@ -1,15 +1,6 @@
-/AdHocCar.class
-/Car.class
-/CarQueue.class
-/Location.class
-/ParkingPassCar.class
-/Simulator.class
-/SimulatorView$CarParkView.class
-/SimulatorView.class
-/ParkeerGarage/
-/src/
-/logic/
 /controller/
+/logic/
 /main/
 /runner/
 /view/
+/splash/
