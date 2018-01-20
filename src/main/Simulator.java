@@ -20,12 +20,12 @@ public class Simulator extends JFrame{
 		super("Pakeer Garage Simulator");
 		model = new Model();
 		controller = new Controller(model);
-		carParkView = new CarParkView(model);
+		carParkView = new CarParkView(model);;
 		setUpFrame();
 	}
 
 //setup frame geeft een grootte aan het frame (hier komt alles in wat ingesteld moet worden binnen het frame)
-	public void setUpFrame() {
+	private void setUpFrame() {
 		setLayout(new BorderLayout());
 		getContentPane().add(carParkView, BorderLayout.CENTER);
 		getContentPane().add(controller, BorderLayout.SOUTH);

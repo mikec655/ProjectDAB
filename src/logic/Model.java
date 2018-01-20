@@ -19,7 +19,9 @@ public class Model extends AbstractModel implements Runnable{
     private CarQueue exitCarQueue;
     
     //Time
+    private int year;
     private int day;
+    private int weekday;
     private int hour;
     private int minute;
     
@@ -56,7 +58,9 @@ public class Model extends AbstractModel implements Runnable{
         exitCarQueue = new CarQueue();
         
         //Time 
+        year = 0;
         day = 0;
+        weekday = 0;
         hour = 0;
         minute = 0;
         
@@ -193,11 +197,37 @@ public class Model extends AbstractModel implements Runnable{
         while (hour > 23) {
             hour -= 24;
             day++;
+            weekday++;
         }
-        while (day > 6) {
-            day -= 7;
+        while (weekday > 6) {
+            weekday -= 7;
+        }
+        while (day > 364) {
+        	day -= 365;
+        	year++;
         }
 	}
+	
+	//Getters of time
+	public int getMinutes() {
+        return minute;
+    }
+	
+	public int getHours() {
+        return hour;
+    }
+	
+	public int getWeekdays() {
+        return weekday;
+    }
+	
+	public int getDays() {
+        return day;
+    }
+	
+	public int getYears() {
+        return year;
+    }
 	
 	//Getters of places
 	public int getNumberOfFloors() {
