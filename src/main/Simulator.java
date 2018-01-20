@@ -22,12 +22,8 @@ public class Simulator extends JFrame{
 		super("Pakeer Garage Simulator");
 		model = new Model();
 		controller = new Controller(model);
-<<<<<<< HEAD
-		carParkView = new CarParkView(model);;
-=======
 		carParkView = new CarParkView(model);
 		tijdView = new tijdView(model);
->>>>>>> branch 'working_branch' of https://github.com/mikec655/ProjectDAB.git
 		setUpFrame();
 	}
 
