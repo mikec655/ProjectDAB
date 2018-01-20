@@ -7,6 +7,7 @@ import controller.Controller;
 import logic.Model;
 import view.AbstractView;
 import view.CarParkView;
+import view.tijdView;
 
 //extends maakt het window aan bij de frontend.
 public class Simulator extends JFrame{
@@ -14,6 +15,7 @@ public class Simulator extends JFrame{
 	private Model model;
 	private AbstractView carParkView;
 	private Controller controller;
+	private AbstractView tijdView;
 	
 //super zorgt ervoor dat het een titel krijgt, die wordt boven in het frame weergegeven.
 	public Simulator() {
@@ -21,6 +23,7 @@ public class Simulator extends JFrame{
 		model = new Model();
 		controller = new Controller(model);
 		carParkView = new CarParkView(model);
+		tijdView = new tijdView(model);
 		setUpFrame();
 	}
 
@@ -29,6 +32,7 @@ public class Simulator extends JFrame{
 		setLayout(new BorderLayout());
 		getContentPane().add(carParkView, BorderLayout.CENTER);
 		getContentPane().add(controller, BorderLayout.SOUTH);
+		getContentPane().add(tijdView, BorderLayout.EAST);
 		setSize(1280, 640);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);

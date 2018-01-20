@@ -198,6 +198,16 @@ public class Model extends AbstractModel implements Runnable{
             day -= 7;
         }
 	}
+	//getters of time
+	public int getHour() {
+        return hour;
+    }
+	public int getMinute() {
+        return minute;
+    }
+	public int getDay() {
+        return day;
+    }
 	
 	//Getters of places
 	public int getNumberOfFloors() {
