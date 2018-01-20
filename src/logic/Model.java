@@ -21,7 +21,6 @@ public class Model extends AbstractModel implements Runnable{
     //Time
     private int year;
     private int day;
-    private int weekday;
     private int hour;
     private int minute;
     
@@ -60,7 +59,6 @@ public class Model extends AbstractModel implements Runnable{
         //Time 
         year = 0;
         day = 0;
-        weekday = 0;
         hour = 0;
         minute = 0;
         
@@ -197,45 +195,31 @@ public class Model extends AbstractModel implements Runnable{
         while (hour > 23) {
             hour -= 24;
             day++;
-            weekday++;
-        }
-        while (weekday > 6) {
-            weekday -= 7;
         }
         while (day > 364) {
         	day -= 365;
         	year++;
         }
 	}
-	//getters of time
-	public int getHour() {
-        return hour;
-    }
+	
+	//Getters of time
 	public int getMinute() {
         return minute;
     }
+	
+	public int getHour() {
+        return hour;
+    }
+	
 	public int getDay() {
         return day;
     }
 	
-	//Getters of time
-	public int getMinutes() {
-        return minute;
+	public int getWeekday() {
+        return day % 7;
     }
 	
-	public int getHours() {
-        return hour;
-    }
-	
-	public int getWeekdays() {
-        return weekday;
-    }
-	
-	public int getDays() {
-        return day;
-    }
-	
-	public int getYears() {
+	public int getYear() {
         return year;
     }
 	
