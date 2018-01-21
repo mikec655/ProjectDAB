@@ -45,7 +45,6 @@ public class Model extends AbstractModel implements Runnable{
     //Constructor
 	public Model() {
 		reset();
-		start();
 	}
 	
 	//Run methods
@@ -93,7 +92,11 @@ public class Model extends AbstractModel implements Runnable{
         //Cars
         cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
         
-        tick();
+        try {
+        	notifyViews();
+        } catch(NullPointerException e) {
+        	//nothing has to happen
+        }
 	}
 	
 	public void start() {
