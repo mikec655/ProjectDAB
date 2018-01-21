@@ -44,6 +44,22 @@ public class Model extends AbstractModel implements Runnable{
 	
     //Constructor
 	public Model() {
+		reset();
+		start();
+	}
+	
+	//Run methods
+	public void run() {
+		run = true;
+		while(run) {
+			tick();
+			try {
+				Thread.sleep(tickPause);
+			} catch (Exception e) {} 
+		}
+	}
+	
+	public void reset() {
 		//Run variables
 		run = false;
 		tickPause = 100;
@@ -76,17 +92,8 @@ public class Model extends AbstractModel implements Runnable{
         
         //Cars
         cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
-	}
-	
-	//Run methods
-	public void run() {
-		run = true;
-		while(run) {
-			tick();
-			try {
-				Thread.sleep(tickPause);
-			} catch (Exception e) {} 
-		}
+        
+        tick();
 	}
 	
 	public void start() {

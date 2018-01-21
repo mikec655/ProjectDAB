@@ -13,14 +13,16 @@ import logic.Model;
 public class Controller extends AbstractController implements ActionListener, ChangeListener{
 	private static final long serialVersionUID = -3877309321229212169L;
 	JButton startButton;
-	JButton stopButton;
+	JButton pauseButton;
+	JButton resetButton;
 	JSlider speedSlider;
 	
 	//Constructor controller
 	public Controller(Model model) {
 		super(model);
 		startButton = new JButton("Start");
-		stopButton = new JButton("Stop");
+		pauseButton = new JButton("Pauze");
+		resetButton = new JButton("Reset");
 		speedSlider = new JSlider(-3, 1, -2);
 		setUpPanel();
 	}
@@ -29,10 +31,12 @@ public class Controller extends AbstractController implements ActionListener, Ch
 	private void setUpPanel(){
 		setLayout(new FlowLayout());
 		startButton.addActionListener(this);
-		stopButton.addActionListener(this);
+		pauseButton.addActionListener(this);
+		resetButton.addActionListener(this);
 		speedSlider.addChangeListener(this);
 		add(startButton);
-		add(stopButton);
+		add(pauseButton);
+		add(resetButton);
 		add(speedSlider);
 	}
 
@@ -43,10 +47,13 @@ public class Controller extends AbstractController implements ActionListener, Ch
 			model.start();
 		}
 		
-		if (e.getSource() == stopButton) {
+		if (e.getSource() == pauseButton) {
 			model.stop();
 		}
 		
+		if (e.getSource() == resetButton) {
+			model.reset();
+		}
 	}
 	
 	//stateChanged voor de verandering van de sliders
