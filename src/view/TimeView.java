@@ -23,7 +23,13 @@ public class TimeView extends AbstractView{
 	}
 	
 	public void updateView() {
-		tijdshow.setText("Jaar: " + model.getYear() + " Dag: " + getDayString(model.getWeekday()) + " Tijd: " + getClockString(model.getHour(), model.getMinute()));
+		String timeString = "";
+		timeString += getClockString(model.getHour(), model.getMinute()) + " ";
+		timeString += getDayString(model.getDayOfWeek()) + " ";
+		timeString += model.getDay() + " ";
+		timeString += getMonthString(model.getMonth()) + " "; 
+		timeString += model.getYear();
+		tijdshow.setText(timeString);
 	}
 	
 	private String getClockString(int hours, int minutes) {
@@ -44,13 +50,32 @@ public class TimeView extends AbstractView{
 	
 	private String getDayString(int day) {
 		switch(day) {
-			case 0 : return "maandag";
-			case 1 : return "dinsdag";
-			case 2 : return "woensdag";
-			case 3 : return "donderdag";
-			case 4 : return "vrijdag";
-			case 5 : return "zaterdag";
-			default: return "zondag";
+			case 1 : return "zondag";
+			case 2 : return "maandag";
+			case 3 : return "dinsdag";
+			case 4 : return "woensdag";
+			case 5 : return "donderdag";
+			case 6 : return "vrijdag";
+			case 7 : return "zaterdag";
+			default: return "";
+		}
+	}
+	
+	private String getMonthString(int month) {
+		switch(month) {
+			case 0 : return "januari";
+			case 1 : return "februari";
+			case 2 : return "maart";
+			case 3 : return "april";
+			case 4 : return "mei";
+			case 5 : return "juni";
+			case 6 : return "juli";
+			case 7 : return "augustus";
+			case 8 : return "september";
+			case 9 : return "oktober";
+			case 10 : return "november";
+			case 11 : return "december";
+			default: return "";
 		}
 	}
 }

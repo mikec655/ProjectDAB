@@ -1,5 +1,6 @@
 package logic;
 
+import java.util.Calendar;
 import java.util.Random;
 
 //implements runnable zorgt ervoor dat er threading komt. Dus de functies toevoegen aan de infiniteloops.
@@ -19,10 +20,7 @@ public class Model extends AbstractModel implements Runnable{
     private CarQueue exitCarQueue;
     
     //Time
-    private int year;
-    private int day;
-    private int hour;
-    private int minute;
+    Calendar time;
     
     //Places
     private int numberOfFloors;
@@ -57,10 +55,7 @@ public class Model extends AbstractModel implements Runnable{
         exitCarQueue = new CarQueue();
         
         //Time 
-        year = 0;
-        day = 0;
-        hour = 0;
-        minute = 0;
+        time = Calendar.getInstance();
         
         //Places
         numberOfFloors = 3;
@@ -187,40 +182,32 @@ public class Model extends AbstractModel implements Runnable{
 	//Time methods
 	private void advanceTime(){
         // Advance the time by one minute.
-        minute++;
-        while (minute > 59) {
-            minute -= 60;
-            hour++;
-        }
-        while (hour > 23) {
-            hour -= 24;
-            day++;
-        }
-        while (day > 364) {
-        	day -= 365;
-        	year++;
-        }
+        time.add(Calendar.MINUTE, 1);
 	}
 	
 	//Getters of time
 	public int getMinute() {
-        return minute;
+        return time.get(Calendar.MINUTE);
     }
 	
 	public int getHour() {
-        return hour;
+        return time.get(Calendar.HOUR_OF_DAY);
     }
 	
 	public int getDay() {
-        return day;
+        return time.get(Calendar.DAY_OF_MONTH);
     }
 	
-	public int getWeekday() {
-        return day % 7;
+	public int getDayOfWeek() {
+        return time.get(Calendar.DAY_OF_WEEK);
     }
+	
+	public int getMonth() {
+		return time.get(Calendar.MONTH);
+	}
 	
 	public int getYear() {
-        return year;
+        return time.get(Calendar.YEAR);
     }
 	
 	//Getters of places
@@ -339,9 +326,9 @@ public class Model extends AbstractModel implements Runnable{
         Random random = new Random();
 
         // Get the average number of cars that arrive per hour.
-        int averageNumberOfCarsPerHour = day < 5
-                ? weekDay
-                : weekend;
+        int averageNumberOfCarsPerHour = getDayOfWeek() == 1 || getDayOfWeek() == 7
+                ? weekend
+                : weekDay;
 
         // Calculate the number of cars that arrive this minute.
         double standardDeviation = averageNumberOfCarsPerHour * 0.3;
