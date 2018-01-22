@@ -26,6 +26,8 @@ public class PieChartView extends AbstractView {
 		g.fillArc(25, 25, 200, 200, 0, 45);
 		g.setColor(Color.BLUE);
 		g.fillArc(25, 25, 200, 200, 45, 360-45);
+		g.setColor(Color.YELLOW);
+		g.fillArc(25, 25, 200, 200, 45, 360-90);
     }
 	 
 
