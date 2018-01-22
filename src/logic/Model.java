@@ -76,7 +76,7 @@ public class Model extends AbstractModel implements Runnable{
         time = Calendar.getInstance();
         
         //Places
-        numberOfFloors = 3;
+        numberOfFloors = 4;
         numberOfRows = 6;
         numberOfPlaces = 30;
         numberOfOpenSpots = numberOfFloors * numberOfRows * numberOfPlaces;
@@ -126,7 +126,7 @@ public class Model extends AbstractModel implements Runnable{
     private void tick() {
     	advanceTime();
     	handleExit();
-    	carTick();
+    	carTick(); // deze haalt een minuut van de carminutes af.
     	notifyViews();
     	handleEntrance();
     }

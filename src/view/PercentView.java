@@ -3,7 +3,6 @@ package view;
 import javax.swing.JLabel;
 import logic.Model;
 import java.awt.FlowLayout;
-import java.text.DecimalFormat;
 
 public class PercentView extends AbstractView{
 	private static final long serialVersionUID = 1337;
