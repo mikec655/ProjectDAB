@@ -23,18 +23,19 @@ public class PercentView extends AbstractView{
 	}
 	
 	public void updateView() {
-		int placepercent = 1000;
+		double placepercent = 0;
+		
+		placepercent = getNumberOfPlaces(placepercent);
 		percentshow.setText(String.valueOf(placepercent));
-		System.out.println(placepercent);
 	}
 	
-	private int getNumberOfPlaces(int placepercent) {
-			if (getNumberOfPlaces(placepercent) < 10) {
-				placepercent += 9;
-			} else {
-				placepercent += 55;
-			}
-			return placepercent;
+	private double getNumberOfPlaces(double placepercent) {
+
+				double tempplacepercent2 = (model.getNumberOfPlaces() * model.getNumberOfFloors() * model.getNumberOfRows());
+				placepercent += model.getNumberOfOpenSpots() / tempplacepercent2 * 100.0;
+				placepercent = Math.round(placepercent * 100);
+				placepercent = placepercent/100;
+				return placepercent;
 			
 		}
 		
