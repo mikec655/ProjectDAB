@@ -79,9 +79,9 @@ public class Model extends AbstractModel implements Runnable{
         numberOfOpenSpots = numberOfFloors * numberOfRows * numberOfPlaces;
         
         //Arrivals
-        weekDayArrivals = 100; 
-        weekendArrivals = 200; 
-        weekDayPassArrivals= 50; 
+        weekDayArrivals = 200;
+        weekDayPassArrivals= 200; 
+        weekendArrivals = 300; 
         weekendPassArrivals = 5; 
         
         //Speeds
@@ -143,12 +143,19 @@ public class Model extends AbstractModel implements Runnable{
 
     private void carsEntering(CarQueue queue){
         int i=0;
+        Location freeLocation = null;
         // Remove car from the front of the queue and assign to a parking space.
     	while (queue.carsInQueue()>0 && 
     			getNumberOfOpenSpots()>0 && 
     			i<enterSpeed) {
             Car car = queue.removeCar();
-            Location freeLocation = getFirstFreeLocation();
+            // hier checken wat voor car het is.
+            if(car instanceof ParkingPassCar) {
+            freeLocation = getFirstpassLocation();
+            }
+            else{
+            freeLocation = getFirstFreeLocation();
+            }
             setCarAt(freeLocation, car);
             i++;
         }
@@ -403,7 +410,7 @@ public class Model extends AbstractModel implements Runnable{
     }
 
     public Location getFirstFreeLocation() {
-        for (int floor = 0; floor < getNumberOfFloors(); floor++) {
+          for (int floor = 0; floor < getNumberOfFloors(); floor++) {
             for (int row = 0; row < getNumberOfRows(); row++) {
                 for (int place = 0; place < getNumberOfPlaces(); place++) {
                     Location location = new Location(floor, row, place);
@@ -413,8 +420,24 @@ public class Model extends AbstractModel implements Runnable{
                 }
             }
         }
-        return null;
+         return null;
     }
+    
+    public Location getFirstpassLocation() {
+        for (int floor = 2; floor < getNumberOfFloors(); floor++) {
+          for (int row = 0; row < getNumberOfRows(); row++) {
+              for (int place = 0; place < getNumberOfPlaces(); place++) {
+                  Location location = new Location(floor, row, place);
+                  if (getCarAt(location) == null) {
+                      return location;
+                  }
+              }
+          }
+      }
+       return null;
+  }
+  
+    
 
     public Car getFirstLeavingCar() {
         for (int floor = 0; floor < getNumberOfFloors(); floor++) {
