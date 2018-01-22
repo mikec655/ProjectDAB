@@ -32,7 +32,6 @@ public class Simulator extends JFrame implements ComponentListener{
 		tijdView = new TimeView(model);
 		PercentView = new PercentView(model);
 		setUpFrame();
-		model.notifyViews();
 	}
 
 	//setup frame geeft een grootte aan het frame (hier komt alles in wat ingesteld moet worden binnen het frame)

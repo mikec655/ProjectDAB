@@ -99,6 +99,11 @@ public class Model extends AbstractModel implements Runnable{
         }
 	}
 	
+	public void reset(int tickPause) {
+		this.reset();
+		this.tickPause = tickPause;
+	}
+	
 	public void start() {
 		if (!run) {
 			new Thread(this).start();
