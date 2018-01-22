@@ -12,6 +12,7 @@ import view.AbstractView;
 import view.CarParkView;
 import view.TimeView;
 import view.PercentView;
+import view.PieChartView;
 
 //extends maakt het window aan bij de frontend.
 public class Simulator extends JFrame implements ComponentListener{
@@ -20,7 +21,8 @@ public class Simulator extends JFrame implements ComponentListener{
 	private AbstractView carParkView;
 	private AbstractView tijdView;
 	private Controller controller;
-	private PercentView PercentView;
+	private PercentView percentView;
+	private PieChartView pieChartView;
 	
 	
 	//super zorgt ervoor dat het een titel krijgt, die wordt boven in het frame weergegeven.
@@ -30,7 +32,8 @@ public class Simulator extends JFrame implements ComponentListener{
 		controller = new Controller(model);
 		carParkView = new CarParkView(model);
 		tijdView = new TimeView(model);
-		PercentView = new PercentView(model);
+		percentView = new PercentView(model);
+		pieChartView = new PieChartView(model);
 		setUpFrame();
 	}
 
@@ -50,7 +53,8 @@ public class Simulator extends JFrame implements ComponentListener{
 		getContentPane().add(carParkView, BorderLayout.CENTER);
 		getContentPane().add(controller, BorderLayout.SOUTH);
 		getContentPane().add(tijdView, BorderLayout.NORTH);
-		getContentPane().add(PercentView, BorderLayout.EAST);
+		getContentPane().add(percentView, BorderLayout.EAST);
+		getContentPane().add(pieChartView, BorderLayout.EAST);
 	}
 
 	@Override
