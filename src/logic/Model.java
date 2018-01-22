@@ -44,7 +44,13 @@ public class Model extends AbstractModel implements Runnable{
     
     //Cars
     private Car[][][] cars;
-	
+    
+    //payment
+    private double adHocPayment;
+    private double resCarPayment;
+    private double pasCarPayment;
+    
+    
     //Constructor
 	public Model() {
 		reset();
@@ -188,12 +194,40 @@ public class Model extends AbstractModel implements Runnable{
         }
     }
 
+    public int gStayMinute() {
+    	return getMinute();
+    }
+    
     private void carsPaying(){
         // Let cars pay.
+    	
     	int i=0;
     	while (paymentCarQueue.carsInQueue()>0 && i < paymentSpeed){
             Car car = paymentCarQueue.removeCar();
-            // TODO Handle payment.
+            //   private double AdHocPayment;
+            //   private double ResCarPayment;
+            //   private double PasCarPayment;
+           
+            if(car instanceof AdHocCar) {
+            	((AdHocCar) car).getPaymentADH();
+            	System.out.println(((AdHocCar) car).getPaymentADH());
+            }
+            
+            if(car instanceof ResCar) {
+            	((ResCar) car).getpaymentRes();
+            	System.out.println(((ResCar) car).getpaymentRes());
+            }
+            
+            
+            if(car instanceof ParkingPassCar) {
+            	((ParkingPassCar) car).getpaymentPass();
+            	System.out.println(((ParkingPassCar) car).getpaymentPass());
+            }
+            
+            //polymorfism
+            car.getIsPaying();
+           
+            
             carLeavesSpot(car);
             i++;
     	}
@@ -494,4 +528,19 @@ public class Model extends AbstractModel implements Runnable{
         }
         return true;
     }
+    
+    
+ //   private double AdHocPayment;
+ //   private double ResCarPayment;
+ //   private double PasCarPayment;
+  //  public double AdHocPaymentTotal() {
+  //  	adHocPayment += AdHocCar.getpaymentADH();
+  //  	System.out.println(adHocPayment);/
+//		return adHocPayment;
+//    }
+    
+    
+    
+ 
+    
 }

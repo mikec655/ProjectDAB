@@ -8,6 +8,7 @@ public abstract class Car {
     private int minutesLeft;
     private boolean isPaying;
     private boolean hasToPay;
+    private int stayMinutes;
 
     public Car() {
 
@@ -43,6 +44,12 @@ public abstract class Car {
 
     public void setHasToPay(boolean hasToPay) {
         this.hasToPay = hasToPay;
+    }
+    
+    public int getStayMinute() {
+    	System.out.println(stayMinutes);
+    	return stayMinutes;
+    
     }
 
     public void tick() {

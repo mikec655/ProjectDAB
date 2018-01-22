@@ -1,6 +1,8 @@
 package view;
 
 import javax.swing.JLabel;
+
+import logic.AdHocCar;
 import logic.Model;
 import java.awt.FlowLayout;
 
@@ -38,6 +40,4 @@ public class PercentView extends AbstractView{
 				
 		}
 		
-
-    
 }
