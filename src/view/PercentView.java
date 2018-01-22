@@ -3,10 +3,10 @@ package view;
 import javax.swing.JLabel;
 import logic.Model;
 import java.awt.FlowLayout;
+import java.text.DecimalFormat;
 
 public class PercentView extends AbstractView{
 	private static final long serialVersionUID = 1337;
-	
 	private JLabel percentshow;
 	
 	public PercentView(Model model) {
@@ -26,17 +26,17 @@ public class PercentView extends AbstractView{
 		double placepercent = 0;
 		
 		placepercent = getNumberOfPlaces(placepercent);
-		percentshow.setText(String.valueOf(placepercent));
+		percentshow.setText("Het percentage open plaatsen is: " + String.valueOf(placepercent) + "%");
 	}
 	
 	private double getNumberOfPlaces(double placepercent) {
 
 				double tempplacepercent2 = (model.getNumberOfPlaces() * model.getNumberOfFloors() * model.getNumberOfRows());
-				placepercent += model.getNumberOfOpenSpots() / tempplacepercent2 * 100.0;
-				placepercent = Math.round(placepercent * 100);
-				placepercent = placepercent/100;
+				placepercent += model.getNumberOfOpenSpots() / tempplacepercent2 * 100.00;
+				placepercent = Math.round(placepercent * 10.00);
+				placepercent = placepercent / 10.00;
 				return placepercent;
-			
+				
 		}
 		
 
