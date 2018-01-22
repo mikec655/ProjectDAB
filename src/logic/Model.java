@@ -76,7 +76,7 @@ public class Model extends AbstractModel implements Runnable{
         time = Calendar.getInstance();
         
         //Places
-        numberOfFloors = 4;
+        numberOfFloors = 3;
         numberOfRows = 6;
         numberOfPlaces = 30;
         numberOfOpenSpots = numberOfFloors * numberOfRows * numberOfPlaces;
@@ -164,6 +164,9 @@ public class Model extends AbstractModel implements Runnable{
             // hier checken wat voor car het is.
             if(car instanceof ParkingPassCar) {
             freeLocation = getFirstpassLocation();
+            }
+            else if(car instanceof ResCar) {
+            	freeLocation = getFirstResLocation();
             }
             else{
             freeLocation = getFirstFreeLocation();
@@ -453,6 +456,20 @@ public class Model extends AbstractModel implements Runnable{
         }
          return null;
     }
+    
+    public Location getFirstResLocation() {
+        for (int floor = 1; floor < getNumberOfFloors(); floor++) {
+          for (int row = 5; row < getNumberOfRows(); row++) {
+              for (int place = 0; place < getNumberOfPlaces(); place++) {
+                  Location location = new Location(floor, row, place);
+                  if (getCarAt(location) == null) {
+                      return location;
+                  }
+              }
+          }
+      }
+       return null;
+  }
     
     public Location getFirstpassLocation() {
         for (int floor = 2; floor < getNumberOfFloors(); floor++) {
