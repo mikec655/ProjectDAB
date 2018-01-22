@@ -39,6 +39,10 @@ public class Controller extends AbstractController implements ActionListener, Ch
 		add(resetButton);
 		add(speedSlider);
 	}
+	
+	private int calculateTickPause() {
+		return (int) Math.pow(10, speedSlider.getValue() * -1);
+	}
 
 	//actionPerformed voor de actie van de knoppen
 	@Override
@@ -52,7 +56,7 @@ public class Controller extends AbstractController implements ActionListener, Ch
 		}
 		
 		if (e.getSource() == resetButton) {
-			model.reset();
+			model.reset(calculateTickPause());
 		}
 	}
 	
@@ -60,7 +64,7 @@ public class Controller extends AbstractController implements ActionListener, Ch
 	@Override
 	public void stateChanged(ChangeEvent e) {
 		if (e.getSource() == speedSlider) {
-			model.setTickPause((int) Math.pow(10, speedSlider.getValue() * -1));
+			model.setTickPause(calculateTickPause());
 		}
 	}
 }
