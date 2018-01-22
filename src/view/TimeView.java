@@ -1,19 +1,28 @@
 package view;
 
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import logic.Model;
+
+import java.awt.Color;
 import java.awt.FlowLayout;
+import javax.swing.border.*;
 
 public class TimeView extends AbstractView{
 	private static final long serialVersionUID = 1;
-	
+	private Border blackline;
 	private JLabel tijdshow;
 	
 	public TimeView(Model model) {
 		super(model);
+		
+		blackline = BorderFactory.createLineBorder(Color.black, 1 );
 		tijdshow = new JLabel();
 		tijdshow.setVerticalTextPosition(JLabel.BOTTOM);
 		tijdshow.setHorizontalTextPosition(JLabel.CENTER);
+		tijdshow.setOpaque(true);
+		tijdshow.setBackground(Color.WHITE);
+		tijdshow.setBorder(new CompoundBorder((blackline),BorderFactory.createEmptyBorder(20,20,20,20)));
 		setUpPanel();
 	}
 	
