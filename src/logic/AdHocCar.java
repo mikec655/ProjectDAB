@@ -23,3 +23,4 @@ public class AdHocCar extends Car {
     	return paymentADH;
     }
 }
+
