@@ -8,6 +8,7 @@ public class Model extends AbstractModel implements Runnable{
 	
 	private static final String AD_HOC = "1";
 	private static final String PASS = "2";
+	private static final String ResCar = "3";
 	
 	//Run variables
 	private boolean run;
@@ -33,6 +34,8 @@ public class Model extends AbstractModel implements Runnable{
     private int weekendArrivals; // average number of arriving cars per hour
     private int weekDayPassArrivals; // average number of arriving cars per hour
     private int weekendPassArrivals; // average number of arriving cars per hour
+    private int weekDayResArrivals; // average number of arriving reserved cars per hour
+    private int weekendResArrivals; // average number of arriving reserved cars per hour
     
     //Speed
     private int enterSpeed; // number of cars that can enter per minute
@@ -80,9 +83,11 @@ public class Model extends AbstractModel implements Runnable{
         
         //Arrivals
         weekDayArrivals = 200;
-        weekDayPassArrivals= 50; 
+        weekDayPassArrivals= 50;
+        weekDayResArrivals = 20;
         weekendArrivals = 100; 
         weekendPassArrivals = 5; 
+        weekendResArrivals = 10;
         
         //Speeds
         enterSpeed = 3; 
@@ -143,7 +148,9 @@ public class Model extends AbstractModel implements Runnable{
     	int numberOfCars=getNumberOfCars(weekDayArrivals, weekendArrivals);
         addArrivingCars(numberOfCars, AD_HOC);    	
     	numberOfCars=getNumberOfCars(weekDayPassArrivals, weekendPassArrivals);
-        addArrivingCars(numberOfCars, PASS);    	
+        addArrivingCars(numberOfCars, PASS);
+        numberOfCars=getNumberOfCars(weekDayResArrivals, weekendResArrivals);
+        addArrivingCars(numberOfCars, ResCar);  
     }
 
     private void carsEntering(CarQueue queue){
@@ -283,6 +290,13 @@ public class Model extends AbstractModel implements Runnable{
         this.weekendPassArrivals = weekendPassArrivals;
     }
     
+    public void getweekDayResArrivals(int weekDayResArrivals) {
+        this.weekDayResArrivals = weekDayResArrivals;
+    }
+    
+    public void getweekendResArrivals(int weekendResArrivals) {
+        this.weekendResArrivals = weekendResArrivals;
+    }
     
     //Setters of arrivals
     public void setweekDayArrivals(int weekDayArrivals) {
@@ -299,6 +313,13 @@ public class Model extends AbstractModel implements Runnable{
     
     public void setweekendPassArrivals(int weekendPassArrivals) {
         this.weekendPassArrivals = weekendPassArrivals;
+    }
+    public void setweekDayResArrivals(int weekDayResArrivals) {
+        this.weekDayResArrivals = weekDayResArrivals;
+    }
+    
+    public void setweekendResArrivals(int weekendResArrivals) {
+        this.weekendResArrivals = weekendResArrivals;
     }
     
     
@@ -370,7 +391,12 @@ public class Model extends AbstractModel implements Runnable{
             for (int i = 0; i < numberOfCars; i++) {
             	entrancePassQueue.addCar(new ParkingPassCar());
             }
-            break;	            
+            break;	
+    	case ResCar:
+    		for (int i = 0; i < numberOfCars; i++) {
+            	entranceCarQueue.addCar(new ResCar());
+            }
+            break;
     	}
     }
     
