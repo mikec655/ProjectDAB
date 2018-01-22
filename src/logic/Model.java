@@ -80,8 +80,8 @@ public class Model extends AbstractModel implements Runnable{
         
         //Arrivals
         weekDayArrivals = 200;
-        weekDayPassArrivals= 200; 
-        weekendArrivals = 300; 
+        weekDayPassArrivals= 50; 
+        weekendArrivals = 100; 
         weekendPassArrivals = 5; 
         
         //Speeds
