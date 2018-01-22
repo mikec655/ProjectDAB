@@ -1,10 +1,8 @@
 package view;
 
-import java.awt.FlowLayout;
-
 import javax.swing.JLabel;
-
 import logic.Model;
+import java.awt.FlowLayout;
 
 public class PercentView extends AbstractView{
 	private static final long serialVersionUID = 1337;
