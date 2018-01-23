@@ -169,7 +169,8 @@ public class Model extends AbstractModel implements Runnable{
         while (queue.carsInQueue()>0 && 
     			getNumberOfOpenSpots()>0 && 
     			i<enterSpeed) {
-            Car car = queue.removeCar();
+           Car car = queue.removeCar();
+        	//Car car = queue.peek();
             // hier checken wat voor car het is.
             if(car instanceof ParkingPassCar) {
             freeLocation = getFirstpassLocation();
