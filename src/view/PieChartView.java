@@ -6,10 +6,10 @@ import java.awt.Graphics;
 
 import logic.Model;
 
+
 //PieChartView extends AbstractView 
 public class PieChartView extends AbstractView {
 	private static final long serialVersionUID = -3842302968396266777L;
-	
 	
 //Hier word de super aangeroepen van de klasse AbstractView.
 	public PieChartView(Model model) {
@@ -40,7 +40,7 @@ public class PieChartView extends AbstractView {
 			g.fillArc(25, 25, 200, 200, 0, (int) (100*3.60));
 			g.setColor(Color.red);
 			g.fillArc(25, 25, 200, 200, 0, (int) (getAngle()));  
-			
 			}
-	 
+
+				
 }
