@@ -1,5 +1,5 @@
 package logic;
-
+ 
 import java.util.Calendar;
 import java.util.Random;
 import java.io.BufferedReader;
@@ -7,189 +7,197 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-
+ 
 //implements runnable zorgt ervoor dat er threading komt. Dus de functies toevoegen aan de infiniteloops.
 public class Model extends AbstractModel implements Runnable{
-	// Deze code kun je beter onder elkaar zetten dat is netter.
-	private static final String AD_HOC = "1";
-	private static final String PASS = "2";
-	private static final String ResCar = "3";
-	
-	//Run variables
-	private boolean run;
-	private int tickPause;
-	
-	//Queues
-	private CarQueue entranceCarQueue;
+    // Deze code kun je beter onder elkaar zetten dat is netter.
+    private static final String AD_HOC = "1";
+    private static final String PASS = "2";
+    private static final String ResCar = "3";
+   
+    //Run variables
+    private boolean run;
+    private int tickPause;
+   
+    //Queues
+    private CarQueue entranceCarQueue;
     private CarQueue entrancePassQueue;
     private CarQueue paymentCarQueue;
     private CarQueue exitCarQueue;
-    
+   
     //Time
-    Calendar time;
-    
+    private Calendar time;
+    private int minutesRunning;
+   
     //Places
     private int numberOfFloors;
     private int numberOfRows;
     private int numberOfPlaces;
     private int numberOfOpenSpots;
-    
+   
     //Arrivals
     private int[][] arrivalsPass;
     private int[][] arrivalsAdHoc;
     private int[][] arrivalsRes;
-    
+   
     //Speed
     private int enterSpeed; // number of cars that can enter per minute
     private int paymentSpeed; // number of cars that can pay per minute
     private int exitSpeed; // number of cars that can leave per minute
-    
+   
     //Cars in een multidimensionale array.
     private Car[][][] cars;
-    
+   
     //payment
     private double adHocPayment;
     private double resCarPayment;
     private double pasCarPayment;
-    
-    
+    private double profit;
+    private double averageProfit;
+    private static double label;
+    private double profitPlus;
+    private double profitAv;
+   
+   
+   
     //Constructor
-	public Model() {
-		reset();
-	}
-	
-	//Run methods
-	public void run() {
-		run = true;
-		while(run) {
-			tick();
-			try {
-				Thread.sleep(tickPause);
-			} catch (Exception e) {} 
-		}
-	}
-	
-	public void reset() {
-		//Run variables
-		run = false;
-		tickPause = 100;
-		
-		//Queues
-		entranceCarQueue = new CarQueue();
+    public Model() {
+        reset();
+    }
+   
+    //Run methods
+    public void run() {
+        run = true;
+        while(run) {
+            tick();
+            try {
+                Thread.sleep(tickPause);
+            } catch (Exception e) {}
+        }
+    }
+   
+    public void reset() {
+        //Run variables
+        run = false;
+        tickPause = 100;
+       
+        //Queues
+        entranceCarQueue = new CarQueue();
         entrancePassQueue = new CarQueue();
         paymentCarQueue = new CarQueue();
         exitCarQueue = new CarQueue();
-        
-        //Time 
+       
+        //Time
         time = Calendar.getInstance();
-        
+        minutesRunning = 0;
+       
         //Places
         numberOfFloors = 3;
         numberOfRows = 6;
         numberOfPlaces = 30;
         numberOfOpenSpots = numberOfFloors * numberOfRows * numberOfPlaces;
-        
+       
         //Arrivals
         arrivalsAdHoc = readArrivalsFile("arrivalsAdHoc.txt");
         arrivalsPass = readArrivalsFile("arrivalsPass.txt");
         arrivalsRes = readArrivalsFile("arrivalsRes.txt");
        
         //Speeds
-        enterSpeed = 3; 
-        paymentSpeed = 7; 
-        exitSpeed = 5; 
-        
-        //Cars	numberOfFloor, numberOfRows, numberOfPlaces
+        enterSpeed = 3;
+        paymentSpeed = 7;
+        exitSpeed = 5;
+       
+        //Cars  numberOfFloor, numberOfRows, numberOfPlaces
         cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
-        
+       
         try {
-        	//update view in realTime
-        	notifyViews();
+            //update view in realTime
+            notifyViews();
         } catch(NullPointerException e) {
-        	//nothing has to happen
+            //nothing has to happen
         }
-	}
-	//instellen 
-	public void reset(int tickPause) {
-		this.reset();
-		this.tickPause = tickPause;
-	}
-	
-	public void start() {
-		if (!run) {
-			// new tread wil zeggen dat je een ander stukje programma kan draaien in je programma.
-			new Thread(this).start();
-		}
-	}
-	
-	public void stop() {
-		run = false;
-	}
-	
-	public void setTickPause(int tickPause) {
-		this.tickPause = tickPause;
-	}
-    
+    }
+    //instellen
+    public void reset(int tickPause) {
+        this.reset();
+        this.tickPause = tickPause;
+    }
+   
+    public void start() {
+        if (!run) {
+            // new tread wil zeggen dat je een ander stukje programma kan draaien in je programma.
+            new Thread(this).start();
+        }
+    }
+   
+    public void stop() {
+        run = false;
+    }
+   
+    public void setTickPause(int tickPause) {
+        this.tickPause = tickPause;
+    }
+   
     private void tick() {
-    	advanceTime();
-    	handleExit();
-    	carTick(); // deze haalt een minuut van de carminutes af.
-    	notifyViews();
-    	handleEntrance();
+        advanceTime();
+        handleExit();
+        carTick(); // deze haalt een minuut van de carminutes af.
+        notifyViews();
+        handleEntrance();
     }
-    
+   
     private int[][] readArrivalsFile(String file) {
-    	int[][] arrivals = new int[7][24];
-    	try {
-    		InputStream in = Model.class.getClassLoader().getResourceAsStream("arrivals/" + file);
-        	BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-        	String line;
-			while((line = reader.readLine()) != null) {
-				int day = Integer.parseInt(line.substring(0, 1));
-				int hour = Integer.parseInt(line.substring(2, 4));
-				arrivals[day][hour] = Integer.parseInt(line.substring(5));
-			}
-			reader.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-    	return arrivals;
+        int[][] arrivals = new int[7][24];
+        try {
+            InputStream in = Model.class.getClassLoader().getResourceAsStream("arrivals/" + file);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+            String line;
+            while((line = reader.readLine()) != null) {
+                int day = Integer.parseInt(line.substring(0, 1));
+                int hour = Integer.parseInt(line.substring(2, 4));
+                arrivals[day][hour] = Integer.parseInt(line.substring(5));
+            }
+            reader.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return arrivals;
     }
-
+ 
     //Queues
     private void handleEntrance(){
-    	carsArriving();
-    	carsEntering(entrancePassQueue);
-    	carsEntering(entranceCarQueue);  	
+        carsArriving();
+        carsEntering(entrancePassQueue);
+        carsEntering(entranceCarQueue);    
     }
-    
+   
     private void handleExit(){
         carsReadyToLeave();
         carsPaying();
         carsLeaving();
     }
-    
+   
     private void carsArriving(){
-    	int numberOfCars=getNumberOfCars(arrivalsAdHoc);
-        addArrivingCars(numberOfCars, AD_HOC);    	
-    	numberOfCars=getNumberOfCars(arrivalsPass);
+        int numberOfCars=getNumberOfCars(arrivalsAdHoc);
+        addArrivingCars(numberOfCars, AD_HOC);     
+        numberOfCars=getNumberOfCars(arrivalsPass);
         addArrivingCars(numberOfCars, PASS);
         numberOfCars=getNumberOfCars(arrivalsRes);
         addArrivingCars(numberOfCars, ResCar);  
     }
-
+ 
     private void carsEntering(CarQueue queue){
         int i=0;
         Location freeLocation = null;
         // Remove car from the front of the queue and assign to a parking space.
-    	//if(!null)
-        while (queue.carsInQueue()>0 && 
-    			getNumberOfOpenSpots()>0 && 
-    			i<enterSpeed) {
+        //if(!null)
+        while (queue.carsInQueue()>0 &&
+                getNumberOfOpenSpots()>0 &&
+                i<enterSpeed) {
            Car car = queue.removeCar();
-        	//Car car = queue.peek();
+            //Car car = queue.peek();
             // hier checken wat voor car het is.
             if(car instanceof ParkingPassCar) {
             freeLocation = getFirstpassLocation();
@@ -198,135 +206,142 @@ public class Model extends AbstractModel implements Runnable{
             freeLocation = getFirstresLocation();
             }
             else {
-            freeLocation = getFirstFreeLocation();	
+            freeLocation = getFirstFreeLocation(); 
             }
-            setCarAt(freeLocation, car);
+            if (freeLocation != null) {
+                setCarAt(freeLocation, car);
+            }
             i++;
         }
     }
-    
+   
     private void carsReadyToLeave(){
         // Add leaving cars to the payment queue.
         Car car = getFirstLeavingCar();
         while (car!=null) {
-        	if (car.getHasToPay()){
-	            car.setIsPaying(true);
-	            paymentCarQueue.addCar(car);
-        	}
-        	else {
-        		carLeavesSpot(car);
-        	}
+            if (car.getHasToPay()){
+                car.setIsPaying(true);
+                paymentCarQueue.addCar(car);
+            }
+            else {
+                carLeavesSpot(car);
+            }
             car = getFirstLeavingCar();
         }
     }
-
+ 
     public int gStayMinute() {
-    	return getMinute();
+        return getMinute();
     }
-    
+   
     private void carsPaying(){
-        // Let cars pay.   	
-    	int i=0;
-    	while (paymentCarQueue.carsInQueue()>0 && i < paymentSpeed){
-    		Car car = paymentCarQueue.removeCar();
-            
+        // Let cars pay.    
+        int i=0;
+        while (paymentCarQueue.carsInQueue()>0 && i < paymentSpeed){
+            Car car = paymentCarQueue.removeCar();
+           
             if(car instanceof AdHocCar) {
-          //  	System.out.println("AdHocCar");
-          //  	System.out.println(car.getPayment());
+                profit += car.getPayment();
+                //System.out.println("AdHocCar");
+                //System.out.println(car.getPayment());
             }
-            
+           
             if(car instanceof ResCar) {
-           // 	System.out.println("ResCar");
-            //	System.out.println(car.getPayment());
+                profit += car.getPayment();
+                //System.out.println("ResCar");
+                //System.out.println(car.getPayment());
             }
-            
-            
-            if(car instanceof ParkingPassCar) {
-           // 	System.out.println("PassCar");
-          //  	System.out.println(car.getPayment());
-            }
-            
+           
             carLeavesSpot(car);
             i++;
-    	}
+            profitAv = profit / minutesRunning * 60;
+        }
     }
-    
+    public double getprofitAv() {
+        return profitAv;
+    }
+   
+    public double getProfitPlus() {
+        return profitPlus;
+    }
+   
     private void carsLeaving(){
         // Let cars leave.
-    	int i=0;
-    	while (exitCarQueue.carsInQueue()>0 && i < exitSpeed){
+        int i=0;
+        while (exitCarQueue.carsInQueue()>0 && i < exitSpeed){
             exitCarQueue.removeCar();
             i++;
-    	}	
+        }  
     }
-    
-	//Time methods
-	private void advanceTime(){
+   
+    //Time methods
+    private void advanceTime(){
         // Advance the time by one minute.
         time.add(Calendar.MINUTE, 1);
-	}
-	
-	//Getters of time
-	public int getMinute() {
+        minutesRunning++;
+    }
+   
+    //Getters of time
+    public int getMinute() {
         return time.get(Calendar.MINUTE);
     }
-	
-	public int getHour() {
+   
+    public int getHour() {
         return time.get(Calendar.HOUR_OF_DAY);
     }
-	
-	public int getDay() {
+   
+    public int getDay() {
         return time.get(Calendar.DAY_OF_MONTH);
     }
-	
-	public int getDayOfWeek() {
+   
+    public int getDayOfWeek() {
         return time.get(Calendar.DAY_OF_WEEK);
     }
-	
-	public int getMonth() {
-		return time.get(Calendar.MONTH);
-	}
-	
-	public int getYear() {
+   
+    public int getMonth() {
+        return time.get(Calendar.MONTH);
+    }
+   
+    public int getYear() {
         return time.get(Calendar.YEAR);
     }
-	
-	//Getters of places
-	public int getNumberOfFloors() {
+   
+    //Getters of places
+    public int getNumberOfFloors() {
         return numberOfFloors;
     }
-
+ 
     public int getNumberOfRows() {
         return numberOfRows;
     }
-
+ 
     public int getNumberOfPlaces() {
         return numberOfPlaces;
     }
-
+ 
     public int getNumberOfOpenSpots(){
-    	return numberOfOpenSpots;
+        return numberOfOpenSpots;
     }
-    
+   
     //Setters of places
     public void setNumberOfFloors(int numberofFloors) {
         this.numberOfFloors = numberofFloors;
     }
-
+ 
     public void setNumberOfRows(int numberOfRows) {
         this.numberOfRows = numberOfRows;
     }
-
+ 
     public void setNumberOfPlaces(int numberOfPlaces) {
         this.numberOfPlaces = numberOfPlaces;
     }
-
+ 
     public void setNumberOfOpenSpots(int numberOfOpenSpots){
-    	this.numberOfOpenSpots = numberOfOpenSpots;
+        this.numberOfOpenSpots = numberOfOpenSpots;
     }
-
+ 
 //    AANPASSEN!!!!!!!!
-//    //Getters of arrivals 
+//    //Getters of arrivals
 //    public void getweekDayArrivals(int weekDayArrivals) {
 //        this.weekDayArrivals = weekDayArrivals;
 //    }
@@ -375,94 +390,94 @@ public class Model extends AbstractModel implements Runnable{
 //        this.weekendResArrivals = weekendResArrivals;
 //    }
 //    
-    
+   
     //Getters of speeds
     public void getenterSpeed(int enterSpeed) {
         this.enterSpeed = enterSpeed;
     }
-    
+   
     public void getpaymentSpeed(int paymentSpeed) {
         this.paymentSpeed = paymentSpeed;
     }
-    
+   
     public void getexitSpeed(int exitSpeed) {
         this.exitSpeed = exitSpeed;
     }
-    
-    
+   
+   
     //Setters of speeds
     public void setenterSpeed(int enterSpeed) {
         this.enterSpeed = enterSpeed;
     }
-    
+   
     public void setpaymentSpeed(int paymentSpeed) {
         this.paymentSpeed = paymentSpeed;
     }
-    
+   
     public void setexitSpeed(int exitSpeed) {
         this.exitSpeed = exitSpeed;
     }
-    
+   
     //Cars methods
-	private void carTick() {
-		for (int floor = 0; floor < getNumberOfFloors(); floor++) {
-    		for (int row = 0; row < getNumberOfRows(); row++) {
-    			for (int place = 0; place < getNumberOfPlaces(); place++) {
-    				Location location = new Location(floor, row, place);
-    				Car car = getCarAt(location);
-    				if (car != null) {
-    					car.tick();
-					}
-				}           
-    		}
-		}  	
-	}
-
+    private void carTick() {
+        for (int floor = 0; floor < getNumberOfFloors(); floor++) {
+            for (int row = 0; row < getNumberOfRows(); row++) {
+                for (int place = 0; place < getNumberOfPlaces(); place++) {
+                    Location location = new Location(floor, row, place);
+                    Car car = getCarAt(location);
+                    if (car != null) {
+                        car.tick();
+                    }
+                }          
+            }
+        }  
+    }
+ 
     private int getNumberOfCars(int [][] arrivals){
         Random random = new Random();
-
+ 
         // Get the average number of cars that arrive per hour.
-        int averageNumberOfCarsPerHour = arrivals[getDayOfWeek()][getHour()];
-
+        int averageNumberOfCarsPerHour = arrivals[getDayOfWeek() - 1][getHour()];
+ 
         // Calculate the number of cars that arrive this minute.
         double standardDeviation = averageNumberOfCarsPerHour * 0.3;
         double numberOfCarsPerHour = averageNumberOfCarsPerHour + random.nextGaussian() * standardDeviation;
-        return (int)Math.round(numberOfCarsPerHour / 60);	
+        return (int)Math.round(numberOfCarsPerHour / 60);  
     }
-    
+   
     private void addArrivingCars(int numberOfCars, String type){
         // Add the cars to the back of the queue.
-    	switch(type) {
-    	case AD_HOC: 
+        switch(type) {
+        case AD_HOC:
             for (int i = 0; i < numberOfCars; i++) {
-            	entranceCarQueue.addCar(new AdHocCar());
+                entranceCarQueue.addCar(new AdHocCar());
             }
             break;
-    	case PASS:
+        case PASS:
             for (int i = 0; i < numberOfCars; i++) {
-            	entrancePassQueue.addCar(new ParkingPassCar());
+                entrancePassQueue.addCar(new ParkingPassCar());
             }
-            break;	
-    	case ResCar:
-    		for (int i = 0; i < numberOfCars; i++) {
-            	entranceCarQueue.addCar(new ResCar());
+            break; 
+        case ResCar:
+            for (int i = 0; i < numberOfCars; i++) {
+                entranceCarQueue.addCar(new ResCar());
             }
             break;
-    	}
+        }
     }
-    
+   
     private void carLeavesSpot(Car car){
-    	removeCarAt(car.getLocation());
+        removeCarAt(car.getLocation());
         exitCarQueue.addCar(car);
     }
-    
+   
     public Car getCarAt(Location location) {
         if (!locationIsValid(location)) {
             return null;
         }
         return cars[location.getFloor()][location.getRow()][location.getPlace()];
     }
-
+ 
     public boolean setCarAt(Location location, Car car) {
         if (!locationIsValid(location)) {
             return false;
@@ -490,7 +505,7 @@ public class Model extends AbstractModel implements Runnable{
         numberOfOpenSpots++;
         return car;
     }
-
+ 
     public Location getFirstFreeLocation() {
           for (int floor = 0; floor < getNumberOfFloors(); floor++) {
             for (int row = 0; row < getNumberOfRows(); row++) {
@@ -504,7 +519,7 @@ public class Model extends AbstractModel implements Runnable{
         }
          return null;
     }
-    
+   
     public Location getFirstpassLocation() {
         for (int floor = 2; floor < getNumberOfFloors(); floor++) {
           for (int row = 0; row < getNumberOfRows(); row++) {
@@ -518,7 +533,7 @@ public class Model extends AbstractModel implements Runnable{
       }
        return null;
   }
-    
+   
     public Location getFirstresLocation() {
         for (int floor = 1; floor < getNumberOfFloors(); floor++) {
           for (int row = 2; row < getNumberOfRows(); row++) {
@@ -532,9 +547,9 @@ public class Model extends AbstractModel implements Runnable{
       }
        return null;
   }
-  
-    
-
+ 
+   
+ 
     public Car getFirstLeavingCar() {
         for (int floor = 0; floor < getNumberOfFloors(); floor++) {
             for (int row = 0; row < getNumberOfRows(); row++) {
@@ -549,7 +564,7 @@ public class Model extends AbstractModel implements Runnable{
         }
         return null;
     }
-
+ 
     private boolean locationIsValid(Location location) {
         int floor = location.getFloor();
         int row = location.getRow();
@@ -559,16 +574,15 @@ public class Model extends AbstractModel implements Runnable{
         }
         return true;
     }
-    
-    
+   
+   
  //   private double AdHocPayment;
  //   private double ResCarPayment;
  //   private double PasCarPayment;
   //  public double AdHocPaymentTotal() {
-  //  	adHocPayment += AdHocCar.getpaymentADH();
-  //  	System.out.println(adHocPayment);/
-//		return adHocPayment;
+  //    adHocPayment += AdHocCar.getpaymentADH();
+  //    System.out.println(adHocPayment);/
+//      return adHocPayment;
 //   }
-    
+   
 }
-
