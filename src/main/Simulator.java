@@ -4,7 +4,11 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -32,7 +36,7 @@ public class Simulator extends JFrame implements ComponentListener{
 	
 	//super zorgt ervoor dat het een titel krijgt, die wordt boven in het frame weergegeven.
 	public Simulator() {
-		super("Pakeer Garage Simulator");
+		super("Pakeer Garage Simulatie");
 		model = new Model();
 		controller = new Controller(model);
 		viewPanel = new JPanel();
@@ -49,11 +53,23 @@ public class Simulator extends JFrame implements ComponentListener{
 		setLayout(new BorderLayout());
 		viewPanel.setLayout(new GridLayout(0, 1));
 		addComponents();
-		addComponentListener(this);
-		setSize(1280, 640);
+		setIcon();
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		addComponentListener(this);
 		setVisible(true);
+	}
+	
+	private void setIcon() {
+		try {
+			InputStream stream = Simulator.class.getClassLoader().getResourceAsStream("images/icon.png");
+			BufferedImage icon = ImageIO.read(stream);
+			setIconImage(icon);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	//addcomponents daarmee kun je views en controllers toevoegen aan het frame.
@@ -63,8 +79,9 @@ public class Simulator extends JFrame implements ComponentListener{
 		getContentPane().add(controller, BorderLayout.SOUTH);
 		getContentPane().add(tijdView, BorderLayout.NORTH);
 		getContentPane().add(labels, BorderLayout.WEST);
-		viewPanel.add(percentView, BorderLayout.EAST);
-		viewPanel.add(pieChartView, BorderLayout.EAST);
+		viewPanel.add(percentView);
+		viewPanel.add(pieChartView);
+		pack();
 	}
 
 	@Override

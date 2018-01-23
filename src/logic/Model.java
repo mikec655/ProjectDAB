@@ -2,6 +2,11 @@ package logic;
 
 import java.util.Calendar;
 import java.util.Random;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 //implements runnable zorgt ervoor dat er threading komt. Dus de functies toevoegen aan de infiniteloops.
 public class Model extends AbstractModel implements Runnable{
@@ -30,12 +35,9 @@ public class Model extends AbstractModel implements Runnable{
     private int numberOfOpenSpots;
     
     //Arrivals
-    private int weekDayArrivals; // average number of arriving cars per hour
-    private int weekendArrivals; // average number of arriving cars per hour
-    private int weekDayPassArrivals; // average number of arriving cars per hour
-    private int weekendPassArrivals; // average number of arriving cars per hour
-    private int weekDayResArrivals; // average number of arriving reserved cars per hour
-    private int weekendResArrivals; // average number of arriving reserved cars per hour
+    private int[][] arrivalsPass;
+    private int[][] arrivalsAdHoc;
+    private int[][] arrivalsRes;
     
     //Speed
     private int enterSpeed; // number of cars that can enter per minute
@@ -88,13 +90,10 @@ public class Model extends AbstractModel implements Runnable{
         numberOfOpenSpots = numberOfFloors * numberOfRows * numberOfPlaces;
         
         //Arrivals
-        weekDayArrivals = 200;
-        weekDayPassArrivals= 50;
-        weekDayResArrivals = 20;
-        weekendArrivals = 100; 
-        weekendPassArrivals = 5; 
-        weekendResArrivals = 10;
-        
+        arrivalsAdHoc = readArrivalsFile("arrivalsAdHoc.txt");
+        arrivalsPass = readArrivalsFile("arrivalsPass.txt");
+        arrivalsRes = readArrivalsFile("arrivalsRes.txt");
+       
         //Speeds
         enterSpeed = 3; 
         paymentSpeed = 7; 
@@ -138,6 +137,26 @@ public class Model extends AbstractModel implements Runnable{
     	notifyViews();
     	handleEntrance();
     }
+    
+    private int[][] readArrivalsFile(String file) {
+    	int[][] arrivals = new int[7][24];
+    	try {
+    		InputStream in = Model.class.getClassLoader().getResourceAsStream("arrivals/" + file);
+        	BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+        	String line;
+			while((line = reader.readLine()) != null) {
+				int day = Integer.parseInt(line.substring(0, 1));
+				int hour = Integer.parseInt(line.substring(2, 4));
+				arrivals[day][hour] = Integer.parseInt(line.substring(5));
+			}
+			reader.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    	return arrivals;
+    }
 
     //Queues
     private void handleEntrance(){
@@ -153,11 +172,11 @@ public class Model extends AbstractModel implements Runnable{
     }
     
     private void carsArriving(){
-    	int numberOfCars=getNumberOfCars(weekDayArrivals, weekendArrivals);
+    	int numberOfCars=getNumberOfCars(arrivalsAdHoc);
         addArrivingCars(numberOfCars, AD_HOC);    	
-    	numberOfCars=getNumberOfCars(weekDayPassArrivals, weekendPassArrivals);
+    	numberOfCars=getNumberOfCars(arrivalsPass);
         addArrivingCars(numberOfCars, PASS);
-        numberOfCars=getNumberOfCars(weekDayResArrivals, weekendResArrivals);
+        numberOfCars=getNumberOfCars(arrivalsRes);
         addArrivingCars(numberOfCars, ResCar);  
     }
 
@@ -327,56 +346,57 @@ public class Model extends AbstractModel implements Runnable{
     public void setNumberOfOpenSpots(int numberOfOpenSpots){
     	this.numberOfOpenSpots = numberOfOpenSpots;
     }
-    
-    //Getters of arrivals 
-    public void getweekDayArrivals(int weekDayArrivals) {
-        this.weekDayArrivals = weekDayArrivals;
-    }
-    
-    public void getweekendArrivals(int weekendArrivals) {
-        this.weekendArrivals = weekendArrivals;
-    }
-    
-    public void getweekDayPassArrivals(int weekDayPassArrivals) {
-        this.weekDayPassArrivals = weekDayPassArrivals;
-    }
-    
-    public void getweekendPassArrivals(int weekendPassArrivals) {
-        this.weekendPassArrivals = weekendPassArrivals;
-    }
-    
-    public void getweekDayResArrivals(int weekDayResArrivals) {
-        this.weekDayResArrivals = weekDayResArrivals;
-    }
-    
-    public void getweekendResArrivals(int weekendResArrivals) {
-        this.weekendResArrivals = weekendResArrivals;
-    }
-    
-    //Setters of arrivals
-    public void setweekDayArrivals(int weekDayArrivals) {
-        this.weekDayArrivals = weekDayArrivals;
-    }
-    
-    public void setweekendArrivals(int weekendArrivals) {
-        this.weekendArrivals = weekendArrivals;
-    }
-    
-    public void setweekDayPassArrivals(int weekDayPassArrivals) {
-        this.weekDayPassArrivals = weekDayPassArrivals;
-    }
-    
-    public void setweekendPassArrivals(int weekendPassArrivals) {
-        this.weekendPassArrivals = weekendPassArrivals;
-    }
-    public void setweekDayResArrivals(int weekDayResArrivals) {
-        this.weekDayResArrivals = weekDayResArrivals;
-    }
-    
-    public void setweekendResArrivals(int weekendResArrivals) {
-        this.weekendResArrivals = weekendResArrivals;
-    }
-    
+
+//    AANPASSEN!!!!!!!!
+//    //Getters of arrivals 
+//    public void getweekDayArrivals(int weekDayArrivals) {
+//        this.weekDayArrivals = weekDayArrivals;
+//    }
+//    
+//    public void getweekendArrivals(int weekendArrivals) {
+//        this.weekendArrivals = weekendArrivals;
+//    }
+//    
+//    public void getweekDayPassArrivals(int weekDayPassArrivals) {
+//        this.weekDayPassArrivals = weekDayPassArrivals;
+//    }
+//    
+//    public void getweekendPassArrivals(int weekendPassArrivals) {
+//        this.weekendPassArrivals = weekendPassArrivals;
+//    }
+//    
+//    public void getweekDayResArrivals(int weekDayResArrivals) {
+//        this.weekDayResArrivals = weekDayResArrivals;
+//    }
+//    
+//    public void getweekendResArrivals(int weekendResArrivals) {
+//        this.weekendResArrivals = weekendResArrivals;
+//    }
+//    
+//    //Setters of arrivals
+//    public void setweekDayArrivals(int weekDayArrivals) {
+//        this.weekDayArrivals = weekDayArrivals;
+//    }
+//    
+//    public void setweekendArrivals(int weekendArrivals) {
+//        this.weekendArrivals = weekendArrivals;
+//    }
+//    
+//    public void setweekDayPassArrivals(int weekDayPassArrivals) {
+//        this.weekDayPassArrivals = weekDayPassArrivals;
+//    }
+//    
+//    public void setweekendPassArrivals(int weekendPassArrivals) {
+//        this.weekendPassArrivals = weekendPassArrivals;
+//    }
+//    public void setweekDayResArrivals(int weekDayResArrivals) {
+//        this.weekDayResArrivals = weekDayResArrivals;
+//    }
+//    
+//    public void setweekendResArrivals(int weekendResArrivals) {
+//        this.weekendResArrivals = weekendResArrivals;
+//    }
+//    
     
     //Getters of speeds
     public void getenterSpeed(int enterSpeed) {
@@ -420,13 +440,11 @@ public class Model extends AbstractModel implements Runnable{
 		}  	
 	}
 
-    private int getNumberOfCars(int weekDay, int weekend){
+    private int getNumberOfCars(int [][] arrivals){
         Random random = new Random();
 
         // Get the average number of cars that arrive per hour.
-        int averageNumberOfCarsPerHour = getDayOfWeek() == 1 || getDayOfWeek() == 7
-                ? weekend
-                : weekDay;
+        int averageNumberOfCarsPerHour = arrivals[getDayOfWeek()][getHour()];
 
         // Calculate the number of cars that arrive this minute.
         double standardDeviation = averageNumberOfCarsPerHour * 0.3;
