@@ -517,6 +517,20 @@ public class Model extends AbstractModel implements Runnable{
       }
        return null;
   }
+    
+    public Location getFirstresLocation() {
+        for (int floor = 2; floor < getNumberOfFloors(); floor++) {
+          for (int row = 0; row < getNumberOfRows(); row++) {
+              for (int place = 0; place < getNumberOfPlaces(); place++) {
+                  Location location = new Location(floor, row, place);
+                  if (getCarAt(location) == null) {
+                      return location;
+                  }
+              }
+          }
+      }
+       return null;
+  }
   
     
 
