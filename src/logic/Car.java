@@ -51,6 +51,9 @@ public abstract class Car {
     	return stayMinutes;
     
     }
+    public void setStayMinute(int stayMinutes1) {
+    	this.stayMinutes = stayMinutes1;
+    }
     
 // Nieuwe getpaymentADH
     public double getPayment() {

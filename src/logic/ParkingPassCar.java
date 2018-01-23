@@ -10,6 +10,7 @@ public class ParkingPassCar extends Car {
     	Random random = new Random();
     	int stayMinutes = (int) (15 + random.nextFloat() * 3 * 60);
         this.setMinutesLeft(stayMinutes);
+        this.setStayMinute(stayMinutes);
         this.setHasToPay(false);
         payment = 0;
         COLOR=Color.blue;
@@ -19,7 +20,7 @@ public class ParkingPassCar extends Car {
     	return COLOR;
     }
     public Color setColor(){
-    	COLOR = Color.LIGHT_GRAY;
+    	COLOR = Color.YELLOW;
     	return null;
     }
     
