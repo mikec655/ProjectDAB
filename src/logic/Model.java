@@ -191,29 +191,39 @@ public class Model extends AbstractModel implements Runnable{
     private void carsEntering(CarQueue queue){
         int i=0;
         Location freeLocation = null;
+        Car car = null;
         // Remove car from the front of the queue and assign to a parking space.
-        //if(!null)
-        while (queue.carsInQueue()>0 &&
-                getNumberOfOpenSpots()>0 &&
-                i<enterSpeed) {
-           Car car = queue.removeCar();
-            //Car car = queue.peek();
+    	//if(!null)
+        while (queue.carsInQueue()>0 && 
+    			getNumberOfOpenSpots()>0 && 
+    			i<enterSpeed) {
+           //Car car = queue.removeCar();
+        	Car car1 = queue.peekCar();
             // hier checken wat voor car het is.
-            if(car instanceof ParkingPassCar) {
-            freeLocation = getFirstpassLocation();
+            if(car1 instanceof ParkingPassCar) {
+            	freeLocation = getFirstpassLocation();
+            	if(freeLocation != null) {
+            		 car = queue.removeCar();
+            		 setCarAt(freeLocation, car);}
             }
-            else if(car instanceof ResCar){
-            freeLocation = getFirstresLocation();
+            
+            else if(car1 instanceof ResCar){
+            	freeLocation = getFirstresLocation();
+            	if(freeLocation != null) {
+            		 car = queue.removeCar();
+            		 setCarAt(freeLocation, car);
+            		 freeLocation = null;}
+            	}
+            
+        
+            else if(car1 instanceof AdHocCar){
+            	freeLocation = getFirstFreeLocation();	
+            	if(freeLocation != null) {
+            		 car = queue.removeCar();
+            		 setCarAt(freeLocation, car);}
             }
-            else {
-            freeLocation = getFirstFreeLocation(); 
-            }
-            if (freeLocation != null) {
-                setCarAt(freeLocation, car);
-            }
-            i++;
-        }
-    }
+              i++;
+        }}
    
     private void carsReadyToLeave(){
         // Add leaving cars to the payment queue.
