@@ -34,11 +34,12 @@ public class Labels extends AbstractView{
 	
 	public void updateView() {
 		String jLabel = "";
-		jLabel +=  "Berry ";
-		jLabel +=  "Youry ";
+		jLabel +=  "Bernt ";
+		jLabel +=  "Youri ";
 		jLabel +=  "Mike ";
-		jLabel +=  "Yun "; 
+		jLabel +=  "Yun Lin"; 
 		jLabel +=  "Gerben ";
+		jLabel += "Jefrey";
 		labels.setText(jLabel);
 	}
 	
