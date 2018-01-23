@@ -18,6 +18,7 @@ import view.AbstractView;
 import view.CarParkView;
 import view.TimeView;
 import view.Labels;
+import view.NumberView;
 import view.PercentView;
 import view.PieChartView;
 
@@ -25,13 +26,14 @@ import view.PieChartView;
 public class Simulator extends JFrame implements ComponentListener{
 	private static final long serialVersionUID = 8060582986233007360L;
 	private Model model;
+	private Controller controller;
+	private JPanel viewPanel;
 	private AbstractView carParkView;
 	private AbstractView tijdView;
 	private AbstractView labels;
-	private Controller controller;
 	private AbstractView percentView;
 	private AbstractView pieChartView;
-	private JPanel viewPanel;
+	private AbstractView numberView;
 	
 	
 	//super zorgt ervoor dat het een titel krijgt, die wordt boven in het frame weergegeven.
@@ -45,6 +47,7 @@ public class Simulator extends JFrame implements ComponentListener{
 		labels = new Labels(model);
 		percentView = new PercentView(model);
 		pieChartView = new PieChartView(model);
+		numberView = new NumberView(model);
 		setUpFrame();
 	}
 
@@ -81,6 +84,7 @@ public class Simulator extends JFrame implements ComponentListener{
 		getContentPane().add(labels, BorderLayout.WEST);
 		viewPanel.add(percentView);
 		viewPanel.add(pieChartView);
+		viewPanel.add(numberView);
 		pack();
 	}
 

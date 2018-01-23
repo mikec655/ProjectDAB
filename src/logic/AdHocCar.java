@@ -4,7 +4,7 @@ import java.util.Random;
 import java.awt.*;
 
 public class AdHocCar extends Car {
-	private Color COLOR;
+	private Color color;
 	
     public AdHocCar() {
         Random random = new Random();
@@ -13,16 +13,15 @@ public class AdHocCar extends Car {
         this.setStayMinute(stayMinutes);
         this.setHasToPay(true);
         payment = (double) stayMinutes * 0.02;
-        COLOR=Color.red;
+        color = Color.RED;
     }
     
     public Color getColor(){
-    	return COLOR;
+    	return color;
     }
     
-    public Color setColor(){
-    	COLOR = Color.YELLOW;
-    	return null;
+    public void setColor(){
+    	color = Color.YELLOW;
     }
 }
 

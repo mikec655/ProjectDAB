@@ -1,5 +1,5 @@
 package runner;
-//test
+
 import main.Simulator;
 
 public class Runner {

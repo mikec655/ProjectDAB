@@ -4,7 +4,7 @@ import java.util.Random;
 import java.awt.*;
 
 public class ResCar extends Car {
-	private  Color COLOR;
+	private  Color color;
 	
 	public ResCar() {
     	Random random = new Random();
@@ -13,15 +13,14 @@ public class ResCar extends Car {
         this.setStayMinute(stayMinutes);
         this.setHasToPay(true);
         payment = (double)(stayMinutes * 0.02) + 3;
-        COLOR=Color.LIGHT_GRAY;
+        color = Color.LIGHT_GRAY;
     }
     
     public Color getColor(){
-    	return COLOR;
+    	return color;
     }
-    public Color setColor(){
-    	COLOR = Color.YELLOW;
-    	return null;
+    public void setColor(){
+    	color = Color.YELLOW;
     }
     
 }

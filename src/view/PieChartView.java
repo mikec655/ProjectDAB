@@ -22,25 +22,31 @@ public class PieChartView extends AbstractView {
         return new Dimension(250, 250);
     }
 
-	private double getAngle() {
-		double placepercentpie;
-		double tempspotspie = 1.0 * (model.getNumberOfPlaces() * model.getNumberOfFloors() * model.getNumberOfRows());
-		placepercentpie = 1.0 * model.getNumberOfOpenSpots() / tempspotspie * 100.00;
-		placepercentpie = Math.round(placepercentpie * 10.00);
-		placepercentpie = (placepercentpie / 10.00) * 3.60;
-		return placepercentpie;
-		
-}
+	private int getAngle(int amountOfCars) {
+		int total = model.getNumberOfFloors() * model.getNumberOfRows() * model.getNumberOfPlaces();
+		double angle =  1.0 * (double) amountOfCars / (double) total * 360.0;
+		//System.out.println("angel: " + angle);
+		return (int) angle;
+	}
 	
 	
 	//paint een circelmet daarin het percentage.
-		 public void paintComponent(Graphics g) {
-			super.paintComponent(g);
-		 	g.setColor(Color.white);
-			g.fillArc(25, 25, 200, 200, 0, (int) (100*3.60));
-			g.setColor(Color.red);
-			g.fillArc(25, 25, 200, 200, 0, (int) (getAngle()));  
-			}
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		int angleAdHoc = getAngle(model.getAmountOfAdHocCars());
+		//int anglePass = getAngle(model.getAmountOfPassCars());
+		int angleRes = getAngle(model.getAmountOfResCars());
+		int angleOpen = getAngle(model.getNumberOfOpenSpots());
+		
+	 	g.setColor(Color.BLUE);
+		g.fillArc(25, 25, 200, 200, 90, 360 + 90);
+		g.setColor(Color.RED);
+		g.fillArc(25, 25, 200, 200, 90, angleAdHoc);
+		g.setColor(Color.YELLOW);
+		g.fillArc(25, 25, 200, 200, 90 + angleAdHoc, angleRes);
+		g.setColor(Color.WHITE);
+		g.fillArc(25, 25, 200, 200, 90 + angleAdHoc + angleRes, angleOpen);
+	}
 
 				
 }

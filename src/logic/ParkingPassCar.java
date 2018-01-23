@@ -4,7 +4,7 @@ import java.util.Random;
 import java.awt.*;
 
 public class ParkingPassCar extends Car {
-	private Color COLOR;
+	private Color color;
     
 	public ParkingPassCar() {
     	Random random = new Random();
@@ -13,15 +13,15 @@ public class ParkingPassCar extends Car {
         this.setStayMinute(stayMinutes);
         this.setHasToPay(false);
         payment = 0;
-        COLOR=Color.blue;
+        color = Color.blue;
     }
     
     public Color getColor(){
-    	return COLOR;
+    	return color;
     }
-    public Color setColor(){
-    	COLOR = Color.YELLOW;
-    	return null;
+    
+    public void setColor(){
+    	color = Color.YELLOW;
     }
     
 }

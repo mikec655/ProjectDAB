@@ -7,8 +7,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
  
 //implements runnable zorgt ervoor dat er threading komt. Dus de functies toevoegen aan de infiniteloops.
 public class Model extends AbstractModel implements Runnable{
@@ -51,12 +49,7 @@ public class Model extends AbstractModel implements Runnable{
     private Car[][][] cars;
    
     //payment
-    private double adHocPayment;
-    private double resCarPayment;
-    private double pasCarPayment;
     private double profit;
-    private double averageProfit;
-    private static double label;
     private double profitPlus;
     private double profitAv;
    
@@ -257,14 +250,11 @@ public class Model extends AbstractModel implements Runnable{
            
             if(car instanceof AdHocCar) {
                 profit += car.getPayment();
-                //System.out.println("AdHocCar");
-                //System.out.println(car.getPayment());
+                
             }
            
             if(car instanceof ResCar) {
                 profit += car.getPayment();
-                //System.out.println("ResCar");
-                //System.out.println(car.getPayment());
             }
            
             carLeavesSpot(car);
@@ -441,15 +431,15 @@ public class Model extends AbstractModel implements Runnable{
    
     
     //Getters of cars in garage per car + or -
-    public int getadhcargarage() {
+    public int getAmountOfAdHocCars() {
         return adhcar;
     }
     
-    public int getpasscargarage() {
+    public int getAmountOfPassCars() {
         return passcar;
     }
     
-    public int getrescargarage() {
+    public int getAmountOfResCars() {
         return rescar;
     }
     
@@ -486,21 +476,20 @@ public class Model extends AbstractModel implements Runnable{
         switch(type) {
         case AD_HOC:
             for (int i = 0; i < numberOfCars; i++) {
-            	adhcar += 1;
+            	adhcar++;
                 entranceCarQueue.addCar(new AdHocCar());
           
             }
             break;
         case PASS:
             for (int i = 0; i < numberOfCars; i++) {
-            	passcar += 1;
+            	passcar++;
                 entrancePassQueue.addCar(new ParkingPassCar());
-                System.out.println("pass + " + passcar);
             }
             break; 
         case ResCar:
             for (int i = 0; i < numberOfCars; i++) {
-            	rescar+=1;
+            	rescar++;
                 entranceCarQueue.addCar(new ResCar());
               
             }
@@ -546,15 +535,15 @@ public class Model extends AbstractModel implements Runnable{
         car.setLocation(null);
         
         if(car instanceof ParkingPassCar) {
-        	passcar-=1;
+        	passcar--;
         }
         
         else if(car instanceof ResCar){
-        	rescar-=1;
+        	rescar--;
         	}
         
         else if(car instanceof AdHocCar){
-        	adhcar-=1;
+        	adhcar--;
         }  
         
         numberOfOpenSpots++;
@@ -572,7 +561,7 @@ public class Model extends AbstractModel implements Runnable{
                 }
             }
         }
-         return null;
+        return null;
     }
    
     public Location getFirstpassLocation() {
@@ -586,8 +575,8 @@ public class Model extends AbstractModel implements Runnable{
               }
           }
       }
-       return null;
-  }
+      return null;
+    }
    
     public Location getFirstresLocation() {
         for (int floor = 1; floor < getNumberOfFloors(); floor++) {
@@ -601,11 +590,9 @@ public class Model extends AbstractModel implements Runnable{
           }
       }
        return null;
-  }
+    }
  
-   
- 
-    public Car getFirstLeavingCar() {
+   public Car getFirstLeavingCar() {
         for (int floor = 0; floor < getNumberOfFloors(); floor++) {
             for (int row = 0; row < getNumberOfRows(); row++) {
                 for (int place = 0; place < getNumberOfPlaces(); place++) {
@@ -628,16 +615,5 @@ public class Model extends AbstractModel implements Runnable{
             return false;
         }
         return true;
-    }
-   
-   
- //   private double AdHocPayment;
- //   private double ResCarPayment;
- //   private double PasCarPayment;
-  //  public double AdHocPaymentTotal() {
-  //    adHocPayment += AdHocCar.getpaymentADH();
-  //    System.out.println(adHocPayment);/
-//      return adHocPayment;
-//   }
-   
+    }  
 }

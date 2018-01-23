@@ -6,8 +6,7 @@ import view.AbstractView;
 public abstract class AbstractModel {
 private ArrayList<AbstractView> views;
 	
-
-//maakt een arraylist aan waar alle views in worden opgeslagen.
+	//maakt een arraylist aan waar alle views in worden opgeslagen.
 	public AbstractModel() {
 		views=new ArrayList<AbstractView>();
 	}
