@@ -165,7 +165,8 @@ public class Model extends AbstractModel implements Runnable{
         int i=0;
         Location freeLocation = null;
         // Remove car from the front of the queue and assign to a parking space.
-    	while (queue.carsInQueue()>0 && 
+    	//if(!null)
+        while (queue.carsInQueue()>0 && 
     			getNumberOfOpenSpots()>0 && 
     			i<enterSpeed) {
             Car car = queue.removeCar();
@@ -173,8 +174,11 @@ public class Model extends AbstractModel implements Runnable{
             if(car instanceof ParkingPassCar) {
             freeLocation = getFirstpassLocation();
             }
-            else{
-            freeLocation = getFirstFreeLocation();
+            else if(car instanceof ResCar){
+            freeLocation = getFirstresLocation();
+            }
+            else {
+            freeLocation = getFirstFreeLocation();	
             }
             setCarAt(freeLocation, car);
             i++;
@@ -519,8 +523,8 @@ public class Model extends AbstractModel implements Runnable{
   }
     
     public Location getFirstresLocation() {
-        for (int floor = 2; floor < getNumberOfFloors(); floor++) {
-          for (int row = 0; row < getNumberOfRows(); row++) {
+        for (int floor = 1; floor < getNumberOfFloors(); floor++) {
+          for (int row = 2; row < getNumberOfRows(); row++) {
               for (int place = 0; place < getNumberOfPlaces(); place++) {
                   Location location = new Location(floor, row, place);
                   if (getCarAt(location) == null) {
