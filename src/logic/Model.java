@@ -7,6 +7,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
  
 //implements runnable zorgt ervoor dat er threading komt. Dus de functies toevoegen aan de infiniteloops.
 public class Model extends AbstractModel implements Runnable{
@@ -191,34 +193,31 @@ public class Model extends AbstractModel implements Runnable{
     private void carsEntering(CarQueue queue){
         int i=0;
         Location freeLocation = null;
-        Car car = null;
         // Remove car from the front of the queue and assign to a parking space.
-    	//if(!null)
-        while (queue.carsInQueue()>0 && 
-    			getNumberOfOpenSpots()>0 && 
-    			i<enterSpeed) {
-           //Car car = queue.removeCar();
-        	Car car1 = queue.peekCar();
+        //if(!null)
+        while (queue.carsInQueue()>0 &&
+                getNumberOfOpenSpots()>0 &&
+                i<enterSpeed) {
+          // Car car = queue.removeCar();
+            Car car = queue.peekCar();
             // hier checken wat voor car het is.
-            if(car1 instanceof ParkingPassCar) {
+            if(car instanceof ParkingPassCar) {
             	freeLocation = getFirstpassLocation();
             	if(freeLocation != null) {
             		 car = queue.removeCar();
             		 setCarAt(freeLocation, car);}
             }
             
-            else if(car1 instanceof ResCar){
+            else if(car instanceof ResCar){
             	freeLocation = getFirstresLocation();
             	if(freeLocation != null) {
             		 car = queue.removeCar();
-            		 freeLocation.setreserved();
-            		 System.out.println(freeLocation.getreserved());
             		 setCarAt(freeLocation, car);
             		 freeLocation = null;}
             	}
             
         
-            else if(car1 instanceof AdHocCar){
+            else if(car instanceof AdHocCar){
             	freeLocation = getFirstFreeLocation();	
             	if(freeLocation != null) {
             		 car = queue.removeCar();
@@ -266,15 +265,21 @@ public class Model extends AbstractModel implements Runnable{
            
             carLeavesSpot(car);
             i++;
+           
+           
             profitAv = profit / minutesRunning * 60;
+ 
         }
     }
-    public double getprofitAv() {
+    public double getProfitAv() {
         return profitAv;
     }
    
     public double getProfitPlus() {
         return profitPlus;
+    }
+    public double getProfit() {
+        return profit;
     }
    
     private void carsLeaving(){
