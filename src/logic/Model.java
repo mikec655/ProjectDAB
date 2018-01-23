@@ -5,7 +5,7 @@ import java.util.Random;
 
 //implements runnable zorgt ervoor dat er threading komt. Dus de functies toevoegen aan de infiniteloops.
 public class Model extends AbstractModel implements Runnable{
-	
+	// Deze code kun je beter onder elkaar zetten dat is netter.
 	private static final String AD_HOC = "1";
 	private static final String PASS = "2";
 	private static final String ResCar = "3";
@@ -42,7 +42,7 @@ public class Model extends AbstractModel implements Runnable{
     private int paymentSpeed; // number of cars that can pay per minute
     private int exitSpeed; // number of cars that can leave per minute
     
-    //Cars
+    //Cars in een multidimensionale array.
     private Car[][][] cars;
     
     //payment
@@ -100,16 +100,17 @@ public class Model extends AbstractModel implements Runnable{
         paymentSpeed = 7; 
         exitSpeed = 5; 
         
-        //Cars
+        //Cars	numberOfFloor, numberOfRows, numberOfPlaces
         cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
         
         try {
+        	//update view in realTime
         	notifyViews();
         } catch(NullPointerException e) {
         	//nothing has to happen
         }
 	}
-	
+	//instellen 
 	public void reset(int tickPause) {
 		this.reset();
 		this.tickPause = tickPause;
@@ -117,6 +118,7 @@ public class Model extends AbstractModel implements Runnable{
 	
 	public void start() {
 		if (!run) {
+			// new tread wil zeggen dat je een ander stukje programma kan draaien in je programma.
 			new Thread(this).start();
 		}
 	}
@@ -199,33 +201,47 @@ public class Model extends AbstractModel implements Runnable{
     }
     
     private void carsPaying(){
-        // Let cars pay.
-    	
+        // Let cars pay.   	
     	int i=0;
     	while (paymentCarQueue.carsInQueue()>0 && i < paymentSpeed){
-            Car car = paymentCarQueue.removeCar();
+    		Car car = paymentCarQueue.removeCar();
+            System.out.println(car);
+          //  car.getStayMinute();
             //   private double AdHocPayment;
             //   private double ResCarPayment;
             //   private double PasCarPayment;
-           
+            Model[] instances = new Model[3];
+ //           instances[0] = new Car;
+ //           instances[1] = new dog();
+ //           instances[2] = new Turtle();
+            
+ //           for (Model c : instances){
+ //               c.Sleep();
+ //               c.Food();
+           // ((ResCar) car).getpaymentRes();  
+ //           }
             if(car instanceof AdHocCar) {
+            	System.out.println("AdHocCar");
             	((AdHocCar) car).getPaymentADH();
+            	System.out.println(((AdHocCar) car).getPaymentADH());
             	System.out.println(((AdHocCar) car).getPaymentADH());
             }
             
             if(car instanceof ResCar) {
+            	System.out.println("ResCar");
             	((ResCar) car).getpaymentRes();
             	System.out.println(((ResCar) car).getpaymentRes());
             }
             
             
             if(car instanceof ParkingPassCar) {
+            	System.out.println("Parking");
             	((ParkingPassCar) car).getpaymentPass();
             	System.out.println(((ParkingPassCar) car).getpaymentPass());
             }
-            
+           
             //polymorfism
-            car.getIsPaying();
+           // car.getIsPaying();
            
             
             carLeavesSpot(car);

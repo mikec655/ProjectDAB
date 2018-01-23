@@ -13,6 +13,7 @@ import logic.Model;
 import view.AbstractView;
 import view.CarParkView;
 import view.TimeView;
+import view.Labels;
 import view.PercentView;
 import view.PieChartView;
 
@@ -22,6 +23,7 @@ public class Simulator extends JFrame implements ComponentListener{
 	private Model model;
 	private AbstractView carParkView;
 	private AbstractView tijdView;
+	private AbstractView labels;
 	private Controller controller;
 	private AbstractView percentView;
 	private AbstractView pieChartView;
@@ -36,6 +38,7 @@ public class Simulator extends JFrame implements ComponentListener{
 		viewPanel = new JPanel();
 		carParkView = new CarParkView(model);
 		tijdView = new TimeView(model);
+		labels = new Labels(model);
 		percentView = new PercentView(model);
 		pieChartView = new PieChartView(model);
 		setUpFrame();
@@ -59,6 +62,7 @@ public class Simulator extends JFrame implements ComponentListener{
 		getContentPane().add(carParkView, BorderLayout.CENTER);
 		getContentPane().add(controller, BorderLayout.SOUTH);
 		getContentPane().add(tijdView, BorderLayout.NORTH);
+		getContentPane().add(labels, BorderLayout.WEST);
 		viewPanel.add(percentView, BorderLayout.EAST);
 		viewPanel.add(pieChartView, BorderLayout.EAST);
 	}
