@@ -8,7 +8,8 @@ public abstract class Car {
     private int minutesLeft;
     private boolean isPaying;
     private boolean hasToPay;
-    private int stayMinutes;
+    protected int stayMinutes;
+    protected double payment;
 //auto's
     public Car() {
 
@@ -47,12 +48,15 @@ public abstract class Car {
     }
 // Blijft nog aantal minuten word uitgeprint
     public int getStayMinute() {
- //   	System.out.println(stayMinutes);
-    	//double label;
-    	//.getPaymentADH()
     	return stayMinutes;
     
     }
+    
+// Nieuwe getpaymentADH
+    public double getPayment() {
+    	return payment;
+    }
+
 
     public void tick() {
         minutesLeft--;

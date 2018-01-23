@@ -229,44 +229,22 @@ public class Model extends AbstractModel implements Runnable{
     	int i=0;
     	while (paymentCarQueue.carsInQueue()>0 && i < paymentSpeed){
     		Car car = paymentCarQueue.removeCar();
-            System.out.println(car);
-          //  car.getStayMinute();
-            //   private double AdHocPayment;
-            //   private double ResCarPayment;
-            //   private double PasCarPayment;
-            Model[] instances = new Model[3];
- //           instances[0] = new Car;
- //           instances[1] = new dog();
- //           instances[2] = new Turtle();
             
- //           for (Model c : instances){
- //               c.Sleep();
- //               c.Food();
-           // ((ResCar) car).getpaymentRes();  
- //           }
             if(car instanceof AdHocCar) {
             	System.out.println("AdHocCar");
-            	((AdHocCar) car).getPaymentADH();
-            	System.out.println(((AdHocCar) car).getPaymentADH());
-            	System.out.println(((AdHocCar) car).getPaymentADH());
+            	System.out.println(car.getPayment());
             }
             
             if(car instanceof ResCar) {
             	System.out.println("ResCar");
-            	((ResCar) car).getpaymentRes();
-            	System.out.println(((ResCar) car).getpaymentRes());
+            	System.out.println(car.getPayment());
             }
             
             
             if(car instanceof ParkingPassCar) {
-            	System.out.println("Parking");
-            	((ParkingPassCar) car).getpaymentPass();
-            	System.out.println(((ParkingPassCar) car).getpaymentPass());
+            	System.out.println("PassCar");
+            	System.out.println(car.getPayment());
             }
-           
-            //polymorfism
-           // car.getIsPaying();
-           
             
             carLeavesSpot(car);
             i++;
