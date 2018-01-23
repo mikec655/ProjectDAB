@@ -5,11 +5,13 @@ public class Location {
     private int floor;
     private int row;
     private int place;
+    private boolean isreserved;
 
     public Location(int floor, int row, int place) {
         this.floor = floor;
         this.row = row;
         this.place = place;
+        this.isreserved = false;
     }
 
     public boolean equals(Object obj) {
@@ -41,5 +43,12 @@ public class Location {
     public int getPlace() {
         return place;
     }
-
+    public boolean getreserved() {
+    return isreserved;
+    }
+    
+    public void setreserved() {
+    	isreserved = true;
+    }
+    
 }

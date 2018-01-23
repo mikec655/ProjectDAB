@@ -211,6 +211,8 @@ public class Model extends AbstractModel implements Runnable{
             	freeLocation = getFirstresLocation();
             	if(freeLocation != null) {
             		 car = queue.removeCar();
+            		 freeLocation.setreserved();
+            		 System.out.println(freeLocation.getreserved());
             		 setCarAt(freeLocation, car);
             		 freeLocation = null;}
             	}

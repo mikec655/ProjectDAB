@@ -59,8 +59,15 @@ public abstract class Car {
 
 
     public void tick() {
-        minutesLeft--;
+    	if(this instanceof ResCar) {
+    	if(getStayMinute()-15 == getMinutesLeft()) {
+    		System.out.println("Color");
+    	    	setColor();
+    	}}
+    	minutesLeft--;
     }
     
     public abstract Color getColor();
+    public abstract Color setColor();
+   	 
 	}

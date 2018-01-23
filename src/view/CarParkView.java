@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 
 import logic.Car;
+import logic.ResCar;
 import logic.Location;
 import logic.Model;
 
@@ -13,6 +14,7 @@ public class CarParkView extends AbstractView{
 	private static final long serialVersionUID = -5134000553073183997L;
 	private Dimension size;
     private Image carParkImage; 
+    private Color kleur;
 
     //voegt het model toe.
 	public CarParkView(Model model) {
@@ -53,7 +55,13 @@ public class CarParkView extends AbstractView{
                 for(int place = 0; place < model.getNumberOfPlaces(); place++) {
                     Location location = new Location(floor, row, place);
                     Car car = model.getCarAt(location);
-                    Color color = car == null ? Color.white : car.getColor();
+                    Color color = null;
+                    if(car instanceof ResCar) {
+                    	color = car == null ? Color.BLACK : car.getColor();	
+                    }
+                    else {
+                    	 color = car == null ? Color.white : car.getColor();}
+                    
                     drawPlace(graphics, location, color);
                 }
             }
