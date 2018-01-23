@@ -60,7 +60,10 @@ public class Model extends AbstractModel implements Runnable{
     private double profitPlus;
     private double profitAv;
    
-   
+   //type auto in garage
+    private int adhcar;
+    private int rescar;
+    private int passcar;
    
     //Constructor
     public Model() {
@@ -224,7 +227,8 @@ public class Model extends AbstractModel implements Runnable{
             		 setCarAt(freeLocation, car);}
             }
               i++;
-        }}
+        }
+     }
    
     private void carsReadyToLeave(){
         // Add leaving cars to the payment queue.
@@ -435,6 +439,20 @@ public class Model extends AbstractModel implements Runnable{
         this.exitSpeed = exitSpeed;
     }
    
+    
+    //Getters of cars in garage per car + or -
+    public int getadhcargarage() {
+        return adhcar;
+    }
+    
+    public int getpasscargarage() {
+        return passcar;
+    }
+    
+    public int getrescargarage() {
+        return rescar;
+    }
+    
     //Cars methods
     private void carTick() {
         for (int floor = 0; floor < getNumberOfFloors(); floor++) {
@@ -464,20 +482,27 @@ public class Model extends AbstractModel implements Runnable{
    
     private void addArrivingCars(int numberOfCars, String type){
         // Add the cars to the back of the queue.
+        
         switch(type) {
         case AD_HOC:
             for (int i = 0; i < numberOfCars; i++) {
+            	adhcar += 1;
                 entranceCarQueue.addCar(new AdHocCar());
+          
             }
             break;
         case PASS:
             for (int i = 0; i < numberOfCars; i++) {
+            	passcar += 1;
                 entrancePassQueue.addCar(new ParkingPassCar());
+                System.out.println("pass + " + passcar);
             }
             break; 
         case ResCar:
             for (int i = 0; i < numberOfCars; i++) {
+            	rescar+=1;
                 entranceCarQueue.addCar(new ResCar());
+              
             }
             break;
         }
@@ -519,6 +544,19 @@ public class Model extends AbstractModel implements Runnable{
         }
         cars[location.getFloor()][location.getRow()][location.getPlace()] = null;
         car.setLocation(null);
+        
+        if(car instanceof ParkingPassCar) {
+        	passcar-=1;
+        }
+        
+        else if(car instanceof ResCar){
+        	rescar-=1;
+        	}
+        
+        else if(car instanceof AdHocCar){
+        	adhcar-=1;
+        }  
+        
         numberOfOpenSpots++;
         return car;
     }
