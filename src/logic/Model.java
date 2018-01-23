@@ -84,7 +84,7 @@ public class Model extends AbstractModel implements Runnable{
         time = Calendar.getInstance();
         
         //Places
-        numberOfFloors = 4;
+        numberOfFloors = 3;
         numberOfRows = 6;
         numberOfPlaces = 30;
         numberOfOpenSpots = numberOfFloors * numberOfRows * numberOfPlaces;
