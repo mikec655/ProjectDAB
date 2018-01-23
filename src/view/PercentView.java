@@ -10,6 +10,7 @@ public class PercentView extends AbstractView{
 	private static final long serialVersionUID = 1337;
 	private JLabel percentshow;
 	
+	
 	public PercentView(Model model) {
 		super(model);
 		percentshow = new JLabel();
@@ -24,20 +25,22 @@ public class PercentView extends AbstractView{
 	}
 	
 	public void updateView() {
-		double placepercent = 0;
-		
+		double placepercent=0;
 		placepercent = getNumberOfPlaces(placepercent);
 		percentshow.setText("Het percentage open plaatsen is: " + String.valueOf(placepercent) + "%");
+		
 	}
 	
 	private double getNumberOfPlaces(double placepercent) {
 
-				double tempplacepercent2 = (model.getNumberOfPlaces() * model.getNumberOfFloors() * model.getNumberOfRows());
-				placepercent += model.getNumberOfOpenSpots() / tempplacepercent2 * 100.00;
+				double tempspots = 1.0 * (model.getNumberOfPlaces() * model.getNumberOfFloors() * model.getNumberOfRows());
+				placepercent = 1.0 * model.getNumberOfOpenSpots() / tempspots * 100.00;
 				placepercent = Math.round(placepercent * 10.00);
 				placepercent = placepercent / 10.00;
 				return placepercent;
 				
 		}
+	
+
 		
 }

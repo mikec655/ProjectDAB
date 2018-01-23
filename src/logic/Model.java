@@ -231,19 +231,19 @@ public class Model extends AbstractModel implements Runnable{
     		Car car = paymentCarQueue.removeCar();
             
             if(car instanceof AdHocCar) {
-            	System.out.println("AdHocCar");
-            	System.out.println(car.getPayment());
+          //  	System.out.println("AdHocCar");
+          //  	System.out.println(car.getPayment());
             }
             
             if(car instanceof ResCar) {
-            	System.out.println("ResCar");
-            	System.out.println(car.getPayment());
+           // 	System.out.println("ResCar");
+            //	System.out.println(car.getPayment());
             }
             
             
             if(car instanceof ParkingPassCar) {
-            	System.out.println("PassCar");
-            	System.out.println(car.getPayment());
+           // 	System.out.println("PassCar");
+          //  	System.out.println(car.getPayment());
             }
             
             carLeavesSpot(car);
@@ -568,11 +568,7 @@ public class Model extends AbstractModel implements Runnable{
   //  	adHocPayment += AdHocCar.getpaymentADH();
   //  	System.out.println(adHocPayment);/
 //		return adHocPayment;
-//    }
-    
-    
-    
- 
+//   }
     
 }
 
