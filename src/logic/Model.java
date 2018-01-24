@@ -24,6 +24,7 @@ public class Model extends AbstractModel implements Runnable{
     private CarQueue entrancePassQueue;
     private CarQueue paymentCarQueue;
     private CarQueue exitCarQueue;
+    private CarQueue leavingqueue;
    
     //Time
     private Calendar time;
@@ -77,7 +78,22 @@ public class Model extends AbstractModel implements Runnable{
             } catch (Exception e) {}
         }
     }
-   
+    public void skip(int minutes) {
+    	while(minutes > 0) {
+    		 advanceTime();
+    	     handleExit();
+    	     carTick(); // deze haalt een minuut van de carminutes af.
+    	     handleEntrance();
+    	     minutes--;
+    	}
+    	notifyViews();
+    	
+    }
+    
+    
+    
+    
+    
     public void reset() {
         //Run variables
         run = false;
@@ -88,6 +104,8 @@ public class Model extends AbstractModel implements Runnable{
         entrancePassQueue = new CarQueue();
         paymentCarQueue = new CarQueue();
         exitCarQueue = new CarQueue();
+        leavingqueue = new CarQueue();
+        
        
         //Time
         time = Calendar.getInstance();
@@ -497,27 +515,44 @@ public class Model extends AbstractModel implements Runnable{
    
     private void addArrivingCars(int numberOfCars, String type){
         // Add the cars to the back of the queue.
-        
+   
         switch(type) {
         case AD_HOC:
             for (int i = 0; i < numberOfCars; i++) {
             	adhcar++;
+            	 if(entranceCarQueue.carsInQueue()== 20){
+            		 leavingqueue.addCar(new AdHocCar());
+            	 }
+            	 else {
+            	
                 entranceCarQueue.addCar(new AdHocCar());
+            	 }
           
             }
             break;
         case PASS:
             for (int i = 0; i < numberOfCars; i++) {
             	passcar++;
+           	 	if(entrancePassQueue.carsInQueue()== 20){
+           	 		leavingqueue.addCar(new ParkingPassCar());
+        	 }
+        	 else {
                 entrancePassQueue.addCar(new ParkingPassCar());
+        	 }
             }
             break; 
         case ResCar:
             for (int i = 0; i < numberOfCars; i++) {
             	rescar++;
+            	 if(entranceCarQueue.carsInQueue()== 20){
+            		 leavingqueue.addCar(new ResCar());
+            	 }
+            	 else {
+            	
                 entranceCarQueue.addCar(new ResCar());
-              
+            	 }
             }
+            System.out.println(leavingqueue.carsInQueue());
             break;
         }
     }
