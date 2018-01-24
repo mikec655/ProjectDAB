@@ -53,6 +53,7 @@ public class Model extends AbstractModel implements Runnable{
     private double profit;
     private double profitPlus;
     private double profitAv;
+    private double gemisteprofit;
    
    //type auto in garage
     private int adhcar;
@@ -115,6 +116,7 @@ public class Model extends AbstractModel implements Runnable{
         adhcar = 0;
         rescar = 0;
         passcar = 0;
+        gemisteprofit =0;
         
         //Cars  numberOfFloor, numberOfRows, numberOfPlaces
         cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
@@ -151,6 +153,7 @@ public class Model extends AbstractModel implements Runnable{
         advanceTime();
         handleExit();
         carTick(); // deze haalt een minuut van de carminutes af.
+        setMissedProfit() ;
         notifyViews();
         handleEntrance();
     }
@@ -286,6 +289,13 @@ public class Model extends AbstractModel implements Runnable{
     public double getProfit() {
         return profit;
     }
+    
+    public double getMissedProfit() {
+    	return gemisteprofit;
+    }
+    public void setMissedProfit() {
+    	gemisteprofit = leavingqueue.getmissedprofit();
+    }
    
     private void carsLeaving(){
         // Let cars leave.
@@ -344,7 +354,12 @@ public class Model extends AbstractModel implements Runnable{
     public int getNumberOfOpenSpots(){
         return numberOfOpenSpots;
     }
-   
+    
+    public int getNumberofLeaving() {
+    	return leavingqueue.carsInQueue();
+    }
+    
+     
     //Setters of places
     public void setNumberOfFloors(int numberofFloors) {
         this.numberOfFloors = numberofFloors;
@@ -490,6 +505,7 @@ public class Model extends AbstractModel implements Runnable{
             	adhcar++;
             	 if(entranceCarQueue.carsInQueue()== 20){
             		 leavingqueue.addCar(new AdHocCar());
+            		 //adhcar--
             	 }
             	 else {
             	
@@ -520,7 +536,7 @@ public class Model extends AbstractModel implements Runnable{
                 entranceCarQueue.addCar(new ResCar());
             	 }
             }
-            System.out.println(leavingqueue.carsInQueue());
+            
             break;
         }
     }

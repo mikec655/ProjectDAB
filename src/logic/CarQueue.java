@@ -5,7 +5,8 @@ import java.util.Queue;
 
 public class CarQueue {
     private Queue<Car> queue = new LinkedList<>();
-
+    private double money;
+    
     public boolean addCar(Car car) {
         return queue.add(car);
     }
@@ -20,5 +21,13 @@ public class CarQueue {
     
     public Car peekCar() {
     	return queue.peek();
+    }
+    public double getmissedprofit() {
+    	money = 0;
+    	for(Car carnaam: queue) {
+          money= money + carnaam.getPayment();
+          System.out.println(money);
+        }
+    	return money;
     }
 }
