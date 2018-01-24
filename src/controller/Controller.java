@@ -57,6 +57,7 @@ public class Controller extends AbstractController implements ActionListener, Ch
 		
 		if (e.getSource() == resetButton) {
 			model.reset(calculateTickPause());
+			model.reset(calculateTickPause());
 		}
 	}
 	
