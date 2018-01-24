@@ -39,9 +39,14 @@ public class Labels extends AbstractView{
 		jLabel +=  "Mike<br>";
 		jLabel +=  "Jun Lin<br>"; 
 		jLabel +=  "Gerben <br>";
-		jLabel += "Jefrey<html>";
+		jLabel +=  "Jefrey";
+		jLabel +=  "<br><br><br>";
+		jLabel +=  " ADHocCar= rood<br>";
+		jLabel +=  " ResCar = geel<br>";
+		jLabel +=  " ParkingPassCar = blauw<html>";
 		labels.setText(jLabel);
 	}
+	
 	
 	
 }
