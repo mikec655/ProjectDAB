@@ -80,6 +80,11 @@ public class Model extends AbstractModel implements Runnable{
         }
     }
     public void skip(int minutes) {
+    	boolean wasRunning = false;
+    	if (run) {
+    		stop();
+    		wasRunning = true;
+    	}
     	while(minutes > 0) {
     		 advanceTime();
     	     handleExit();
@@ -88,7 +93,7 @@ public class Model extends AbstractModel implements Runnable{
     	     minutes--;
     	}
     	notifyViews();
-    	
+    	if (wasRunning) start();
     }
     
     

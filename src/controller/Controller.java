@@ -29,7 +29,7 @@ public class Controller extends AbstractController implements ActionListener, Ch
 		startButton = new JButton("Start");
 		pauseButton = new JButton("Pauze");
 		resetButton = new JButton("Reset");
-		plusOneMinuteButton = new JButton("+1 minute");
+		plusOneMinuteButton = new JButton("+1 minuut");
 		plusOneHourButton= new JButton("+1 uur");
 		plusOneDayButton = new JButton("+1 dag");
 		plusOneWeekButton = new JButton("+1 week");
