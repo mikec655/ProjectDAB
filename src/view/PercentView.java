@@ -34,8 +34,13 @@ public class PercentView extends AbstractView{
         String text = "";
         double placepercent = getNumberOfPlaces();
         text += "<html>Het percentage open plaatsen is: " ;
-        text += formatter.format(placepercent) + "% <br /> ProfitAvg: ";
-        text += formatter.format(model.getProfitAv()) + "<br />"+ "Profit: " + formatter.format(model.getProfit())+"</html>";
+        text += formatter.format(placepercent) + "% <br /> ProfitAvgPerUur: ";
+        text += formatter.format(model.getProfitAv()) + "<br />"+ "Profit totaal: " + formatter.format(model.getProfit());
+        text += "<br>Profit avg per dag: " + formatter.format(model.getProfitAv() * 24);
+        text += "<br>Profit avg per week: " + formatter.format(model.getProfitAv() * 24 * 7);
+        text += "<br>Profit avg per maand: " + formatter.format(model.getProfitAv() * 24 * 365 / 12);
+        text += "<br>Profit avg per jaar: " + formatter.format(model.getProfitAv() * 24 * 365)+"</html>";
+        text += "<br>Profit avg per adhoc " + formatter.format(model.getProfitAv() * 24 * 365)+"</html>";
         show.setText(text);
        
     }
