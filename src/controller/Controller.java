@@ -104,7 +104,7 @@ public class Controller extends AbstractController implements ActionListener, Ch
 	@Override
 	public void stateChanged(ChangeEvent e) {
 		if (e.getSource() == speedSlider) {
-			System.out.println(calculateTickPause());
+			//System.out.println(calculateTickPause());
 			model.setTickPause(calculateTickPause());
 		}
 	}

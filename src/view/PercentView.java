@@ -46,8 +46,8 @@ public class PercentView extends AbstractView{
         text += "<br>Profit totaal normale/rode auto's " + formatter.format(model.getProfitADH());
         text += "<br>Profit avg per normale/rode auto's " + formatter.format(model.getProfitADH()/model.getAmountOfAdHocCars());
         text += "<br>Profit totaal reserverende/gele auto's " + formatter.format(model.getProfitres());
-        text += "<br>Profit avg per reserverende/gele auto's " + formatter.format(model.getProfitres()/model.getAmountOfResCars())+"</html>";
-       
+        text += "<br>Profit avg per reserverende/gele auto's " + formatter.format(model.getProfitres()/model.getAmountOfResCars());
+        text += "<br>Gemiste geld " + formatter.format(model.getMissedProfit())+"</html>";
         show.setText(text);
        
     }

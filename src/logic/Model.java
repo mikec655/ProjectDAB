@@ -327,6 +327,7 @@ public class Model extends AbstractModel implements Runnable{
     public double getMissedProfit() {
     	return gemisteprofit;
     }
+    // set gemisteprofit naar de totalepayment van alle aut0s in de levingqueue.
     public void setMissedProfit() {
     	gemisteprofit = leavingqueue.getmissedprofit();
     }
