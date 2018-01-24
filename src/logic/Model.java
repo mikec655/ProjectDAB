@@ -235,7 +235,9 @@ public class Model extends AbstractModel implements Runnable{
             	freeLocation = getFirstpassLocation();
             	if(freeLocation != null) {
             		 car = queue.removeCar();
-            		 setCarAt(freeLocation, car);}
+            		 setCarAt(freeLocation, car);
+            		 passcar++;
+            	}
             }
             
             else if(car instanceof ResCar){
@@ -243,7 +245,8 @@ public class Model extends AbstractModel implements Runnable{
             	if(freeLocation != null) {
             		 car = queue.removeCar();
             		 setCarAt(freeLocation, car);
-            		 freeLocation = null;}
+            		 rescar++;
+            		}
             	}
             
         
@@ -251,7 +254,9 @@ public class Model extends AbstractModel implements Runnable{
             	freeLocation = getFirstFreeLocation();	
             	if(freeLocation != null) {
             		 car = queue.removeCar();
-            		 setCarAt(freeLocation, car);}
+            		 setCarAt(freeLocation, car);
+            		 adhcar++;
+            	}
             }
               i++;
         }
@@ -519,12 +524,11 @@ public class Model extends AbstractModel implements Runnable{
         switch(type) {
         case AD_HOC:
             for (int i = 0; i < numberOfCars; i++) {
-            	adhcar++;
+            	
             	 if(entranceCarQueue.carsInQueue()== 20){
             		 leavingqueue.addCar(new AdHocCar());
             	 }
             	 else {
-            	
                 entranceCarQueue.addCar(new AdHocCar());
             	 }
           
@@ -532,7 +536,7 @@ public class Model extends AbstractModel implements Runnable{
             break;
         case PASS:
             for (int i = 0; i < numberOfCars; i++) {
-            	passcar++;
+            	
            	 	if(entrancePassQueue.carsInQueue()== 20){
            	 		leavingqueue.addCar(new ParkingPassCar());
         	 }
@@ -543,7 +547,7 @@ public class Model extends AbstractModel implements Runnable{
             break; 
         case ResCar:
             for (int i = 0; i < numberOfCars; i++) {
-            	rescar++;
+            	
             	 if(entranceCarQueue.carsInQueue()== 20){
             		 leavingqueue.addCar(new ResCar());
             	 }

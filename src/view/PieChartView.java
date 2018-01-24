@@ -34,18 +34,17 @@ public class PieChartView extends AbstractView {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		int angleAdHoc = getAngle(model.getAmountOfAdHocCars());
-		//int anglePass = getAngle(model.getAmountOfPassCars());
+		int anglePass = getAngle(model.getAmountOfPassCars());
 		int angleRes = getAngle(model.getAmountOfResCars());
-		int angleOpen = getAngle(model.getNumberOfOpenSpots());
 		
-	 	g.setColor(Color.BLUE);
-		g.fillArc(25, 25, 200, 200, 90, 360 + 90);
+	 	g.setColor(Color.WHITE);
+		g.fillArc(25, 25, 200, 200, 0, 360 );
 		g.setColor(Color.RED);
 		g.fillArc(25, 25, 200, 200, 90, angleAdHoc);
+		g.setColor(Color.BLUE);
+		g.fillArc(25, 25, 200, 200, 90 + angleAdHoc, anglePass);
 		g.setColor(Color.YELLOW);
-		g.fillArc(25, 25, 200, 200, 90 + angleAdHoc, angleRes);
-		g.setColor(Color.WHITE);
-		g.fillArc(25, 25, 200, 200, 90 + angleAdHoc + angleRes, angleOpen);
+		g.fillArc(25, 25, 200, 200, 90 + angleAdHoc + anglePass, angleRes);
 		g.setColor(Color.black);
 		g.drawArc(25, 25, 200, 200, 90, 360 + 90);
 	}
