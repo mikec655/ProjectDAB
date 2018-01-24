@@ -73,7 +73,22 @@ public class Model extends AbstractModel implements Runnable{
             } catch (Exception e) {}
         }
     }
-   
+    public void skip(int minutes) {
+    	while(minutes > 0) {
+    		 advanceTime();
+    	     handleExit();
+    	     carTick(); // deze haalt een minuut van de carminutes af.
+    	     handleEntrance();
+    	     minutes--;
+    	}
+    	notifyViews();
+    	
+    }
+    
+    
+    
+    
+    
     public void reset() {
         //Run variables
         run = false;
