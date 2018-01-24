@@ -13,6 +13,7 @@ public class AdHocCar extends Car {
         this.setStayMinute(stayMinutes);
         this.setHasToPay(true);
         payment = (double) stayMinutes * 0.02;
+        paymentADH = (double) stayMinutes * 0.02;
         color = Color.RED;
     }
     
@@ -23,5 +24,6 @@ public class AdHocCar extends Car {
     public void setColor(){
     	color = Color.YELLOW;
     }
+   
 }
 
