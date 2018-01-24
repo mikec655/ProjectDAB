@@ -579,7 +579,7 @@ public class Model extends AbstractModel implements Runnable{
     }
    
     public Location getFirstresLocation() {
-        for (int floor = 1; floor < getNumberOfFloors(); floor++) {
+        for (int floor = 1; floor < 2; floor++) {
           for (int row = 2; row < getNumberOfRows(); row++) {
               for (int place = 0; place < getNumberOfPlaces(); place++) {
                   Location location = new Location(floor, row, place);
