@@ -34,7 +34,7 @@ public class SplashScreen extends JWindow{
 		setVisible(true);
 		
 		try {
-		    Thread.sleep(1000);
+		    Thread.sleep(3000);
 		} catch (InterruptedException e) {
 		    e.printStackTrace();
 		}
@@ -47,7 +47,7 @@ public class SplashScreen extends JWindow{
 	
 	private void getImage() {
 		try {
-			InputStream stream = Simulator.class.getClassLoader().getResourceAsStream("images/image.jpg");
+			InputStream stream = Simulator.class.getClassLoader().getResourceAsStream("images/hanze.jpg");
 			image = ImageIO.read(stream);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -60,6 +60,6 @@ public class SplashScreen extends JWindow{
 		g.drawImage(image, 0, 0, null);
 		g.setColor(Color.BLACK);
 		g.setFont(new Font("Arial", Font.PLAIN, 48));
-		g.drawString("Mike, Bernt-Jan, Jefrey, Jun, Youri, Gerben", 100, 120);
+		g.drawString("Version 1.0", 0, 220);
 	}
 }
