@@ -74,13 +74,10 @@ public class Controller extends AbstractController implements ActionListener, Ch
 		if (e.getSource() == startButton) {
 			model.start();
 		}
-		
 		if (e.getSource() == pauseButton) {
 			model.stop();
 		}
-		
 		if (e.getSource() == resetButton) {
-			model.reset(calculateTickPause());
 			model.reset(calculateTickPause());
 		}
 		if (e.getSource() == plusOneMinuteButton) {
@@ -89,7 +86,6 @@ public class Controller extends AbstractController implements ActionListener, Ch
 		if (e.getSource() == plusOneHourButton) {
 			model.skip(60);
 		}
-		
 		if (e.getSource() == plusOneDayButton) {
 			model.skip(24 *60);
 		}
@@ -102,12 +98,13 @@ public class Controller extends AbstractController implements ActionListener, Ch
 		if (e.getSource() == plusOneYearButton) {
 			model.skip(24*60*365);
 		}
-		}
+	}
 	
 	//stateChanged voor de verandering van de sliders
 	@Override
 	public void stateChanged(ChangeEvent e) {
 		if (e.getSource() == speedSlider) {
+			System.out.println(calculateTickPause());
 			model.setTickPause(calculateTickPause());
 		}
 	}

@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
 import logic.Model;
@@ -12,12 +13,12 @@ public class NumberView extends AbstractView{
         super(model);
         show = new JLabel();
         show.setVerticalTextPosition(JLabel.TOP);
-        show.setHorizontalTextPosition(JLabel.RIGHT);
+        show.setHorizontalTextPosition(JLabel.LEFT);
         setUpPanel();
     }
    
     private void setUpPanel(){
-        setLayout(new GridLayout(0, 1));
+        setLayout(new FlowLayout());
         add(show);
     }
    
@@ -32,7 +33,7 @@ public class NumberView extends AbstractView{
         text += "<tr><td>Aantal normale auto's:</td>" + "<td>" + model.getAmountOfAdHocCars() + "</td></tr>";
         text += "<tr><td>Aantal abbonnementhouders:</td>" + "<td>" + model.getAmountOfPassCars() + "</td></tr>";
         text += "<tr><td>Aantal gereserveerde auto's:</td>" + "<td>" + model.getAmountOfResCars() + "</td></tr>";
-        text += "<tr><td>Aantal auto's die wegzijngegaan door lange rij:</td>" + "<td>" + model.getNumberofLeaving() + "</td></tr>";
+        text += "<tr><td>Aantal misgelopen auto's:</td>" + "<td>" + model.getNumberofLeaving() + "</td></tr>";
         text += "<tr><td>gemiste geld:</td>" + "<td>" + model.getMissedProfit() + "</td></tr>";
         show.setText(text);
        

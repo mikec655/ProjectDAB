@@ -19,7 +19,7 @@ public class PieChartView extends AbstractView {
 	
 	//Hier word de dimension van de car gezet.
 	public Dimension getPreferredSize() {
-        return new Dimension(250, 250);
+        return new Dimension(300, 300);
     }
 
 	private int getAngle(int amountOfCars) {
@@ -38,15 +38,15 @@ public class PieChartView extends AbstractView {
 		int angleRes = getAngle(model.getAmountOfResCars());
 		
 	 	g.setColor(Color.WHITE);
-		g.fillArc(25, 25, 200, 200, 0, 360 );
+		g.fillArc(50, 50, 200, 200, 0, 360 );
 		g.setColor(Color.RED);
-		g.fillArc(25, 25, 200, 200, 90, angleAdHoc);
+		g.fillArc(50, 50, 200, 200, 90, angleAdHoc);
 		g.setColor(Color.BLUE);
-		g.fillArc(25, 25, 200, 200, 90 + angleAdHoc, anglePass);
+		g.fillArc(50, 50, 200, 200, 90 + angleAdHoc, anglePass);
 		g.setColor(Color.YELLOW);
-		g.fillArc(25, 25, 200, 200, 90 + angleAdHoc + anglePass, angleRes);
-		g.setColor(Color.black);
-		g.drawArc(25, 25, 200, 200, 90, 360 + 90);
+		g.fillArc(50, 50, 200, 200, 90 + angleAdHoc + anglePass, angleRes);
+		g.setColor(Color.BLACK);
+		g.drawArc(50, 50, 200, 200, 90, 360 + 90);
 	}
 
 				
