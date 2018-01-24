@@ -24,13 +24,10 @@ public class CarQueue {
     }
     public double getmissedprofit() {
     	money = 0;
-    	System.out.println(queue.size());
-    	
-    	for(Car carnaam: queue) {
-          money= money + carnaam.getPayment();
-         
-        }
-    	 System.out.println(money);
+   	   	for(Car carnaam: queue) {
+        money= money + carnaam.getPayment();     
+}
+
     	return money;
     }
 }

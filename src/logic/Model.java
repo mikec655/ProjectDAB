@@ -181,7 +181,7 @@ public class Model extends AbstractModel implements Runnable{
         advanceTime();
         handleExit();
         carTick(); // deze haalt een minuut van de carminutes af.
-        setMissedProfit() ;
+        setMissedProfit() ; //check voor gemiste profit.
         notifyViews();
         handleEntrance();
     }
@@ -269,9 +269,9 @@ public class Model extends AbstractModel implements Runnable{
               i++;
         }
      }
-   
+    
+    // Add leaving cars to the payment queue.
     private void carsReadyToLeave(){
-        // Add leaving cars to the payment queue.
         Car car = getFirstLeavingCar();
         while (car!=null) {
             if (car.getHasToPay()){
@@ -289,8 +289,8 @@ public class Model extends AbstractModel implements Runnable{
         return getMinute();
     }
    
+    // Let cars pay. 
     private void carsPaying(){
-        // Let cars pay.    
         int i=0;
         while (paymentCarQueue.carsInQueue()>0 && i < paymentSpeed){
             Car car = paymentCarQueue.removeCar();
@@ -304,15 +304,12 @@ public class Model extends AbstractModel implements Runnable{
                 profit += car.getPayment();
                 profitres += car.getPaymentres();
             }
-           
             carLeavesSpot(car);
             i++;
-           
-           
             profitAv = profit / minutesRunning * 60;
- 
-        }
+         }
     }
+    
     public double getProfitAv() {
         return profitAv;
     }
@@ -320,6 +317,7 @@ public class Model extends AbstractModel implements Runnable{
     public double getProfitPlus() {
         return profitPlus;
     }
+    
     public double getProfit() {
         return profit;
     }
@@ -327,14 +325,15 @@ public class Model extends AbstractModel implements Runnable{
     public double getMissedProfit() {
     	return gemisteprofit;
     }
-    // set gemisteprofit naar de totalepayment van alle aut0s in de levingqueue.
+    
+    // set gemisteprofit naar de totalepayment van alle aut0s in de leavingqueue.
     public void setMissedProfit() {
     	gemisteprofit = leavingqueue.getmissedprofit();
     }
-   
+    
+    // Let cars leave.
     private void carsLeaving(){
-        // Let cars leave.
-        int i=0;
+       int i=0;
         while (exitCarQueue.carsInQueue()>0 && i < exitSpeed){
             exitCarQueue.removeCar();
             i++;
@@ -490,7 +489,6 @@ public class Model extends AbstractModel implements Runnable{
         this.exitSpeed = exitSpeed;
     }
    
-    
     //Getters of cars in garage per car + or -
     public int getAmountOfAdHocCars() {
         return adhcar;
@@ -529,10 +527,8 @@ public class Model extends AbstractModel implements Runnable{
  
     private int getNumberOfCars(int [][] arrivals){
         Random random = new Random();
- 
         // Get the average number of cars that arrive per hour.
         int averageNumberOfCarsPerHour = arrivals[getDayOfWeek() - 1][getHour()];
- 
         // Calculate the number of cars that arrive this minute.
         double standardDeviation = averageNumberOfCarsPerHour * 0.3;
         double numberOfCarsPerHour = averageNumberOfCarsPerHour + random.nextGaussian() * standardDeviation;
@@ -542,7 +538,7 @@ public class Model extends AbstractModel implements Runnable{
     private void addArrivingCars(int numberOfCars, String type){
         // Add the cars to the back of the queue.
    
-        switch(type) {
+     switch(type) {
         case AD_HOC:
             for (int i = 0; i < numberOfCars; i++) {
             	
@@ -551,31 +547,28 @@ public class Model extends AbstractModel implements Runnable{
             		 //adhcar--
             	 }
             	 else {
-                entranceCarQueue.addCar(new AdHocCar());
+            		 entranceCarQueue.addCar(new AdHocCar());
             	 }
           
             }
             break;
-        case PASS:
+         case PASS:
             for (int i = 0; i < numberOfCars; i++) {
-            	
-           	 	if(entrancePassQueue.carsInQueue()== 20){
+            	   if(entrancePassQueue.carsInQueue()== 20){
            	 		leavingqueue.addCar(new ParkingPassCar());
-        	 }
-        	 else {
-                entrancePassQueue.addCar(new ParkingPassCar());
-        	 }
+            	   }
+            	   else {
+            		   entrancePassQueue.addCar(new ParkingPassCar());
+            	   }
             }
             break; 
-        case ResCar:
+         case ResCar:
             for (int i = 0; i < numberOfCars; i++) {
-            	
-            	 if(entranceCarQueue.carsInQueue()== 20){
+                  if(entranceCarQueue.carsInQueue()== 20){
             		 leavingqueue.addCar(new ResCar());
             	 }
             	 else {
-            	
-                entranceCarQueue.addCar(new ResCar());
+            	   entranceCarQueue.addCar(new ResCar());
             	 }
             }
             
@@ -601,10 +594,10 @@ public class Model extends AbstractModel implements Runnable{
         }
         Car oldCar = getCarAt(location);
         if (oldCar == null) {
-            cars[location.getFloor()][location.getRow()][location.getPlace()] = car;
-            car.setLocation(location);
-            numberOfOpenSpots--;
-            return true;
+        		cars[location.getFloor()][location.getRow()][location.getPlace()] = car;
+        			car.setLocation(location);
+        			numberOfOpenSpots--;
+        			return true;
         }
         return false;
     }
@@ -617,21 +610,18 @@ public class Model extends AbstractModel implements Runnable{
         if (car == null) {
             return null;
         }
-        cars[location.getFloor()][location.getRow()][location.getPlace()] = null;
-        car.setLocation(null);
+        	cars[location.getFloor()][location.getRow()][location.getPlace()] = null;
+        	car.setLocation(null);
         
         if(car instanceof ParkingPassCar) {
         	passcar--;
         }
-        
         else if(car instanceof ResCar){
         	rescar--;
         	}
-        
         else if(car instanceof AdHocCar){
         	adhcar--;
         }  
-        
         numberOfOpenSpots++;
         return car;
     }
