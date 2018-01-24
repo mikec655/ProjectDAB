@@ -57,6 +57,10 @@ public class Model extends AbstractModel implements Runnable{
     private int adhcar;
     private int rescar;
     private int passcar;
+    
+    //profit per auto
+    private double profitadh;
+    private double profitres;
    
     //Constructor
     public Model() {
@@ -112,6 +116,10 @@ public class Model extends AbstractModel implements Runnable{
         adhcar = 0;
         rescar = 0;
         passcar = 0;
+        
+        //profit per auto
+        profitadh = 0;
+        profitres = 0;
         
         //Cars  numberOfFloor, numberOfRows, numberOfPlaces
         cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
@@ -258,11 +266,12 @@ public class Model extends AbstractModel implements Runnable{
            
             if(car instanceof AdHocCar) {
                 profit += car.getPayment();
-                
+                profitadh += car.getPaymentADH();
             }
            
             if(car instanceof ResCar) {
                 profit += car.getPayment();
+                profitres += car.getPaymentres();
             }
            
             carLeavesSpot(car);
@@ -451,6 +460,14 @@ public class Model extends AbstractModel implements Runnable{
         return rescar;
     }
     
+    public double getProfitADH() {
+    	return profitadh;
+    }
+    
+    public double getProfitres() {
+    	return profitres;
+    }
+    
     //Cars methods
     private void carTick() {
         for (int floor = 0; floor < getNumberOfFloors(); floor++) {
@@ -624,4 +641,5 @@ public class Model extends AbstractModel implements Runnable{
         }
         return true;
     }  
+    
 }

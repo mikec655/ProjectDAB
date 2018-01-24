@@ -10,6 +10,9 @@ public abstract class Car {
     private boolean hasToPay;
     protected int stayMinutes;
     protected double payment;
+    protected double paymentADH;
+    protected double paymentres;
+    
     
     //auto's
     public Car() {
@@ -66,11 +69,20 @@ public abstract class Car {
     	this.stayMinutes = stayMinutes1;
     }
     
-    // Nieuwe getpaymentADH
+ // Nieuwe getpaymentADH
     public double getPayment() {
     	return payment;
     }
-
+    
+    // Nieuwe getpaymentADH
+    public double getPaymentADH() {
+    	return paymentADH;
+    }
+    
+    public double getPaymentres() {
+    	return paymentres;
+    }
+    
 
     public void tick() {
     	if(this instanceof ResCar) {

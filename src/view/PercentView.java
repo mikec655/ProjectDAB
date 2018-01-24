@@ -1,6 +1,8 @@
 package view;
  
 import javax.swing.JLabel;
+
+import logic.Car;
 import logic.Model;
 
 import java.awt.Dimension;
@@ -31,6 +33,7 @@ public class PercentView extends AbstractView{
     }
    
     public void updateView() {
+    	double paymentADH;
         String text = "";
         double placepercent = getNumberOfPlaces();
         text += "<html>Het percentage open plaatsen is: " ;
@@ -39,8 +42,12 @@ public class PercentView extends AbstractView{
         text += "<br>Profit avg per dag: " + formatter.format(model.getProfitAv() * 24);
         text += "<br>Profit avg per week: " + formatter.format(model.getProfitAv() * 24 * 7);
         text += "<br>Profit avg per maand: " + formatter.format(model.getProfitAv() * 24 * 365 / 12);
-        text += "<br>Profit avg per jaar: " + formatter.format(model.getProfitAv() * 24 * 365)+"</html>";
-        text += "<br>Profit avg per adhoc " + formatter.format(model.getProfitAv() * 24 * 365)+"</html>";
+        text += "<br>Profit avg per jaar: " + formatter.format(model.getProfitAv() * 24 * 365);
+        text += "<br>Profit totaal normale/rode auto's " + formatter.format(model.getProfitADH());
+        text += "<br>Profit avg per normale/rode auto's " + formatter.format(model.getProfitADH()/model.getAmountOfAdHocCars());
+        text += "<br>Profit totaal reserverende/gele auto's " + formatter.format(model.getProfitres());
+        text += "<br>Profit avg per reserverende/gele auto's " + formatter.format(model.getProfitres()/model.getAmountOfResCars())+"</html>";
+       
         show.setText(text);
        
     }
