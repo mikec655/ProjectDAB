@@ -104,7 +104,15 @@ public class Model extends AbstractModel implements Runnable{
         enterSpeed = 3;
         paymentSpeed = 7;
         exitSpeed = 5;
-       
+        
+        //waardes profits etc terug naar 0
+        profit = 0;
+        profitPlus = 0;
+        profitAv = 0;
+        adhcar = 0;
+        rescar = 0;
+        passcar = 0;
+        
         //Cars  numberOfFloor, numberOfRows, numberOfPlaces
         cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
        
