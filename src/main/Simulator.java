@@ -25,6 +25,7 @@ import javafx.scene.layout.Border;
 import logic.Model;
 import view.AbstractView;
 import view.CarParkView;
+import view.HistogramView;
 import view.TimeView;
 import view.Labels;
 import view.NumberView;
@@ -52,6 +53,7 @@ public class Simulator extends JFrame implements ComponentListener{
 	private AbstractView percentView;
 	private AbstractView pieChartView;
 	private AbstractView numberView;
+	private AbstractView histogramView;
 	
 	
 	//super zorgt ervoor dat het een titel krijgt, die wordt boven in het frame weergegeven.
@@ -75,6 +77,7 @@ public class Simulator extends JFrame implements ComponentListener{
 		percentView = new PercentView(model);
 		pieChartView = new PieChartView(model);
 		numberView = new NumberView(model);
+		histogramView = new HistogramView(model);
 		setUpFrame();
 	}
 
@@ -99,6 +102,7 @@ public class Simulator extends JFrame implements ComponentListener{
 		//car tabs
 		carTabPane.addTab("Tekst", null, numberView, "Tekst weergave van auto's");
 		carTabPane.addTab("Cirkel diagram", null, pieChartView, "Cirkeldiagram weergave van auto's");
+		carTabPane.addTab("histogram", null, histogramView, "Histogramweergave van de auto's");
 		
 		//finacial tabs
 		financialTabPane.addTab("Tekst", null, percentView, "Cirkeldiagram weergave van auto's");
