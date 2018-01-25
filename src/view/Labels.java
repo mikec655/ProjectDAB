@@ -33,17 +33,13 @@ public class Labels extends AbstractView{
 	}
 	
 	public void updateView() {
-		String jLabel = "";
-		jLabel +=  "<html>Bernt<br>" ;
-		jLabel +=  "Youri<br>";
-		jLabel +=  "Mike<br>";
-		jLabel +=  "Jun Lin<br>"; 
-		jLabel +=  "Gerben <br>";
-		jLabel +=  "Jefrey";
-		jLabel +=  "<br><br><br>";
-		jLabel +=  " Gewone auto= rood<br>";
-		jLabel +=  " Reserverende auto = geel<br>";
-		jLabel +=  " Pashouders = blauw<html>";
+		String jLabel = "<html>";
+		jLabel +=  " <font size='5'>Legenda:</font><br>";
+		jLabel +=  " <font color='red'>Rood = Gewone auto</font><br>";
+		jLabel +=  " <font color='yellow'>Geel = Gereserverde auto</font><br>";
+		jLabel +=  " <font color='blue'>Blauw = Pashouder auto</font><br>";
+		jLabel +=  " <font color='gray'>Grijs = Gereserverde plek</font><br>";
+		jLabel +=  " Wit = Lege plek<html>";
 		labels.setText(jLabel);
 	}
 	
