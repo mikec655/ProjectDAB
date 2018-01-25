@@ -40,6 +40,7 @@ public class Model extends AbstractModel implements Runnable{
     private int[][] arrivalsPass;
     private int[][] arrivalsAdHoc;
     private int[][] arrivalsRes;
+    private double syntJazz;
    
     //Speed
     private int enterSpeed; // number of cars that can enter per minute
@@ -63,6 +64,8 @@ public class Model extends AbstractModel implements Runnable{
     //profit per auto
     private double profitadh;
     private double profitres;
+    
+    
    
     //Constructor
     public Model() {
@@ -129,6 +132,7 @@ public class Model extends AbstractModel implements Runnable{
         arrivalsAdHoc = readArrivalsFile("arrivalsAdHoc.txt");
         arrivalsPass = readArrivalsFile("arrivalsPass.txt");
         arrivalsRes = readArrivalsFile("arrivalsRes.txt");
+        syntJazz = 1.0;
        
         //Speeds
         enterSpeed = 3;
@@ -481,6 +485,9 @@ public class Model extends AbstractModel implements Runnable{
         this.exitSpeed = exitSpeed;
     }
    
+    public void getsyntJazz(double syntJazz) {
+        this.syntJazz=syntJazz ;
+    }
    
     //Setters of speeds
     public void setenterSpeed(int enterSpeed) {
@@ -495,6 +502,9 @@ public class Model extends AbstractModel implements Runnable{
         this.exitSpeed = exitSpeed;
     }
    
+    public void setsyntJazz(double syntJazz) {
+        this.syntJazz=syntJazz ;
+    }
     //Getters of cars in garage per car + or -
     public int getAmountOfAdHocCars() {
         return adhcar;
@@ -565,7 +575,7 @@ public class Model extends AbstractModel implements Runnable{
     private int getNumberOfCars(int [][] arrivals){
         Random random = new Random();
         // Get the average number of cars that arrive per hour.
-        int averageNumberOfCarsPerHour = arrivals[getDayOfWeek() - 1][getHour()];
+        double averageNumberOfCarsPerHour = arrivals[getDayOfWeek() - 1][getHour()] * syntJazz;
         // Calculate the number of cars that arrive this minute.
         double standardDeviation = averageNumberOfCarsPerHour * 0.3;
         double numberOfCarsPerHour = averageNumberOfCarsPerHour + random.nextGaussian() * standardDeviation;
