@@ -113,6 +113,11 @@ public class Model extends AbstractModel implements Runnable{
         exitCarQueue = new CarQueue();
         leavingqueue = new CarQueue();
         
+        //carsinentranceCarQueue
+        
+        //carsentrancePass
+        
+        
        
         //Time
         time = Calendar.getInstance();
@@ -331,7 +336,9 @@ public class Model extends AbstractModel implements Runnable{
     // set gemisteprofit naar de totalepayment van alle aut0s in de leavingqueue.
     public void setMissedProfit() {
     	gemisteprofit = leavingqueue.getmissedprofit();
-    }
+    	entranceCarQueue.getmissedprofit();
+    	entrancePassQueue.getmissedprofit();
+    } 
     
     // Let cars leave.
     private void carsLeaving(){
@@ -511,6 +518,16 @@ public class Model extends AbstractModel implements Runnable{
     public double getProfitres() {
     	return profitres;
     }
+    
+    public int getamountofPassCarleft() {
+    	return leavingqueue.getleavingqueuePassCar();
+    }
+    public int getamountofResCarleft() {
+    	return leavingqueue.getleavingqueueResCar();
+    }
+	public int getamountofAdHocCarleft() {
+		return leavingqueue.getleavingqueueAdHocCar();
+	}
     
     //Cars methods
     private void carTick() {
