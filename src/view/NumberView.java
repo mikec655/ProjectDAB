@@ -34,6 +34,9 @@ public class NumberView extends AbstractView{
         text += "<tr><td>Aantal abbonnementhouders:</td>" + "<td>" + model.getAmountOfPassCars() + "</td></tr>";
         text += "<tr><td>Aantal gereserveerde auto's:</td>" + "<td>" + model.getAmountOfResCars() + "</td></tr>";
         text += "<tr><td>Aantal misgelopen auto's:</td>" + "<td>" + model.getNumberofLeaving() + "</td></tr>";
+        text += "<P ALIGN=LEFT><tr><td> - Waarvan AdhocCar:</td></p>" + "<td>" + model.getamountofAdHocCarleft() + "</td></tr>";
+        text += "<P ALIGN=LEFT><tr><td>- Waarvan ResCar:</td>" + "<td>" + model.getamountofResCarleft() + "</td></tr>";
+        text += "<P ALIGN=LEFT><tr><td> - Waarvan PassCar:</td>" + "<td>" + model.getamountofPassCarleft() + "</td></tr>";
         show.setText(text);
        
     }
