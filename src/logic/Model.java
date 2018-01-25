@@ -89,6 +89,7 @@ public class Model extends AbstractModel implements Runnable{
     		 advanceTime();
     	     handleExit();
     	     carTick(); // deze haalt een minuut van de carminutes af.
+    	     addPoints();
     	     handleEntrance();
     	     minutes--;
     	}
@@ -187,6 +188,7 @@ public class Model extends AbstractModel implements Runnable{
         handleExit();
         carTick(); // deze haalt een minuut van de carminutes af.
         setMissedProfit() ; //check voor gemiste profit.
+        addPoints();
         notifyViews();
         handleEntrance();
     }
@@ -665,7 +667,7 @@ public class Model extends AbstractModel implements Runnable{
     }
  
     public Location getFirstFreeLocation() {
-          for (int floor = 0; floor < getNumberOfFloors(); floor++) {
+          for (int floor = 0; floor < 2; floor++) {
             for (int row = 0; row < getNumberOfRows(); row++) {
                 for (int place = 0; place < getNumberOfPlaces(); place++) {
                     Location location = new Location(floor, row, place);
@@ -693,8 +695,8 @@ public class Model extends AbstractModel implements Runnable{
     }
    
     public Location getFirstresLocation() {
-        for (int floor = 1; floor < 2; floor++) {
-          for (int row = 2; row < getNumberOfRows(); row++) {
+        for (int floor = 0; floor < 2; floor++) {
+          for (int row = 0; row < getNumberOfRows(); row++) {
               for (int place = 0; place < getNumberOfPlaces(); place++) {
                   Location location = new Location(floor, row, place);
                   if (getCarAt(location) == null) {

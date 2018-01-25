@@ -1,10 +1,7 @@
 package view;
  
 import javax.swing.JLabel;
-
-import logic.Car;
 import logic.Model;
-
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.text.DecimalFormat;
@@ -33,7 +30,6 @@ public class PercentView extends AbstractView{
     }
    
     public void updateView() {
-    	double paymentADH;
         String text = "";
         double placepercent = getNumberOfPlaces();
         text += "<html>Het percentage open plaatsen is: " ;

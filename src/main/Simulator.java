@@ -1,17 +1,12 @@
 package main;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
-import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
-
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -19,15 +14,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-
 import controller.Controller;
-import javafx.scene.layout.Border;
 import logic.Model;
 import view.AbstractView;
 import view.CarParkView;
 import view.HistogramView;
 import view.TimeView;
 import view.Labels;
+import view.LineGraphView;
 import view.NumberView;
 import view.PercentView;
 import view.PieChartView;
@@ -55,8 +49,12 @@ public class Simulator extends JFrame implements ComponentListener{
 	private AbstractView pieChartView;
 	private AbstractView numberView;
 	private AbstractView histogramView;
+
 	private AbstractView queueView;
 	
+
+	private AbstractView lineGraphView;
+
 	
 	//super zorgt ervoor dat het een titel krijgt, die wordt boven in het frame weergegeven.
 	public Simulator() {
@@ -80,7 +78,11 @@ public class Simulator extends JFrame implements ComponentListener{
 		pieChartView = new PieChartView(model);
 		numberView = new NumberView(model);
 		histogramView = new HistogramView(model);
+
 		queueView = new QueueView(model);
+
+		lineGraphView = new LineGraphView(model);
+
 		setUpFrame();
 	}
 
@@ -105,7 +107,8 @@ public class Simulator extends JFrame implements ComponentListener{
 		//car tabs
 		carTabPane.addTab("Tekst", null, numberView, "Tekst weergave van auto's");
 		carTabPane.addTab("Cirkel diagram", null, pieChartView, "Cirkeldiagram weergave van auto's");
-		carTabPane.addTab("histogram", null, histogramView, "Histogramweergave van de auto's");
+		carTabPane.addTab("Histogram", null, histogramView, "Histogramweergave van de auto's");
+		carTabPane.addTab("Lijngrafiek", null, lineGraphView, "Lijngrafiek weergave van de auto's");
 		
 		//finacial tabs
 		financialTabPane.addTab("Tekst", null, percentView, "Cirkeldiagram weergave van auto's");

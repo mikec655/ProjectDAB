@@ -20,4 +20,8 @@ private ArrayList<AbstractView> views;
 	public void notifyViews() {
 		for(AbstractView v: views) v.updateView();
 	}
+	
+	public void addPoints() {
+		for(AbstractView v: views) v.addPoints();
+	}
 }

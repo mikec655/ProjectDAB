@@ -2,12 +2,8 @@ package view;
 
 import javax.swing.JLabel;
 import logic.Model;
-
-import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
-
-import javax.swing.border.*;
 
 public class TimeView extends AbstractView{
 	private static final long serialVersionUID = 1;

@@ -1,24 +1,19 @@
-package view;
+package runner;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
-
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JWindow;
-import javax.swing.SwingConstants;
 
 import main.Simulator;
 
 public class SplashScreen extends JWindow{
+	private static final long serialVersionUID = -4943328726608367132L;
 	JPanel panel;
 	BufferedImage image;
 	JButton btn;
