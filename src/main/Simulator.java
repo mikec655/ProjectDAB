@@ -63,7 +63,7 @@ public class Simulator extends JFrame implements ComponentListener{
 		super("Pakeer Garage Simulatie");
 		model = new Model();
 		controller = new Controller(model);
-		settingsController = new SettingsController(model);
+		settingsController = new SettingsController(model, this);
 		viewPanel = new JPanel();
 		carPanel = new JPanel();
 		carLabel = new JLabel("Auto weergaves");
@@ -113,11 +113,11 @@ public class Simulator extends JFrame implements ComponentListener{
 		carTabPane.addTab("Lijngrafiek", null, lineGraphView, "Lijngrafiek weergave van de auto's");
 		
 		//finacial tabs
-		financialTabPane.addTab("Tekst", null, percentView, "Cirkeldiagram weergave van auto's");
-		financialTabPane.addTab("Lijngrafiek", null, lineGraphViewProfits, "Lijngrafiek weergave van de gemiddelde prijs");
+		financialTabPane.addTab("Tekst", null, percentView, "Tekst weergave van omzet");
+		financialTabPane.addTab("Lijngrafiek", null, lineGraphViewProfits, "Lijngrafiek weergave van de gemiddelde omzet");
 		
 		//queues tabs
-		queuesTabPane.addTab("TAB", null, queueView, "TAB");
+		queuesTabPane.addTab("Tekst", null, queueView, "Tekst weergave van rijen");
 	}
 
 	private void setIcon() {

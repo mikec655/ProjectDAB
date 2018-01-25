@@ -1,6 +1,8 @@
 package view;
 
 import java.awt.FlowLayout;
+
+import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 import logic.Model;
@@ -34,7 +36,7 @@ public class QueueView extends AbstractView {
 	 
 	//Hier kan je de panel van de FlowLayout mee zien, wordt ook twee keer een progressbar toegevoegd.
 	 private void setUpPanel(){
-	        setLayout(new FlowLayout());
+	        setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 	        add(show);
 	        add(progressBar);
 	        add(progressBarpas);

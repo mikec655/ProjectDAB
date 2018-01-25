@@ -46,19 +46,22 @@ public class CarQueue {
      numberofrescars = 0;
      numberofadhoccars = 0;
      numberofpasscars = 0;
-   	   	
-     for(Car carnaam: queue) {
-    	 money= money + carnaam.getPayment();
-        	if(carnaam instanceof ResCar) {
-        		numberofrescars ++;
-        	}
-        	else if(carnaam instanceof ParkingPassCar){
-        		 numberofpasscars ++;
-        	}
-        	else if(carnaam instanceof AdHocCar){
-        		numberofadhoccars ++;
-        	}
-   	   }
-    	return money;
+   	 try {  	
+	     for(Car carnaam: queue) {
+	    	 money= money + carnaam.getPayment();
+	        	if(carnaam instanceof ResCar) {
+	        		numberofrescars ++;
+	        	}
+	        	else if(carnaam instanceof ParkingPassCar){
+	        		 numberofpasscars ++;
+	        	}
+	        	else if(carnaam instanceof AdHocCar){
+	        		numberofadhoccars ++;
+	        	}
+	   	  }
+    } catch (Exception ex) {
+    	
+    }
+   	return money;
     }
 }

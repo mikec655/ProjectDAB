@@ -169,7 +169,7 @@ public class Model extends AbstractModel implements Runnable{
     public void start() {
         if (!run) {
             // new tread wil zeggen dat je een ander stukje programma kan draaien in je programma.
-            new Thread(this).start();
+            new Thread(this, "Thread-1").start();
         }
     }
     //Stopt het programma met runnen.
@@ -639,8 +639,12 @@ public class Model extends AbstractModel implements Runnable{
    
     //Verwijdert een auto van een plek.
     private void carLeavesSpot(Car car){
-        removeCarAt(car.getLocation());
-        exitCarQueue.addCar(car);
+    	try {
+    		removeCarAt(car.getLocation());
+        	exitCarQueue.addCar(car);
+    	} catch(Exception ex) {
+    		
+    	}
     }
    
     //Haalt een auto op van een locatie.
