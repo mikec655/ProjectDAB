@@ -1,7 +1,6 @@
 package view;
 
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import javax.swing.JLabel;
 import logic.Model;
 

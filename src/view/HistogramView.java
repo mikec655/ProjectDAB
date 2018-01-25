@@ -11,7 +11,7 @@ import logic.Model;
 public class HistogramView extends AbstractView {
 	private static final long serialVersionUID = -3842302968396266777L;
 	
-//Hier word de super aangeroepen van de klasse AbstractView.
+	//Hier word de super aangeroepen van de klasse AbstractView.
 	public HistogramView(Model model) {
 		super(model);
 	}
@@ -21,21 +21,13 @@ public class HistogramView extends AbstractView {
 	public Dimension getPreferredSize() {
         return new Dimension(300, 300);
     }
-
-	private int getSize(int amountOfCars) {
-		int total = model.getNumberOfFloors() * model.getNumberOfRows() * model.getNumberOfPlaces();
-		double size =  1.0 * (double) amountOfCars;
-		//System.out.println("angel: " + angle);
-		return (int) size;
-	}
-	
 	
 	//paint een circelmet daarin het percentage.
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		int sizeAdHoc = getSize(model.getAmountOfAdHocCars());
-		int sizePass = getSize(model.getAmountOfPassCars());
-		int sizeRes = getSize(model.getAmountOfResCars());
+		int sizeAdHoc = model.getAmountOfAdHocCars();
+		int sizePass = model.getAmountOfPassCars();
+		int sizeRes = model.getAmountOfResCars();
 		
 	 	g.setColor(Color.white);
 		g.fillRect(0, 0, 300, 300);
