@@ -8,71 +8,71 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
  
-//implements runnable zorgt ervoor dat er threading komt. Dus de functies toevoegen aan de infiniteloops.
+//Implements runnable zorgt ervoor dat er threading komt. 
+//Dus de functies toevoegen aan de infiniteloops.
 public class Model extends AbstractModel implements Runnable{
-    // Deze code kun je beter onder elkaar zetten dat is netter.
     private static final String AD_HOC = "1";
     private static final String PASS = "2";
     private static final String ResCar = "3";
    
-    //Run variables
+    //Run variables.
     private boolean run;
     private int tickPause;
    
-    //Queues
+    //Queues.
     private CarQueue entranceCarQueue;
     private CarQueue entrancePassQueue;
     private CarQueue paymentCarQueue;
     private CarQueue exitCarQueue;
     private CarQueue leavingqueue;
    
-    //Time
+    //Time.
     private Calendar time;
     private int minutesRunning;
    
-    //Places
+    //Places.
     private int numberOfFloors;
     private int numberOfRows;
     private int numberOfPlaces;
     private int numberOfOpenSpots;
    
-    //Arrivals
+    //Arrivals.
     private int[][] arrivalsPass;
     private int[][] arrivalsAdHoc;
     private int[][] arrivalsRes;
     private double syntJazz;
    
-    //Speed
-    private int enterSpeed; // number of cars that can enter per minute
-    private int paymentSpeed; // number of cars that can pay per minute
-    private int exitSpeed; // number of cars that can leave per minute
+    //Speed.
+    private int enterSpeed; //Aantal auto's dat per minuut naar binnen mogen.
+    private int paymentSpeed; //Aantal auto's dat mag betalen per minuut.
+    private int exitSpeed; //Aantal auto's dat weg mag per minuut.
    
     //Cars in een multidimensionale array.
     private Car[][][] cars;
    
-    //payment
+    //payment.
     private double profit;
     private double profitPlus;
     private double profitAv;
     private double gemisteprofit;
    
-   //type auto in garage
+   //type auto in garage.
     private int adhcar;
     private int rescar;
     private int passcar;
     
-    //profit per auto
+    //profit per auto.
     private double profitadh;
     private double profitres;
     
     
    
-    //Constructor
+    //Constructor.
     public Model() {
         reset();
     }
    
-    //Run methods
+    //Run de methodes.
     public void run() {
         run = true;
         while(run) {
@@ -82,6 +82,7 @@ public class Model extends AbstractModel implements Runnable{
             } catch (Exception e) {}
         }
     }
+    //Skipt een minuut.
     public void skip(int minutes) {
     	boolean wasRunning = false;
     	if (run) {
@@ -91,7 +92,7 @@ public class Model extends AbstractModel implements Runnable{
     	while(minutes > 0) {
     		 advanceTime();
     	     handleExit();
-    	     carTick(); // deze haalt een minuut van de carminutes af.
+    	     carTick(); //Deze haalt een minuut van de carminutes af.
     	     addPoints();
     	     handleEntrance();
     	     minutes--;
@@ -100,46 +101,41 @@ public class Model extends AbstractModel implements Runnable{
     	if (wasRunning) start();
     }
     
+    //Reset alles
     public void reset() {
         //Run variables
         run = false;
         tickPause = 100;
        
-        //Queues
+        //Queues.
         entranceCarQueue = new CarQueue();
         entrancePassQueue = new CarQueue();
         paymentCarQueue = new CarQueue();
         exitCarQueue = new CarQueue();
         leavingqueue = new CarQueue();
-        
-        //carsinentranceCarQueue
-        
-        //carsentrancePass
-        
-        
        
-        //Time
+        //Time.
         time = Calendar.getInstance();
         minutesRunning = 0;
        
-        //Places
+        //Places.
         numberOfFloors = 3;
         numberOfRows = 6;
         numberOfPlaces = 30;
         numberOfOpenSpots = numberOfFloors * numberOfRows * numberOfPlaces;
        
-        //Arrivals
+        //Arrivals.
         arrivalsAdHoc = readArrivalsFile("arrivalsAdHoc.txt");
         arrivalsPass = readArrivalsFile("arrivalsPass.txt");
         arrivalsRes = readArrivalsFile("arrivalsRes.txt");
         syntJazz = 1.0;
        
-        //Speeds
+        //Speeds.
         enterSpeed = 3;
         paymentSpeed = 7;
         exitSpeed = 5;
         
-        //waardes profits etc terug naar 0
+        //waardes profits etc terug naar 0.
         profit = 0;
         profitPlus = 0;
         profitAv = 0;
@@ -148,38 +144,40 @@ public class Model extends AbstractModel implements Runnable{
         passcar = 0;
         gemisteprofit =0;
         
-        //profit per auto
+        //profit per auto.
         profitadh = 0;
         profitres = 0;
         
-        //Cars  numberOfFloor, numberOfRows, numberOfPlaces
+        //Cars  numberOfFloor, numberOfRows, numberOfPlaces.
         cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
        
         try {
-            //update view in realTime
+            //update view in realTime.
             notifyViews();
         } catch(NullPointerException e) {
-            //nothing has to happen
+            //Niks veranderd.
         }
     }
     
-    //instellen
+    //Instellen
     public void reset(int tickPause) {
         this.reset();
         this.tickPause = tickPause;
     }
    
+    //Start het programma.
     public void start() {
         if (!run) {
             // new tread wil zeggen dat je een ander stukje programma kan draaien in je programma.
             new Thread(this).start();
         }
     }
-   
+    //Stopt het programma met runnen.
     public void stop() {
         run = false;
     }
    
+    //Pauseert een tick.
     public void setTickPause(int tickPause) {
         this.tickPause = tickPause;
     }
@@ -194,6 +192,7 @@ public class Model extends AbstractModel implements Runnable{
         handleEntrance();
     }
    
+    //Dit is dat auto's 24/7 binnen kunnen komen.
     private int[][] readArrivalsFile(String file) {
         int[][] arrivals = new int[7][24];
         try {
@@ -214,19 +213,21 @@ public class Model extends AbstractModel implements Runnable{
         return arrivals;
     }
  
-    //Queues
+    //Dit is voor de queues
     private void handleEntrance(){
         carsArriving();
         carsEntering(entrancePassQueue);
         carsEntering(entranceCarQueue);    
     }
    
+    //Om te controleren voor de auto's die weggaan.
     private void handleExit(){
         carsReadyToLeave();
         carsPaying();
         carsLeaving();
     }
    
+    //Hiermee zie je welke auto's binnen komen.
     private void carsArriving(){
         int numberOfCars=getNumberOfCars(arrivalsAdHoc);
         addArrivingCars(numberOfCars, AD_HOC);     
@@ -235,18 +236,18 @@ public class Model extends AbstractModel implements Runnable{
         numberOfCars=getNumberOfCars(arrivalsRes);
         addArrivingCars(numberOfCars, ResCar);  
     }
- 
+    //Hiermee kan je zien welke auto's naar binnen gaan.
     private void carsEntering(CarQueue queue){
         int i=0;
         Location freeLocation = null;
-        // Remove car from the front of the queue and assign to a parking space.
-        //if(!null)
+        //Verwijdert een auto aan de begin van de queue en geeft het een plaats.
+       
         while (queue.carsInQueue()>0 &&
                 getNumberOfOpenSpots()>0 &&
                 i<enterSpeed) {
-          // Car car = queue.removeCar();
+          
             Car car = queue.peekCar();
-            // hier checken wat voor car het is.
+            //Hier checken wat voor car het is.
             if(car instanceof ParkingPassCar) {
             	freeLocation = getFirstpassLocation();
             	if(freeLocation != null) {
@@ -255,7 +256,7 @@ public class Model extends AbstractModel implements Runnable{
             		 passcar++;
             	}
             }
-            
+            //Als de auto wel een reservering heeft.
             else if(car instanceof ResCar){
             	freeLocation = getFirstresLocation();
             	if(freeLocation != null) {
@@ -265,7 +266,7 @@ public class Model extends AbstractModel implements Runnable{
             		}
             	}
             
-        
+            //Als een auto geen reservering heeft.
             else if(car instanceof AdHocCar){
             	freeLocation = getFirstFreeLocation();	
             	if(freeLocation != null) {
@@ -278,7 +279,7 @@ public class Model extends AbstractModel implements Runnable{
         }
      }
     
-    // Add leaving cars to the payment queue.
+    //Voegt auto's toe aan de queue voor mensen die moeten betalen en weggaan.
     private void carsReadyToLeave(){
         Car car = getFirstLeavingCar();
         while (car!=null) {
@@ -292,22 +293,22 @@ public class Model extends AbstractModel implements Runnable{
             car = getFirstLeavingCar();
         }
     }
- 
+    //returned het aantal minuten van een auto die gebleven is.
     public int gStayMinute() {
         return getMinute();
     }
    
-    // Let cars pay. 
+    //Dit laat de auto's betalen.
     private void carsPaying(){
         int i=0;
         while (paymentCarQueue.carsInQueue()>0 && i < paymentSpeed){
             Car car = paymentCarQueue.removeCar();
-           
+            //Als een auto normaal is.
             if(car instanceof AdHocCar) {
                 profit += car.getPayment();
                 profitadh += car.getPaymentADH();
             }
-           
+            //Als een auto een reservering heeft.
             if(car instanceof ResCar) {
                 profit += car.getPayment();
                 profitres += car.getPaymentres();
@@ -317,31 +318,31 @@ public class Model extends AbstractModel implements Runnable{
             profitAv = profit / minutesRunning * 60;
          }
     }
-    
+    //returned de average profit.
     public double getProfitAv() {
         return profitAv;
     }
-   
+    //returned de profitPlus.
     public double getProfitPlus() {
         return profitPlus;
     }
-    
+    //returned de profit.
     public double getProfit() {
         return profit;
     }
-    
+    //returned de missing profit.
     public double getMissedProfit() {
     	return gemisteprofit;
     }
     
-    // set gemisteprofit naar de totalepayment van alle aut0s in de leavingqueue.
+    //set gemiste profit naar de totalepayment van alle auto's in de leavingqueue.
     public void setMissedProfit() {
     	gemisteprofit = leavingqueue.getmissedprofit();
     	entranceCarQueue.getmissedprofit();
     	entrancePassQueue.getmissedprofit();
     } 
     
-    // Let cars leave.
+    //Laat de auto's verlaten.
     private void carsLeaving(){
        int i=0;
         while (exitCarQueue.carsInQueue()>0 && i < exitSpeed){
@@ -350,73 +351,76 @@ public class Model extends AbstractModel implements Runnable{
         }  
     }
    
-    //Time methods
+    //Time methode
     private void advanceTime(){
-        // Advance the time by one minute.
+        //Tijd gaat met 1 minuut omhoog.
         time.add(Calendar.MINUTE, 1);
         minutesRunning++;
     }
    
     //Getters of time
+    //returned het aantal minuten in een kalender.
     public int getMinute() {
         return time.get(Calendar.MINUTE);
     }
-   
+    //returned het aantal uur in een kalender.
     public int getHour() {
         return time.get(Calendar.HOUR_OF_DAY);
     }
-   
+    //returned de kalender dagen.
     public int getDay() {
         return time.get(Calendar.DAY_OF_MONTH);
     }
-   
+    // returned de kalender weken.
     public int getDayOfWeek() {
         return time.get(Calendar.DAY_OF_WEEK);
     }
-   
+    //returned de kalender maanden.
     public int getMonth() {
         return time.get(Calendar.MONTH);
     }
-   
+    //returned de kalender jaren.
     public int getYear() {
         return time.get(Calendar.YEAR);
     }
    
     //Getters of places
+    //returned het aantal floors die er zijn.
     public int getNumberOfFloors() {
         return numberOfFloors;
     }
- 
+    //returned het aantal rijen die er zijn.
     public int getNumberOfRows() {
         return numberOfRows;
     }
- 
+    //returned het aantal plaatsen die er zijn.
     public int getNumberOfPlaces() {
         return numberOfPlaces;
     }
- 
+    //returned het aantal open spots.
     public int getNumberOfOpenSpots(){
         return numberOfOpenSpots;
     }
-    
+    //returned het aantal auto's die leaven.
     public int getNumberofLeaving() {
     	return leavingqueue.carsInQueue();
     }
     
      
     //Setters of places
+    //set de nummer van het aantal floors die er zijn.
     public void setNumberOfFloors(int numberofFloors) {
         this.numberOfFloors = numberofFloors;
     }
- 
+    //set de nummer van het aantal rijen die er zijn.
     public void setNumberOfRows(int numberOfRows) {
         this.numberOfRows = numberOfRows;
     }
- 
+    //set de nummer van de plaatsen die er zijn.
     public void setNumberOfPlaces(int numberOfPlaces) {
         this.numberOfPlaces = numberOfPlaces;
     }
- 
+    //set de nummer van open spots.
     public void setNumberOfOpenSpots(int numberOfOpenSpots){
         this.numberOfOpenSpots = numberOfOpenSpots;
     }
@@ -476,52 +480,54 @@ public class Model extends AbstractModel implements Runnable{
     public void getenterSpeed(int enterSpeed) {
         this.enterSpeed = enterSpeed;
     }
-   
+    //Getter van de paymentSpeed.
     public void getpaymentSpeed(int paymentSpeed) {
         this.paymentSpeed = paymentSpeed;
     }
-   
+    //Getter van de exitSpeed.
     public void getexitSpeed(int exitSpeed) {
         this.exitSpeed = exitSpeed;
     }
-   
+    //Getter van de synthJazz.
     public void getsyntJazz(double syntJazz) {
         this.syntJazz=syntJazz ;
     }
    
     //Setters of speeds
+    //set de enteringSpeed.
     public void setenterSpeed(int enterSpeed) {
         this.enterSpeed = enterSpeed;
     }
-   
+    //set de paymentSpeed.
     public void setpaymentSpeed(int paymentSpeed) {
         this.paymentSpeed = paymentSpeed;
     }
-   
+    //Set de exitSpeed.
     public void setexitSpeed(int exitSpeed) {
         this.exitSpeed = exitSpeed;
     }
    
+    //set de synthJazz?
     public void setsyntJazz(double syntJazz) {
         this.syntJazz=syntJazz ;
     }
-    //Getters of cars in garage per car + or -
+    //returned de amount van hoeveel normale auto's er zijn.
     public int getAmountOfAdHocCars() {
         return adhcar;
     }
-    
+    //returned de amount van hoeveel abonnement auto's er zijn.
     public int getAmountOfPassCars() {
         return passcar;
     }
-    
+    //returned de amount van hoeveel gereserveerde auto's er zijn.
     public int getAmountOfResCars() {
         return rescar;
     }
-    
+    //returned de profit van een normale auto.
     public double getProfitADH() {
     	return profitadh;
     }
-    
+    //returned de profit van reserveer auto's.
     public double getProfitres() {
     	return profitres;
     }
@@ -529,35 +535,41 @@ public class Model extends AbstractModel implements Runnable{
     public int getamountofPassCarleft() {
     	return leavingqueue.getqueuePassCar();
     }
+    //returned hoeveel auto's die een reservering hebben uit de queue zijn gegaan.
     public int getamountofResCarleft() {
     	return leavingqueue.getqueueResCar();
     }
+    //returned hoeveel auto's die normaal zijn uit de queue zijn gegaan.
 	public int getamountofAdHocCarleft() {
 		return leavingqueue.getqueueAdHocCar();
 	}
-	
+	//returned hoeveel auto's die een abonnement hebben die in de abonnemnthoudersqueue staat.
 	public int getamountofPassCarinPassqueue() {
     	return entrancePassQueue.getqueuePassCar();
     }
-	
+	//returned hoeveel auto's die een abonnement hebben die in de queue staat.
     public int getamountofPassCarinEntrancequeue() {
     	return entranceCarQueue.getqueuePassCar();
     }
+    //returned hoeveel auto's die een reservering hebben die in de queue staat.
     public int getamountofResCarinEntrancequeue() {
     	return entranceCarQueue.getqueueResCar();
     }
+    //returned hoeveel auto's die normaal zijn die in de queue staat.
 	public int getamountofAdHocCarinEntrancequeue() {
 		return entranceCarQueue.getqueueAdHocCar();
 	}
 	
+	//returned hoeveel auto's die normaal zijn die in de queue staan.
 	public int getentranceCarQueuesize() {
 		return entranceCarQueue.carsInQueue();
 	}
+	//returned hoeveel auto's die een abonnement hebben die in de queue staan.
 	public int getentrancePassQueuesize() {
 		return entrancePassQueue.carsInQueue();
 	}
     
-    //Cars methods
+    //Methode voor de auto's.
     private void carTick() {
         for (int floor = 0; floor < getNumberOfFloors(); floor++) {
             for (int row = 0; row < getNumberOfRows(); row++) {
@@ -571,17 +583,19 @@ public class Model extends AbstractModel implements Runnable{
             }
         }  
     }
- 
+
+    //Kijkt hoeveel auto's er aanwezig zijn.
     private int getNumberOfCars(int [][] arrivals){
         Random random = new Random();
-        // Get the average number of cars that arrive per hour.
+        //Kijkt naar de average nummer van auto's die er dat uur geweest zijn.
         double averageNumberOfCarsPerHour = arrivals[getDayOfWeek() - 1][getHour()] * syntJazz;
-        // Calculate the number of cars that arrive this minute.
+        //Kijkt naar de average nummer van auto's die er in een minuut geweest zijn.
         double standardDeviation = averageNumberOfCarsPerHour * 0.3;
         double numberOfCarsPerHour = averageNumberOfCarsPerHour + random.nextGaussian() * standardDeviation;
         return (int)Math.round(numberOfCarsPerHour / 60);  
     }
    
+    //Voegt auto's toe aan een wachtrij, als er meer dan 20 auto's in de wachtrij zitten dan rijden ze door.
     private void addArrivingCars(int numberOfCars, String type){
         // Add the cars to the back of the queue.
    
@@ -623,11 +637,13 @@ public class Model extends AbstractModel implements Runnable{
         }
     }
    
+    //Verwijdert een auto van een plek.
     private void carLeavesSpot(Car car){
         removeCarAt(car.getLocation());
         exitCarQueue.addCar(car);
     }
    
+    //Haalt een auto op van een locatie.
     public Car getCarAt(Location location) {
         if (!locationIsValid(location)) {
             return null;
@@ -635,6 +651,7 @@ public class Model extends AbstractModel implements Runnable{
         return cars[location.getFloor()][location.getRow()][location.getPlace()];
     }
  
+    //Plaatst een auto op een locatie.
     public boolean setCarAt(Location location, Car car) {
         if (!locationIsValid(location)) {
             return false;
@@ -649,6 +666,7 @@ public class Model extends AbstractModel implements Runnable{
         return false;
     }
  
+    //Verwijdert een auto van de plaatst waar die staat en kijkt ook welke het is.
     public Car removeCarAt(Location location) {
         if (!locationIsValid(location)) {
             return null;
@@ -673,6 +691,7 @@ public class Model extends AbstractModel implements Runnable{
         return car;
     }
  
+    //Haalt een locatie op voor waar een auto die geen reservering of abonnement heeft geplaatst kan worden.
     public Location getFirstFreeLocation() {
           for (int floor = 0; floor < 2; floor++) {
             for (int row = 0; row < getNumberOfRows(); row++) {
@@ -687,6 +706,7 @@ public class Model extends AbstractModel implements Runnable{
         return null;
     }
    
+    //Haalt een locatie op waar de eerste auto kan parkeren die een abonnement heeft.
     public Location getFirstpassLocation() {
         for (int floor = 2; floor < getNumberOfFloors(); floor++) {
           for (int row = 0; row < getNumberOfRows(); row++) {
@@ -701,6 +721,7 @@ public class Model extends AbstractModel implements Runnable{
       return null;
     }
    
+    //Haalt de locatie op waar een gereserveerde auto kan gaan parkeren.
     public Location getFirstresLocation() {
         for (int floor = 0; floor < 2; floor++) {
           for (int row = 0; row < getNumberOfRows(); row++) {
@@ -715,6 +736,7 @@ public class Model extends AbstractModel implements Runnable{
        return null;
     }
  
+   //Haalt de eerste auto op die de uit de garage moet.
    public Car getFirstLeavingCar() {
         for (int floor = 0; floor < getNumberOfFloors(); floor++) {
             for (int row = 0; row < getNumberOfRows(); row++) {
@@ -730,6 +752,7 @@ public class Model extends AbstractModel implements Runnable{
         return null;
     }
  
+   //Kijkt of er een auto op de locatie geplaatst kan worden.
     private boolean locationIsValid(Location location) {
         int floor = location.getFloor();
         int row = location.getRow();
