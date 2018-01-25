@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import controller.Controller;
+import controller.SettingsController;
 import logic.Model;
 import view.AbstractView;
 import view.CarParkView;
@@ -32,6 +33,7 @@ public class Simulator extends JFrame implements ComponentListener{
 	private static final long serialVersionUID = 8060582986233007360L;
 	private Model model;
 	private Controller controller;
+	private SettingsController settingsController;
 	private JPanel viewPanel;
 	private JPanel carPanel;
 	private JLabel carLabel;
@@ -42,6 +44,7 @@ public class Simulator extends JFrame implements ComponentListener{
 	private JPanel queuesPanel;
 	private JLabel queuesLabel;
 	private JTabbedPane queuesTabPane;
+	//private JPanel westPanel;
 	private AbstractView carParkView;
 	private AbstractView tijdView;
 	private AbstractView labels;
@@ -49,10 +52,7 @@ public class Simulator extends JFrame implements ComponentListener{
 	private AbstractView pieChartView;
 	private AbstractView numberView;
 	private AbstractView histogramView;
-
 	private AbstractView queueView;
-	
-
 	private AbstractView lineGraphView;
 
 	
@@ -61,6 +61,7 @@ public class Simulator extends JFrame implements ComponentListener{
 		super("Pakeer Garage Simulatie");
 		model = new Model();
 		controller = new Controller(model);
+		settingsController = new SettingsController(model);
 		viewPanel = new JPanel();
 		carPanel = new JPanel();
 		carLabel = new JLabel("Auto weergaves");
@@ -71,6 +72,7 @@ public class Simulator extends JFrame implements ComponentListener{
 		queuesPanel = new JPanel();
 		queuesLabel = new JLabel("Wachtrijen weergaves");
 		queuesTabPane = new JTabbedPane();
+		//westPanel = new JPanel();
 		carParkView = new CarParkView(model);
 		tijdView = new TimeView(model);
 		labels = new Labels(model);
@@ -78,11 +80,9 @@ public class Simulator extends JFrame implements ComponentListener{
 		pieChartView = new PieChartView(model);
 		numberView = new NumberView(model);
 		histogramView = new HistogramView(model);
-
 		queueView = new QueueView(model);
-
 		lineGraphView = new LineGraphView(model);
-
+		
 		setUpFrame();
 	}
 
@@ -135,10 +135,11 @@ public class Simulator extends JFrame implements ComponentListener{
 		getContentPane().add(carParkView, BorderLayout.CENTER);
 		getContentPane().add(controller, BorderLayout.SOUTH);
 		getContentPane().add(tijdView, BorderLayout.NORTH);
-		getContentPane().add(labels, BorderLayout.WEST);
+		getContentPane().add(settingsController, BorderLayout.WEST);
 		viewPanel.add(carPanel);
 		viewPanel.add(financialPanel);
 		viewPanel.add(queuesPanel);
+		viewPanel.add(labels);
 		carPanel.add(carLabel);
 		carPanel.add(carTabPane);
 		financialPanel.add(financialLabel);

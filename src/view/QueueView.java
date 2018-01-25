@@ -1,15 +1,9 @@
 package view;
 
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Graphics;
-
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
-
 import logic.Model;
-
 
 //QueueView extends AbstractView 
 public class QueueView extends AbstractView {
