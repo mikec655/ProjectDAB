@@ -516,15 +516,36 @@ public class Model extends AbstractModel implements Runnable{
     public double getProfitres() {
     	return profitres;
     }
-    
+    //getters om auto hoeveelheden op te halen.
     public int getamountofPassCarleft() {
-    	return leavingqueue.getleavingqueuePassCar();
+    	return leavingqueue.getqueuePassCar();
     }
     public int getamountofResCarleft() {
-    	return leavingqueue.getleavingqueueResCar();
+    	return leavingqueue.getqueueResCar();
     }
 	public int getamountofAdHocCarleft() {
-		return leavingqueue.getleavingqueueAdHocCar();
+		return leavingqueue.getqueueAdHocCar();
+	}
+	
+	public int getamountofPassCarinPassqueue() {
+    	return entrancePassQueue.getqueuePassCar();
+    }
+	
+    public int getamountofPassCarinEntrancequeue() {
+    	return entranceCarQueue.getqueuePassCar();
+    }
+    public int getamountofResCarinEntrancequeue() {
+    	return entranceCarQueue.getqueueResCar();
+    }
+	public int getamountofAdHocCarinEntrancequeue() {
+		return entranceCarQueue.getqueueAdHocCar();
+	}
+	
+	public int getentranceCarQueuesize() {
+		return entranceCarQueue.carsInQueue();
+	}
+	public int getentrancePassQueuesize() {
+		return entrancePassQueue.carsInQueue();
 	}
     
     //Cars methods

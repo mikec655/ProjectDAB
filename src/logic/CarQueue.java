@@ -26,15 +26,15 @@ public class CarQueue {
     	return queue.peek();
     }
     //kan voor elke entrancequeue gebruikt worden.
-    public int getleavingqueueResCar() {
+    public int getqueueResCar() {
     	return  numberofrescars;
     }
     //kan voor elke entrancequeue gebruikt worden.
-    public int getleavingqueueAdHocCar() {
+    public int getqueueAdHocCar() {
     	return  numberofadhoccars;
     }
     //kan voor elke entrancequeue gebruikt worden.
-    public int getleavingqueuePassCar() {
+    public int getqueuePassCar() {
     	return  numberofpasscars;
     }
     

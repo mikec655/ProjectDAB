@@ -31,6 +31,7 @@ import view.Labels;
 import view.NumberView;
 import view.PercentView;
 import view.PieChartView;
+import view.QueueView;
 
 //extends maakt het window aan bij de frontend.
 public class Simulator extends JFrame implements ComponentListener{
@@ -54,6 +55,7 @@ public class Simulator extends JFrame implements ComponentListener{
 	private AbstractView pieChartView;
 	private AbstractView numberView;
 	private AbstractView histogramView;
+	private AbstractView queueView;
 	
 	
 	//super zorgt ervoor dat het een titel krijgt, die wordt boven in het frame weergegeven.
@@ -78,6 +80,7 @@ public class Simulator extends JFrame implements ComponentListener{
 		pieChartView = new PieChartView(model);
 		numberView = new NumberView(model);
 		histogramView = new HistogramView(model);
+		queueView = new QueueView(model);
 		setUpFrame();
 	}
 
@@ -108,7 +111,7 @@ public class Simulator extends JFrame implements ComponentListener{
 		financialTabPane.addTab("Tekst", null, percentView, "Cirkeldiagram weergave van auto's");
 		
 		//queues tabs
-		queuesTabPane.addTab("TAB", null, null, "TAB");
+		queuesTabPane.addTab("TAB", null, queueView, "TAB");
 	}
 
 	private void setIcon() {
