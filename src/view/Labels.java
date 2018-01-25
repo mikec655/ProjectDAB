@@ -33,13 +33,22 @@ public class Labels extends AbstractView{
 	}
 	
 	public void updateView() {
+		int cars = 540 - model.getNumberOfOpenSpots();
 		String jLabel = "<html>";
 		jLabel +=  " <font size='5'>Legenda:</font><br>";
 		jLabel +=  " <font color='red'>Rood = Gewone auto</font><br>";
 		jLabel +=  " <font color='yellow'>Geel = Gereserverde auto</font><br>";
 		jLabel +=  " <font color='blue'>Blauw = Pashouder auto</font><br>";
 		jLabel +=  " <font color='gray'>Grijs = Gereserverde plek</font><br>";
-		jLabel +=  " Wit = Lege plek<html>";
+		jLabel +=  " Wit = Lege plek<br>";
+		if (cars > 500) {
+			jLabel += "<font size='7' color='red'>VOL</font>";
+		} else if (cars > 432) {
+			jLabel += "<font size='7' color='orange'>BIJNA VOL</font>";
+		} else {
+			jLabel += "<font size='7' color='green'>VRIJ</font>";
+		}
+		jLabel += "<html>";
 		labels.setText(jLabel);
 	}
 	

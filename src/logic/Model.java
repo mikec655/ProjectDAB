@@ -97,10 +97,6 @@ public class Model extends AbstractModel implements Runnable{
     	if (wasRunning) start();
     }
     
-    
-    
-    
-    
     public void reset() {
         //Run variables
         run = false;
@@ -162,6 +158,7 @@ public class Model extends AbstractModel implements Runnable{
             //nothing has to happen
         }
     }
+    
     //instellen
     public void reset(int tickPause) {
         this.reset();
