@@ -8,12 +8,14 @@ import java.util.Iterator;
 
 import logic.Model;
 
+//LineGraphView extends AbstractView
 public class LineGraphView extends AbstractView{
 	private static final long serialVersionUID = 7382476374169229440L;
 	private ArrayList<Integer> pointsAdHoc;
 	private ArrayList<Integer> pointsPass;
 	private ArrayList<Integer> pointsRes;
 
+	//Hier wordt de super aangeroepen van de klasse AbstractView.
 	public LineGraphView(Model model) {
 		super(model);
 		pointsAdHoc = new ArrayList<Integer>();
@@ -22,11 +24,12 @@ public class LineGraphView extends AbstractView{
 	}
 	
 	
-	//Hier word de dimension van de car gezet.
+	//Hier wordt de dimension van de car gezet.
 	public Dimension getPreferredSize() {
         return new Dimension(300, 300);
     }
-
+	
+	//Voegt de points toe voor de auto's in de LineGraph.
 	public void addPoints() {
 		pointsAdHoc.add(model.getAmountOfAdHocCars());
 		pointsPass.add(model.getAmountOfPassCars());
@@ -49,7 +52,8 @@ public class LineGraphView extends AbstractView{
 	}
 	
 	
-	//paint een circelmet daarin het percentage.
+	//Paint een circle met daarin het percentage van de auto's die aanwezig zijn in de CarPark.
+	//Dit wordt dan in een lijngrafiek gezet.
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		try {

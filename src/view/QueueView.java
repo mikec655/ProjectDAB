@@ -13,7 +13,7 @@ public class QueueView extends AbstractView {
 	JProgressBar progressBarpas;
 	
 	
-//Hier word de super aangeroepen van de klasse AbstractView.
+	//Hier wordt de super aangeroepen van de klasse AbstractView.
 	public QueueView(Model model) {
 		super(model);
 		 show = new JLabel();
@@ -31,13 +31,17 @@ public class QueueView extends AbstractView {
 	        progressBarpas.setString("0");
 	        setUpPanel();
 	}
-	
+	 
+	//Hier kan je de panel van de FlowLayout mee zien, wordt ook twee keer een progressbar toegevoegd.
 	 private void setUpPanel(){
 	        setLayout(new FlowLayout());
 	        add(show);
 	        add(progressBar);
 	        add(progressBarpas);
 	    }
+	 
+	 //Update de view waarbij je een legenda kan zien waarin je de:
+	 //Auto's die in de queue staan voor de normale ingang en auto's die in de queue staan voor abonnement plekken.
 	 public void updateView() {
 		 	
 		 	progressBar.setValue(model.getentranceCarQueuesize());

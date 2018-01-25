@@ -8,10 +8,12 @@ import java.util.Iterator;
 
 import logic.Model;
 
+//LineGraphViewProfits extends AbstractView.
 public class LineGraphViewProfits extends AbstractView{
 	private static final long serialVersionUID = 12356535345943L;
 	private ArrayList<Integer> pointsProfit;
 
+	//Hier wordt de super aangeroepen van de klasse AbstractView.
 	public LineGraphViewProfits(Model model) {
 		super(model);
 		pointsProfit = new ArrayList<Integer>();
@@ -19,11 +21,12 @@ public class LineGraphViewProfits extends AbstractView{
 	}
 	
 	
-	//Hier word de dimension van de car gezet.
+	//Hier wordt de dimension van de car gezet.
 	public Dimension getPreferredSize() {
         return new Dimension(300, 300);
     }
 
+	//Voegt de points toe wat nodig is voor de profit van de LineGraph.
 	public void addPoints() {
 		pointsProfit.add((int)model.getProfitAv()/2);
 		Iterator<Integer> it = pointsProfit.iterator();
@@ -34,7 +37,7 @@ public class LineGraphViewProfits extends AbstractView{
 	}
 	
 	
-	//paint een circelmet daarin het percentage.
+	//paint een circle met daarin het percentage moet hoeveel profit er is gemaakt.
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		try {

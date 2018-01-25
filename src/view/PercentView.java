@@ -7,11 +7,13 @@ import java.awt.FlowLayout;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
  
+//PercentView extends AbstractView.
 public class PercentView extends AbstractView{
     private static final long serialVersionUID = 1337;
     private JLabel show;
     private NumberFormat formatter = new DecimalFormat("#0.00");
    
+    //Hier wordt de super aangeroepen van de klasse AbstractView.
     public PercentView(Model model) {
         super(model);
         show = new JLabel();
@@ -20,15 +22,21 @@ public class PercentView extends AbstractView{
         setUpPanel();
     }
     
+    //Hier wordt de dimension van de car gezet.
     public Dimension getPreferredSize() {
         return new Dimension(250, 250);
     }
    
+    //Hier kan je de panel van de FlowLayout mee zien.
     private void setUpPanel(){
         setLayout(new FlowLayout());
         add(show);
     }
    
+    //Update de view waarbij je een legenda kan zien met daar in de percentage van op plaatsen:
+  	//Profit average per uur, totaal profit, average per dag/week/maand/jaar.
+    //Totaal van de normale/rode auto's en de gereserveerde/gele auto's.
+  	//Ook kan je zien hoeveel profit er is misgelopen.
     public void updateView() {
     	// text += "<html>";
         //text += "<tr><td>Totaal aantal plaatsen:</td>"+ "<td>" + total + "</td></tr>";
@@ -48,6 +56,7 @@ public class PercentView extends AbstractView{
        
     }
    
+    //Dit vraagt op of er nog plaatsen over zijn in de CarPark.
     private double getNumberOfPlaces() {
     	double tempspots = 1.0 * (model.getNumberOfPlaces() * model.getNumberOfFloors() * model.getNumberOfRows());
     	double placepercent = 1.0 * model.getNumberOfOpenSpots() / tempspots * 100.00;

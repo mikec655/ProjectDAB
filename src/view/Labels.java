@@ -9,11 +9,13 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import javax.swing.border.*;
 
+//Labels extends AbstractView.
 public class Labels extends AbstractView{
 	private static final long serialVersionUID = 1;
 	private Border blackline;
 	private JLabel labels;
 	
+	//Hier wordt de super aangeroepen van de klasse AbstractView.
 	public Labels(Model model) {
 		super(model);
 		
@@ -27,11 +29,15 @@ public class Labels extends AbstractView{
 		setUpPanel();
 	}
 	
+	//Hier kan je de panel van de FlowLayout mee zien, wordt ook labels bij toegevoegd.
 	private void setUpPanel(){
 		setLayout(new FlowLayout());
 		add(labels);
 	}
 	
+	//Update de view waarbij je een legenda kan zien waarin de:
+	//Rode, gele, blauwe en grijze auto's kan zien en wat dit betekend.
+	//Ook kan je zien waar rood, oranje en groen voor staat.(Vol, bijna vol en vrij).
 	public void updateView() {
 		int cars = 540 - model.getNumberOfOpenSpots();
 		String jLabel = "<html>";

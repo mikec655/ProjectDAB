@@ -11,18 +11,18 @@ import logic.Model;
 public class HistogramView extends AbstractView {
 	private static final long serialVersionUID = -3842302968396266777L;
 	
-	//Hier word de super aangeroepen van de klasse AbstractView.
+	//Hier wordt de super aangeroepen van de klasse AbstractView.
 	public HistogramView(Model model) {
 		super(model);
 	}
 	
 	
-	//Hier word de dimension van de car gezet.
+	//Hier wordt de dimension van de car gezet.
 	public Dimension getPreferredSize() {
         return new Dimension(300, 300);
     }
 	
-	//paint een circelmet daarin het percentage.
+	//Paint een circle met daarin het percentage.
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		int sizeAdHoc = model.getAmountOfAdHocCars();
