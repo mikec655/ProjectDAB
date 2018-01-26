@@ -29,13 +29,13 @@ public class QueueView extends AbstractView {
 	        show1.setVerticalTextPosition(JLabel.TOP);
 	        show1.setHorizontalTextPosition(JLabel.LEFT);
 	        
-	        progressBar = new JProgressBar(0, 20);
+	        progressBar = new JProgressBar(0, model.getQueueSize());
 	        progressBar.setValue(0);
 	        progressBar.setStringPainted(true);
 	        progressBar.setString(" 0");
 	        
 	        
-	        progressBarpas = new JProgressBar(0, 21);
+	        progressBarpas = new JProgressBar(0, model.getQueueSize());
 	        progressBarpas.setValue(0);
 	        progressBarpas.setStringPainted(true);
 	        progressBarpas.setString(" 0");

@@ -517,6 +517,9 @@ public class Model extends AbstractModel implements Runnable{
     public void setQueueSize(int queueSize) {
     	this.queueSize = queueSize;
     }
+    public int getQueueSize() {
+    	return queueSize;
+    }
     
     //returned de amount van hoeveel normale auto's er zijn.
     public int getAmountOfAdHocCars() {
