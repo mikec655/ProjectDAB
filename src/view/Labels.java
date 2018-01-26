@@ -22,7 +22,6 @@ public class Labels extends AbstractView{
 		labels.setVerticalTextPosition(JLabel.BOTTOM);
 		labels.setHorizontalTextPosition(JLabel.CENTER);
 		labels.setOpaque(true);
-		labels.setBackground(Color.WHITE);
 		setUpPanel();
 	}
 	
@@ -44,9 +43,9 @@ public class Labels extends AbstractView{
 		String jLabel = "<html>";
 		jLabel +=  " <font size='5'>Legenda:</font><br>";
 		jLabel +=  " <font color='red'>Rood = Gewone auto</font><br>";
+		jLabel +=  " <font color='#00FFFF'>Cyan = Gereserverde plek</font><br>";
 		jLabel +=  " <font color='blue'>Blauw = Gereserverde auto</font><br>";
 		jLabel +=  " <font color='green'>Groen = Pashouder auto</font><br>";
-		jLabel +=  " <font color='#00FFFF'>Cyan = Gereserverde plek</font><br>";
 		jLabel +=  " Wit = Lege plek<br><br>";
 		jLabel +=  " <font size='5'>Status:</font><br>";
 		if (cars > 500) {
@@ -63,6 +62,7 @@ public class Labels extends AbstractView{
 	public void paintComponent(Graphics g) {
 		g.setColor(Color.WHITE);
 		g.fillRect(0, 0, 300, 342);
+		
 		g.setColor(Color.BLACK);
 		g.drawRect(0, 0, 300, 342);
     }
