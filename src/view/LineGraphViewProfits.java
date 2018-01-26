@@ -43,16 +43,20 @@ public class LineGraphViewProfits extends AbstractView{
 		try {
 		 	g.setColor(new Color(175, 175, 175));
 			g.fillRect(0, 0, 300, 300);
-			g.setColor(Color.red);
 			int oldY = 0;
 			double oldX = -6.0;
 			for(Integer y : pointsProfit) {
+				g.setColor(Color.red);
 				g.drawLine((int) oldX, 280 - oldY, (int) oldX + (280/1400), 280 - y);
 				oldX += 1;
 				oldY = y;
+				
 			}
+			g.setColor(Color.black);
+			g.drawString("0                                                                     Afgelopen 24 uur ->",0,300);
+			g.drawString("avgprofit", 0, 10);
+			g.drawString("500",0,30);
 		} catch(Exception e) {
-			
 		}
 
 	}

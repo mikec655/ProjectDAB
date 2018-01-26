@@ -83,10 +83,18 @@ public class LineGraphView extends AbstractView{
 				oldX += 1;
 				oldY = y;
 			}
-		} catch(Exception e) {
+			g.setColor(Color.black);
+			g.drawString("0                                                                     Afgelopen 24 uur ->",0,300);
+			g.drawString("360(MAX)", 0,30);
+			g.drawString("Aantal auto's", 0, 10);
 			
+			
+			
+		} catch(Exception e) {
+			System.out.println("error!!!");
 		}
 
 	}
+	
+	}
 
-}
