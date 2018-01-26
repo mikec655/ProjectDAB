@@ -173,7 +173,7 @@ public class SettingsController extends AbstractView implements ActionListener, 
 		}
 		if (e.getSource() == paymentSpeedButton) {
 			try {
-				model.setpaymentSpeed(Integer.parseInt(enterSpeedField.getText().trim()));
+				model.setpaymentSpeed(Integer.parseInt(paymentSpeedField.getText().trim()));
 				paymentSpeedField.setText("");
 			} catch (Exception ex) {
 				JOptionPane.showMessageDialog(parent,

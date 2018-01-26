@@ -31,15 +31,14 @@ public class QueueView extends AbstractView {
 	        
 	        progressBar = new JProgressBar(0, 20);
 	        progressBar.setValue(0);
-	        progressBar.setSize(10,2);
 	        progressBar.setStringPainted(true);
-	        progressBar.setString("0");
+	        progressBar.setString(" 0");
 	        
 	        
 	        progressBarpas = new JProgressBar(0, 21);
 	        progressBarpas.setValue(0);
 	        progressBarpas.setStringPainted(true);
-	        progressBarpas.setString("0");
+	        progressBarpas.setString(" 0");
 	        setUpPanel();
 	}
 	 
@@ -61,15 +60,15 @@ public class QueueView extends AbstractView {
 		 	
 	        String text = "";
 	        text += "<html>";
-	        text += "<table BORDER=0.5 CELLSPACING=0 CELLPADDING=5><tr><th>Auto's in Entrance queue:</th><td>" + model.getentranceCarQueuesize()+ " Totaal.</td></tr>" ;
-	        text += "<tr><th rowspan=2 ALIGN=RIGHT VALIGN=TOP>waarvan:</th><td>"+ model.getamountofAdHocCarinEntrancequeue() +" AdHoccars.</td></tr>";
-	        text +=	"<tr><td>"+ model.getamountofResCarinEntrancequeue() + " Rescars.</td></tr></table>";
+	        text += "<table BORDER=0.5 CELLSPACING=0 CELLPADDING=5><tr><th>Auto's in Entrance queue:</th><td >" + model.getentranceCarQueuesize()+ " Totaal.</td></tr>" ;
+	        text += "<tr><th rowspan=2 ALIGN=RIGHT VALIGN=TOP>waarvan:</th><td WIDTH=100>"+ model.getamountofAdHocCarinEntrancequeue() +" AdHoccars.</td></tr>";
+	        text +=	"<tr><td  WIDTH=100>"+ model.getamountofResCarinEntrancequeue() + " Rescars.</td></tr></table>";
 
 	        show.setText(text);
 	        
 	        String text1 = "";
 	        text1 += "<html>";
-	        text1 += "<tr><td>Auto's in Pas queue:</td>"+ "<td>" + model.getentrancePassQueuesize()+ "</td></tr>";
+	        text1 += "<table BORDER=0.5 CELLSPACING=0 CELLPADDING=5 WIDTH=254><tr><th>Auto's in Pass queue:</th><td WIDTH=100>" + model.getentrancePassQueuesize()+ " Passcars.</td></tr>" ;
 	        show1.setText(text1);
 	        
 	        progressBar.setValue(model.getentranceCarQueuesize());
