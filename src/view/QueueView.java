@@ -1,8 +1,5 @@
 package view;
 
-import java.awt.*;
-import java.awt.Graphics;
-import javax.swing.*;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;

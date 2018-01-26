@@ -38,9 +38,6 @@ public class CarQueue {
     	return  numberofpasscars;
     }
     
-    
-    
-    
     public double getmissedprofit() {
      money = 0;
      numberofrescars = 0;
@@ -48,20 +45,20 @@ public class CarQueue {
      numberofpasscars = 0;
    	 try {  	
 	     for(Car carnaam: queue) {
-	    	 money= money + carnaam.getPayment();
 	        	if(carnaam instanceof ResCar) {
-	        		numberofrescars ++;
+	        		numberofrescars +=1;
 	        	}
 	        	else if(carnaam instanceof ParkingPassCar){
-	        		 numberofpasscars ++;
+	        		 numberofpasscars +=1;
 	        	}
 	        	else if(carnaam instanceof AdHocCar){
-	        		numberofadhoccars ++;
+	        		numberofadhoccars +=1;
 	        	}
 	   	  }
+	   
     } catch (Exception ex) {
     	
-    }
+    } 
    	return money;
     }
 }

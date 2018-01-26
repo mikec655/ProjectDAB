@@ -24,7 +24,6 @@ public class Model extends AbstractModel implements Runnable{
     private CarQueue entrancePassQueue;
     private CarQueue paymentCarQueue;
     private CarQueue exitCarQueue;
-    private CarQueue leavingqueue;
     private int queueSize;
    
     //Time.
@@ -66,8 +65,11 @@ public class Model extends AbstractModel implements Runnable{
     private double profitadh;
     private double profitres;
     
-    
-   
+    //leavingqueue int's.
+    private int leavingqueuepascar;
+    private int leavingqueuerescar;
+    private int leavingqueueadhoccar;
+    private int totalleavingcarqueue;
     //Constructor.
     public Model() {
         reset();
@@ -114,7 +116,6 @@ public class Model extends AbstractModel implements Runnable{
         entrancePassQueue = new CarQueue();
         paymentCarQueue = new CarQueue();
         exitCarQueue = new CarQueue();
-        leavingqueue = new CarQueue();
         queueSize = 20;
        
         //Time.
@@ -146,6 +147,12 @@ public class Model extends AbstractModel implements Runnable{
         rescar = 0;
         passcar = 0;
         gemisteprofit =0;
+        
+        //gegevens autos die queueleaven naar 0;
+        leavingqueuepascar =0;
+        leavingqueuerescar =0;
+        leavingqueueadhoccar =0;
+        totalleavingcarqueue =0;
         
         //profit per auto.
         profitadh = 0;
@@ -189,10 +196,11 @@ public class Model extends AbstractModel implements Runnable{
         advanceTime();
         handleExit();
         carTick(); // deze haalt een minuut van de carminutes af.
-        setMissedProfit() ; //check voor gemiste profit.
+        setMissedProfit() ; //check voor hoeveelheid auto's in de entrance queue's.
         addPoints();
         notifyViews();
         handleEntrance();
+
     }
    
     //Dit is dat auto's 24/7 binnen kunnen komen.
@@ -340,7 +348,6 @@ public class Model extends AbstractModel implements Runnable{
     
     //set gemiste profit naar de totalepayment van alle auto's in de leavingqueue.
     public void setMissedProfit() {
-    	gemisteprofit = leavingqueue.getmissedprofit();
     	entranceCarQueue.getmissedprofit();
     	entrancePassQueue.getmissedprofit();
     } 
@@ -406,7 +413,7 @@ public class Model extends AbstractModel implements Runnable{
     }
     //returned het aantal auto's die leaven.
     public int getNumberofLeaving() {
-    	return leavingqueue.carsInQueue();
+    	return totalleavingcarqueue;
     }
     
      
@@ -543,19 +550,20 @@ public class Model extends AbstractModel implements Runnable{
     }
     //getters om auto hoeveelheden op te halen.
     public int getamountofPassCarleft() {
-    	return leavingqueue.getqueuePassCar();
+    	return leavingqueuepascar ;
     }
     //returned hoeveel auto's die een reservering hebben uit de queue zijn gegaan.
     public int getamountofResCarleft() {
-    	return leavingqueue.getqueueResCar();
+    	return leavingqueuerescar;
     }
     //returned hoeveel auto's die normaal zijn uit de queue zijn gegaan.
 	public int getamountofAdHocCarleft() {
-		return leavingqueue.getqueueAdHocCar();
+		return leavingqueueadhoccar ;
 	}
 	//returned hoeveel auto's die een abonnement hebben die in de abonnemnthoudersqueue staat.
 	public int getamountofPassCarinPassqueue() {
-    	return entrancePassQueue.getqueuePassCar();
+		return entrancePassQueue.carsInQueue();
+	
     }
 	//returned hoeveel auto's die een abonnement hebben die in de queue staat.
     public int getamountofPassCarinEntrancequeue() {
@@ -614,8 +622,13 @@ public class Model extends AbstractModel implements Runnable{
             for (int i = 0; i < numberOfCars; i++) {
             	
             	 if(entranceCarQueue.carsInQueue()== queueSize){
-            		 leavingqueue.addCar(new AdHocCar());
-            		 //adhcar--
+            		 Car tempcar = new AdHocCar();
+            		 gemisteprofit += tempcar.getPaymentADH();
+            		 //leavingqueue.addCar(new AdHocCar());
+            		 totalleavingcarqueue +=1;
+            		 leavingqueueadhoccar +=1;
+            		 
+            	       
             	 }
             	 else {
             		 entranceCarQueue.addCar(new AdHocCar());
@@ -626,7 +639,11 @@ public class Model extends AbstractModel implements Runnable{
          case PASS:
             for (int i = 0; i < numberOfCars; i++) {
             	   if(entrancePassQueue.carsInQueue()== queueSize){
-           	 		leavingqueue.addCar(new ParkingPassCar());
+            		   //Car tempcar = new ParkingPassCar();
+            		   
+           	 		//leavingqueue.addCar(new ParkingPassCar());
+            		totalleavingcarqueue +=1;
+           	 		leavingqueuepascar +=1;
             	   }
             	   else {
             		   entrancePassQueue.addCar(new ParkingPassCar());
@@ -636,7 +653,11 @@ public class Model extends AbstractModel implements Runnable{
          case ResCar:
             for (int i = 0; i < numberOfCars; i++) {
                   if(entranceCarQueue.carsInQueue()== queueSize){
-            		 leavingqueue.addCar(new ResCar());
+                	  Car tempcar = new ResCar();
+                	  gemisteprofit += tempcar.getPaymentres();
+            		 //leavingqueue.addCar(new ResCar());
+                	  totalleavingcarqueue +=1;
+                	  leavingqueuerescar += 1;
             	 }
             	 else {
             	   entranceCarQueue.addCar(new ResCar());

@@ -13,7 +13,7 @@ public class ResCar extends Car {
         this.setStayMinute(stayMinutes);
         this.setHasToPay(true);
         paymentres = (double)(stayMinutes * carprice) + 3;
-        color = new Color(0,255,255);
+        color = new Color(102, 204, 255);
     }
     
     public Color getColor(){
