@@ -10,25 +10,26 @@ import logic.ResCar;
 import logic.Location;
 import logic.Model;
 
+//CarParkView extends AbstractView
 public class CarParkView extends AbstractView{
 	private static final long serialVersionUID = -5134000553073183997L;
 	private Dimension size;
     private Image carParkImage; 
     //private Color kleur;
 
-    //voegt het model toe.
+    //Voegt het model toe.
 	public CarParkView(Model model) {
 		super(model);
 		size = new Dimension(0, 0);
 	}
 	
-	//die geeft de waardes aan dimensies van het frame.
+	//Dit geeft de waardes aan dimensies van het frame.
     public Dimension getPreferredSize() {
-        return new Dimension(1000, 500);
+        return new Dimension(800, 500);
     }
 
     
-    //die tekent de image. (wanneer aanwezig)
+    //Dit tekent de image als het aanwezig is.
     public void paintComponent(Graphics g) {
         if (carParkImage == null) {
             return;
@@ -43,7 +44,7 @@ public class CarParkView extends AbstractView{
         }
     }
 
-    //samenstellen carpark.
+    //Zorgt ervoor dat de CarPark samengesteld wordt.
     public void updateView() {
         if (!size.equals(getSize())) {
             size = getSize();
@@ -69,7 +70,7 @@ public class CarParkView extends AbstractView{
         repaint();
     }
 
-    //die tekent de parkeervakken.
+    //Dit tekent de parkeervakken die nodig zijn voor de CarPark.
     private void drawPlace(Graphics graphics, Location location, Color color) {
         graphics.setColor(color);
         graphics.fillRect(
