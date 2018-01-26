@@ -75,7 +75,7 @@ public class LineGraphView extends AbstractView{
 				oldX += 1;
 				oldY = y;
 			}
-			g.setColor(Color.yellow);
+			g.setColor(Color.green);
 			oldY = 0;
 			oldX = -6.0;
 			for(Integer y : pointsRes) {
