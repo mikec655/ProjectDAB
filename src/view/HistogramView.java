@@ -39,14 +39,14 @@ public class HistogramView extends AbstractView {
 		g.setColor(Color.black);//nummer
 		g.drawString("" + model.getAmountOfAdHocCars(), 37, 283-sizeAdHoc);//x,y,breedte,lengte
 		
-		g.setColor(Color.green); //fill
+		g.setColor(Color.blue); //fill
 		g.fillRect(125,284-sizeRes,50,sizeRes); //x,y,breedte,lengte
 		g.setColor(Color.black); //draw
 		g.drawRect(125,284-sizeRes,50,sizeRes); //x,y,breedte,lengte
 		g.setColor(Color.black); //nummer
 		g.drawString("" + model.getAmountOfResCars(), 137, 283-sizeRes);//x,y,breedte,lengte
 		
-		g.setColor(Color.blue);//fill
+		g.setColor(Color.green);//fill
 		g.fillRect(225,284-sizePass,50,sizePass); //x,y,breedte,lengte
 		g.setColor(Color.black); //draw
 		g.drawRect(225,284-sizePass,50,sizePass); //x,y,breedte,lengte
