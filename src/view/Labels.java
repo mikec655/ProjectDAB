@@ -59,8 +59,10 @@ public class Labels extends AbstractView{
 	}
 	
 	public void paintComponent(Graphics g) {
-		g.setColor(Color.white);
-		g.fillRect(0, 0, 300, 342);
+		super.paintComponent(g);
+		// als je background color wit wilt, remove super.paint en comment g.setcolor en fillrect terug in.
+		//g.setColor(Color.white);
+		//g.fillRect(0, 0, 300, 342); 
 		g.setColor(Color.BLACK);
 		g.drawRect(0, 0, 300, 342);
     }
