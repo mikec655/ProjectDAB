@@ -25,7 +25,7 @@ public class CarParkView extends AbstractView{
 	
 	//Dit geeft de waardes aan dimensies van het frame.
     public Dimension getPreferredSize() {
-        return new Dimension(800, 500);
+        return new Dimension(1000, 500);
     }
 
     
