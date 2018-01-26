@@ -44,9 +44,9 @@ public class Labels extends AbstractView{
 		String jLabel = "<html>";
 		jLabel +=  " <font size='5'>Legenda:</font><br>";
 		jLabel +=  " <font color='red'>Rood = Gewone auto</font><br>";
-		jLabel +=  " <font color='green'>Groen = Gereserverde auto</font><br>";
-		jLabel +=  " <font color='blue'>Blauw = Pashouder auto</font><br>";
-		jLabel +=  " <font color='gray'>Grijs = Gereserverde plek</font><br>";
+		jLabel +=  " <font color='blue'>Blauw = Gereserverde auto</font><br>";
+		jLabel +=  " <font color='green'>Groen = Pashouder auto</font><br>";
+		jLabel +=  " <font color='#00FFFF'>Cyan = Gereserverde plek</font><br>";
 		jLabel +=  " Wit = Lege plek<br><br>";
 		jLabel +=  " <font size='5'>Status:</font><br>";
 		if (cars > 500) {
