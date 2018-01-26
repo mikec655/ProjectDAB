@@ -20,7 +20,7 @@ public class ResCar extends Car {
     	return color;
     }
     public void setColor(){
-    	color = Color.YELLOW;
+    	color = Color.GREEN;
     }
     
 }
