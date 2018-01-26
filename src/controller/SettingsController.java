@@ -259,7 +259,7 @@ public class SettingsController extends AbstractView implements ActionListener, 
 	@Override
 	public void stateChanged(ChangeEvent e) {
 		if (e.getSource() == extraJazzSlider) {
-			model.setsyntJazz(1.0 * extraJazzSlider.getValue());
+			model.setsyntJazz(1.0 * extraJazzSlider.getValue()/10);
 		}
 		
 	}

@@ -39,13 +39,13 @@ public class Labels extends AbstractView{
 	//Ook kan je zien waar rood, oranje en groen voor staat.(Vol, bijna vol en vrij).
 	public void updateView() {
 		int cars = 540 - model.getNumberOfOpenSpots();
-		String jLabel = "<html>";
+		String jLabel = "<html><table>";
 		jLabel +=  "<tr><th ALIGN = LEFT><font size='5'>Legenda:</font></th></tr>";
 		jLabel +=  "<tr><th ALIGN = LEFT><font color='red'>Rood = Gewone auto</font></tr></th>";
 		jLabel +=  "<tr><th ALIGN = LEFT><font color='#66ccff'>Lichtblauw = Gereserverde plek</font></th></tr>";
 		jLabel +=  "<tr><th ALIGN = LEFT><font color='blue'>Blauw = Gereserverde auto</font></th></tr>";
 		jLabel +=  "<tr><th ALIGN = LEFT><font color='green'>Groen = Pashouder auto</font></th></tr>";
-		jLabel +=  "<tr><th ALIGN = LEFT>Wit = Lege plek</th></tr>";
+		jLabel +=  "<tr><th ALIGN = LEFT>Wit = Lege plek</th></tr></table>";
 		jLabel +=  "<font size='5'>Status:</font><Br>";
 		if (cars > 500) {
 			jLabel += "<font size='7' color='red'>VOL</font>";
