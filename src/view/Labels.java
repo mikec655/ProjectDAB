@@ -21,8 +21,6 @@ public class Labels extends AbstractView{
 		labels = new JLabel();
 		labels.setVerticalTextPosition(JLabel.BOTTOM);
 		labels.setHorizontalTextPosition(JLabel.CENTER);
-		labels.setOpaque(true);
-		labels.setBackground(Color.WHITE);
 		setUpPanel();
 	}
 	
@@ -42,13 +40,13 @@ public class Labels extends AbstractView{
 	public void updateView() {
 		int cars = 540 - model.getNumberOfOpenSpots();
 		String jLabel = "<html>";
-		jLabel +=  " <font size='5'>Legenda:</font><br>";
-		jLabel +=  " <font color='red'>Rood = Gewone auto</font><br>";
-		jLabel +=  " <font color='blue'>Blauw = Gereserverde auto</font><br>";
-		jLabel +=  " <font color='green'>Groen = Pashouder auto</font><br>";
-		jLabel +=  " <font color='#00FFFF'>Cyan = Gereserverde plek</font><br>";
-		jLabel +=  " Wit = Lege plek<br><br>";
-		jLabel +=  " <font size='5'>Status:</font><br>";
+		jLabel +=  "<tr><th ALIGN = LEFT><font size='5'>Legenda:</font></th></tr>";
+		jLabel +=  "<tr><th ALIGN = LEFT><font color='red'>Rood = Gewone auto</font></tr></th>";
+		jLabel +=  "<tr><th ALIGN = LEFT><font color='#66ccff'>Lichtblauw = Gereserverde plek</font></th></tr>";
+		jLabel +=  "<tr><th ALIGN = LEFT><font color='blue'>Blauw = Gereserverde auto</font></th></tr>";
+		jLabel +=  "<tr><th ALIGN = LEFT><font color='green'>Groen = Pashouder auto</font></th></tr>";
+		jLabel +=  "<tr><th ALIGN = LEFT>Wit = Lege plek</th></tr>";
+		jLabel +=  "<font size='5'>Status:</font><Br>";
 		if (cars > 500) {
 			jLabel += "<font size='7' color='red'>VOL</font>";
 		} else if (cars > 432) {
@@ -61,8 +59,10 @@ public class Labels extends AbstractView{
 	}
 	
 	public void paintComponent(Graphics g) {
-		g.setColor(Color.WHITE);
-		g.fillRect(0, 0, 300, 342);
+		super.paintComponent(g);
+		// als je background color wit wilt, remove super.paint en comment g.setcolor en fillrect terug in.
+		//g.setColor(Color.white);
+		//g.fillRect(0, 0, 300, 342); 
 		g.setColor(Color.BLACK);
 		g.drawRect(0, 0, 300, 342);
     }
