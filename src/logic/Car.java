@@ -12,13 +12,19 @@ public abstract class Car {
     protected double payment;
     protected double paymentADH;
     protected double paymentres;
+    public static double carprice;
+    
+
     
     
     //auto's
     public Car() {
-
     }
     
+    public static void SetCarPrice(double setcarprice) {
+    	carprice = setcarprice;
+    }
+
     //Haal de locatie op van de auto
     public Location getLocation() {
         return location;
@@ -69,9 +75,9 @@ public abstract class Car {
     	this.stayMinutes = stayMinutes1;
     }
     
- // Nieuwe getpaymentADH
+ // Nieuwe getpayment
     public double getPayment() {
-    	return payment;
+    	return payment = paymentres + paymentADH;
     }
     
     // Nieuwe getpaymentADH

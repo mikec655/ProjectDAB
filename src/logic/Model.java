@@ -25,6 +25,7 @@ public class Model extends AbstractModel implements Runnable{
     private CarQueue paymentCarQueue;
     private CarQueue exitCarQueue;
     private CarQueue leavingqueue;
+    private int queueSize;
    
     //Time.
     private Calendar time;
@@ -93,6 +94,7 @@ public class Model extends AbstractModel implements Runnable{
     		 advanceTime();
     	     handleExit();
     	     carTick(); //Deze haalt een minuut van de carminutes af.
+    	     setMissedProfit() ; //check voor gemiste profit.
     	     addPoints();
     	     handleEntrance();
     	     minutes--;
@@ -113,6 +115,7 @@ public class Model extends AbstractModel implements Runnable{
         paymentCarQueue = new CarQueue();
         exitCarQueue = new CarQueue();
         leavingqueue = new CarQueue();
+        queueSize = 20;
        
         //Time.
         time = Calendar.getInstance();
@@ -506,11 +509,15 @@ public class Model extends AbstractModel implements Runnable{
     public void setexitSpeed(int exitSpeed) {
         this.exitSpeed = exitSpeed;
     }
-   
     //set de synthJazz?
     public void setsyntJazz(double syntJazz) {
         this.syntJazz=syntJazz ;
     }
+    //set de queueSize
+    public void setQueueSize(int queueSize) {
+    	this.queueSize = queueSize;
+    }
+    
     //returned de amount van hoeveel normale auto's er zijn.
     public int getAmountOfAdHocCars() {
         return adhcar;
@@ -603,7 +610,7 @@ public class Model extends AbstractModel implements Runnable{
         case AD_HOC:
             for (int i = 0; i < numberOfCars; i++) {
             	
-            	 if(entranceCarQueue.carsInQueue()== 20){
+            	 if(entranceCarQueue.carsInQueue()== queueSize){
             		 leavingqueue.addCar(new AdHocCar());
             		 //adhcar--
             	 }
@@ -615,7 +622,7 @@ public class Model extends AbstractModel implements Runnable{
             break;
          case PASS:
             for (int i = 0; i < numberOfCars; i++) {
-            	   if(entrancePassQueue.carsInQueue()== 20){
+            	   if(entrancePassQueue.carsInQueue()== queueSize){
            	 		leavingqueue.addCar(new ParkingPassCar());
             	   }
             	   else {
@@ -625,7 +632,7 @@ public class Model extends AbstractModel implements Runnable{
             break; 
          case ResCar:
             for (int i = 0; i < numberOfCars; i++) {
-                  if(entranceCarQueue.carsInQueue()== 20){
+                  if(entranceCarQueue.carsInQueue()== queueSize){
             		 leavingqueue.addCar(new ResCar());
             	 }
             	 else {

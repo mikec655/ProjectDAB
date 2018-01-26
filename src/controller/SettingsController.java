@@ -1,11 +1,13 @@
 package controller;
 
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.AbstractButton;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -54,8 +56,12 @@ public class SettingsController extends AbstractView implements ActionListener, 
 	private JPanel resCarPricePanel;
 	private JPanel passCarPricePanel;
 	private JPanel extraJazzPanel;
+	private JPanel queueSizePanel;
 	//private JPanel extraPassJazzPanel;
 	//private JPanel extraResJazzPanel;
+	private JLabel queueSizeLabel;
+	private JTextField queueSizeField;
+	private JButton queueSizeButton;
 	
 	public SettingsController(Model model, JFrame frame) {
 		super(model);
@@ -87,9 +93,14 @@ public class SettingsController extends AbstractView implements ActionListener, 
 		passCarPriceLabel = new JLabel("Prijs abbonnement auto/maand:");
 		passCarPriceField = new JTextField(12);
 		passCarPriceButton = new JButton("Bevestig");
+		queueSizePanel = new JPanel();
+		queueSizeLabel = new JLabel("Rij grootte:                   ");
+		queueSizeField = new JTextField(12);
+		queueSizeButton = new JButton("Bevestig");
 		extraJazzPanel = new JPanel();
 		extraJazzLabel = new JLabel("Extra drukte normale auto's:");
 		extraJazzSlider = new JSlider(10, 20, 10);
+		
 		//extraPassJazzPanel = new JPanel();
 		//extraPassJazzLabel = new JLabel("Extra drukte abbonnement auto's:");
 		//extraPassJazzSlider = new JSlider(10, 20, 10);
@@ -140,6 +151,11 @@ public class SettingsController extends AbstractView implements ActionListener, 
 		extraJazzPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		extraJazzPanel.add(extraJazzLabel);
 		extraJazzPanel.add(extraJazzSlider);
+		add(queueSizePanel);
+		queueSizePanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+		queueSizePanel.add(queueSizeLabel);
+		queueSizePanel.add(queueSizeField);
+		queueSizePanel.add(queueSizeButton);
 		//add(extraPassJazzPanel);
 		//extraPassJazzPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		//extraPassJazzPanel.add(extraPassJazzLabel);
@@ -154,6 +170,7 @@ public class SettingsController extends AbstractView implements ActionListener, 
 		adHocCarPriceButton.addActionListener(this);
 		resCarPriceButton.addActionListener(this);
 		passCarPriceButton.addActionListener(this);
+		queueSizeButton.addActionListener(this);
 		extraJazzSlider.addChangeListener(this);
 	}
 
@@ -222,6 +239,17 @@ public class SettingsController extends AbstractView implements ActionListener, 
 			} catch (Exception ex) {
 				JOptionPane.showMessageDialog(parent,
 					    "Ongeldige invoer in prijs abbonnement auto/maand veld!",
+					    "Ongeldige invoer",
+					    JOptionPane.ERROR_MESSAGE);
+			}
+		}
+		if (e.getSource() == queueSizeButton) {
+			try {
+				model.setQueueSize(Integer.parseInt(queueSizeField.getText().trim()));
+				queueSizeField.setText("");
+			} catch (Exception ex) {
+				JOptionPane.showMessageDialog(parent,
+					    "Ongeldige invoer in rij grootte veld!",
 					    "Ongeldige invoer",
 					    JOptionPane.ERROR_MESSAGE);
 			}
