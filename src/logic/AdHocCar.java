@@ -14,6 +14,7 @@ public class AdHocCar extends Car {
         this.setHasToPay(true);
         paymentADH = (double) stayMinutes * carprice;
         color = Color.RED;
+        carprice = 0.02;
     }
     
     public Color getColor(){

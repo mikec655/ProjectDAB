@@ -13,13 +13,12 @@ public abstract class Car {
     protected double paymentADH;
     protected double paymentres;
     public static double carprice;
-
+    
 
     
     
     //auto's
     public Car() {
-
     }
     
     public static void SetCarPrice(double setcarprice) {
