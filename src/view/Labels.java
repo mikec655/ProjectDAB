@@ -1,7 +1,5 @@
 package view;
 
-
-import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import logic.Model;
 
