@@ -5,6 +5,7 @@ import java.awt.*;
 
 public class AdHocCar extends Car {
 	private Color color;
+	public static double pricePerHour = 2;
     
     public AdHocCar() {
         Random random = new Random();
@@ -12,17 +13,16 @@ public class AdHocCar extends Car {
         this.setMinutesLeft(stayMinutes);
         this.setStayMinute(stayMinutes);
         this.setHasToPay(true);
-        paymentADH = (double) stayMinutes * carprice;
+        payment = (1 + stayMinutes / 60)  * pricePerHour;
         color = Color.RED;
-        carprice = 0.02;
+    }
+    
+    public static void setPricePerHour(double price) {
+    	pricePerHour = price;
     }
     
     public Color getColor(){
     	return color;
-    }
-    
-    public void setColor(){
-    	color = Color.YELLOW;
     }
    
 }

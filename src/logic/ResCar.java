@@ -4,7 +4,9 @@ import java.util.Random;
 import java.awt.*;
 
 public class ResCar extends Car {
-	private  Color color;
+	private Color color;
+	public static double pricePerHour = 2;
+	public static double priceReservation = 3;
     
 	public ResCar() {
     	Random random = new Random();
@@ -12,16 +14,31 @@ public class ResCar extends Car {
         this.setMinutesLeft(stayMinutes);
         this.setStayMinute(stayMinutes);
         this.setHasToPay(true);
-        paymentres = (double)(stayMinutes * carprice) + 3;
+        payment = (1 + stayMinutes / 60)  * pricePerHour + priceReservation;
         color = new Color(102, 204, 255);
+    }
+	
+	public static void setPricePerHour(double price) {
+    	pricePerHour = price;
+    }
+	
+	public static void setPriceReservation(double price) {
+    	priceReservation = price;
     }
     
     public Color getColor(){
     	return color;
     }
-    public void setColor(){
-    	color = new Color(0,0,255);
+    
+    private void setColor(){
+    	color = Color.BLUE;
     }
     
+    public void tick() {
+    	if(getStayMinute()-15 == getMinutesLeft()) {
+    		setColor();
+    	}
+    	super.tick();
+    }
 }
 

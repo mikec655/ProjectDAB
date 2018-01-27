@@ -108,7 +108,7 @@ public class Simulator extends JFrame implements ComponentListener{
 	private void createTabPanes() {
 		//car tabs
 		carTabPane.addTab("Tekst", null, numberView, "Tekst weergave van auto's");
-		carTabPane.addTab("Cirkeldiagram", null, pieChartView, "Cirkeldiagram weergave van auto's");
+		carTabPane.addTab("Cirkeld...", null, pieChartView, "Cirkeldiagram weergave van auto's");
 		carTabPane.addTab("Histogram", null, histogramView, "Histogram weergave van de auto's");
 		carTabPane.addTab("Lijngrafiek", null, lineGraphView, "Lijngrafiek weergave van de auto's");
 		

@@ -62,8 +62,9 @@ public class Model extends AbstractModel implements Runnable{
     private int passcar;
     
     //profit per auto.
-    private double profitadh;
-    private double profitres;
+    private double profitAdHoc;
+    private double profitRes;
+    private double profitPass;
     
     //leavingqueue int's.
     private int leavingqueuepascar;
@@ -155,8 +156,9 @@ public class Model extends AbstractModel implements Runnable{
         totalleavingcarqueue =0;
         
         //profit per auto.
-        profitadh = 0;
-        profitres = 0;
+        profitAdHoc = 0;
+        profitRes = 0;
+        profitPass = 0;
         
         //Cars  numberOfFloor, numberOfRows, numberOfPlaces.
         cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
@@ -311,19 +313,13 @@ public class Model extends AbstractModel implements Runnable{
    
     //Dit laat de auto's betalen.
     private void carsPaying(){
-        int i=0;
+        int i = 0;
         while (paymentCarQueue.carsInQueue()>0 && i < paymentSpeed){
             Car car = paymentCarQueue.removeCar();
-            //Als een auto normaal is.
-            if(car instanceof AdHocCar) {
-                profit += car.getPayment();
-                profitadh += car.getPaymentADH();
-            }
-            //Als een auto een reservering heeft.
-            if(car instanceof ResCar) {
-                profit += car.getPayment();
-                profitres += car.getPaymentres();
-            }
+            profit += car.getPayment();
+            System.out.println(car.getPayment());
+            if(car instanceof AdHocCar) profitAdHoc += car.getPayment();
+            if(car instanceof ResCar) profitRes += car.getPayment();
             carLeavesSpot(car);
             i++;
             profitAv = profit / minutesRunning * 60;
@@ -541,12 +537,16 @@ public class Model extends AbstractModel implements Runnable{
         return rescar;
     }
     //returned de profit van een normale auto.
-    public double getProfitADH() {
-    	return profitadh;
+    public double getProfitAdHoc() {
+    	return profitAdHoc;
     }
     //returned de profit van reserveer auto's.
-    public double getProfitres() {
-    	return profitres;
+    public double getProfitRes() {
+    	return profitRes;
+    }
+    //returned de profit van de abbonnementhouders;
+    public double getProfitPass() {
+    	return profitAdHoc;
     }
     //getters om auto hoeveelheden op te halen.
     public int getamountofPassCarleft() {
@@ -623,7 +623,7 @@ public class Model extends AbstractModel implements Runnable{
             	
             	 if(entranceCarQueue.carsInQueue()== queueSize){
             		 Car tempcar = new AdHocCar();
-            		 gemisteprofit += tempcar.getPaymentADH();
+            		 gemisteprofit += tempcar.getPayment();
             		 //leavingqueue.addCar(new AdHocCar());
             		 totalleavingcarqueue +=1;
             		 leavingqueueadhoccar +=1;
@@ -654,7 +654,7 @@ public class Model extends AbstractModel implements Runnable{
             for (int i = 0; i < numberOfCars; i++) {
                   if(entranceCarQueue.carsInQueue()== queueSize){
                 	  Car tempcar = new ResCar();
-                	  gemisteprofit += tempcar.getPaymentres();
+                	  gemisteprofit += tempcar.getPayment();
             		 //leavingqueue.addCar(new ResCar());
                 	  totalleavingcarqueue +=1;
                 	  leavingqueuerescar += 1;

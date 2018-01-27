@@ -19,8 +19,10 @@ import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import logic.AdHocCar;
 import logic.Car;
 import logic.Model;
+import logic.ResCar;
 import view.AbstractView;
 
 public class SettingsController extends AbstractView implements ActionListener, ChangeListener {
@@ -35,12 +37,12 @@ public class SettingsController extends AbstractView implements ActionListener, 
 	private JLabel exitSpeedLabel;
 	private JTextField exitSpeedField;
 	private JButton exitSpeedButton;
-	private JLabel adHocCarPriceLabel;
-	private JTextField adHocCarPriceField;
-	private JButton adHocCarPriceButton;
-	private JLabel resCarPriceLabel;
-	private JTextField resCarPriceField;
-	private JButton resCarPriceButton;
+	private JLabel pricePerHourLabel;
+	private JTextField pricePerHourField;
+	private JButton pricePerHourButton;
+	private JLabel reservationPriceLabel;
+	private JTextField reservationPriceField;
+	private JButton reservationPriceButton;
 	private JLabel passCarPriceLabel;
 	private JTextField passCarPriceField;
 	private JButton passCarPriceButton;
@@ -53,8 +55,8 @@ public class SettingsController extends AbstractView implements ActionListener, 
 	private JPanel enterSpeedPanel;
 	private JPanel paymentSpeedPanel;
 	private JPanel exitSpeedPanel;
-	private JPanel adHocCarPricePanel;
-	private JPanel resCarPricePanel;
+	private JPanel pricePerHourPanel;
+	private JPanel reservationPricePanel;
 	private JPanel passCarPricePanel;
 	private JPanel extraJazzPanel;
 	private JPanel queueSizePanel;
@@ -79,16 +81,16 @@ public class SettingsController extends AbstractView implements ActionListener, 
 		exitSpeedLabel = new JLabel("Uitrij snelheid:     ");
 		exitSpeedField = new JTextField(12);
 		exitSpeedButton = new JButton("Bevestig");
-		adHocCarPricePanel = new JPanel();
-		adHocCarPriceLabel = new JLabel("Prijs normale auto/uur:");
-		adHocCarPriceField = new JTextField(12);
-		adHocCarPriceButton = new JButton("Bevestig");
-		resCarPricePanel = new JPanel();
-		resCarPriceLabel = new JLabel("Prijs gereserveerde auto/uur:");
-		resCarPriceField = new JTextField(12);
-		resCarPriceButton = new JButton("Bevestig");
+		pricePerHourPanel = new JPanel();
+		pricePerHourLabel = new JLabel("Prijs per uur:");
+		pricePerHourField = new JTextField(12);
+		pricePerHourButton = new JButton("Bevestig");
+		reservationPricePanel = new JPanel();
+		reservationPriceLabel = new JLabel("Prijs voor reserveren:");
+		reservationPriceField = new JTextField(12);
+		reservationPriceButton = new JButton("Bevestig");
 		passCarPricePanel = new JPanel();
-		passCarPriceLabel = new JLabel("Prijs abonnement auto/maand:");
+		passCarPriceLabel = new JLabel("Prijs abbonnement per Smaand:");
 		passCarPriceField = new JTextField(12);
 		passCarPriceButton = new JButton("Bevestig");
 		queueSizePanel = new JPanel();
@@ -130,16 +132,16 @@ public class SettingsController extends AbstractView implements ActionListener, 
 		exitSpeedPanel.add(exitSpeedLabel);
 		exitSpeedPanel.add(exitSpeedField);
 		exitSpeedPanel.add(exitSpeedButton);
-		add(adHocCarPricePanel);
-		adHocCarPricePanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-		adHocCarPricePanel.add(adHocCarPriceLabel);
-		adHocCarPricePanel.add(adHocCarPriceField);
-		adHocCarPricePanel.add(adHocCarPriceButton);
-		add(resCarPricePanel);
-		resCarPricePanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-		resCarPricePanel.add(resCarPriceLabel);
-		resCarPricePanel.add(resCarPriceField);
-		resCarPricePanel.add(resCarPriceButton);
+		add(pricePerHourPanel);
+		pricePerHourPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+		pricePerHourPanel.add(pricePerHourLabel);
+		pricePerHourPanel.add(pricePerHourField);
+		pricePerHourPanel.add(pricePerHourButton);
+		add(reservationPricePanel);
+		reservationPricePanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+		reservationPricePanel.add(reservationPriceLabel);
+		reservationPricePanel.add(reservationPriceField);
+		reservationPricePanel.add(reservationPriceButton);
 		add(passCarPricePanel);
 		passCarPricePanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		passCarPricePanel.add(passCarPriceLabel);
@@ -165,8 +167,8 @@ public class SettingsController extends AbstractView implements ActionListener, 
 		enterSpeedButton.addActionListener(this);
 		paymentSpeedButton.addActionListener(this);
 		exitSpeedButton.addActionListener(this);
-		adHocCarPriceButton.addActionListener(this);
-		resCarPriceButton.addActionListener(this);
+		pricePerHourButton.addActionListener(this);
+		reservationPriceButton.addActionListener(this);
 		passCarPriceButton.addActionListener(this);
 		queueSizeButton.addActionListener(this);
 		extraJazzSlider.addChangeListener(this);
@@ -188,7 +190,7 @@ public class SettingsController extends AbstractView implements ActionListener, 
 		}
 		if (e.getSource() == paymentSpeedButton) {
 			try {
-				model.setpaymentSpeed(Integer.parseInt(paymentSpeedField.getText().trim()));
+				model.setpaymentSpeed(Integer.parseInt(enterSpeedField.getText().trim()));
 				paymentSpeedField.setText("");
 			} catch (Exception ex) {
 				JOptionPane.showMessageDialog(parent,
@@ -208,10 +210,11 @@ public class SettingsController extends AbstractView implements ActionListener, 
 					    JOptionPane.ERROR_MESSAGE);
 			}
 		}
-		if (e.getSource() == adHocCarPriceButton) {
+		if (e.getSource() == pricePerHourButton) {
 			try {
-				Car.SetCarPrice(Double.parseDouble(adHocCarPriceField.getText().trim()));
-				adHocCarPriceField.setText("");
+				AdHocCar.setPricePerHour(Double.parseDouble(pricePerHourField.getText().trim()));
+				ResCar.setPricePerHour(Double.parseDouble(pricePerHourField.getText().trim()));
+				pricePerHourField.setText("");
 			} catch (Exception ex) {
 				JOptionPane.showMessageDialog(parent,
 					    "Ongeldige invoer in prijs normale auto/uur veld!",
@@ -219,10 +222,10 @@ public class SettingsController extends AbstractView implements ActionListener, 
 					    JOptionPane.ERROR_MESSAGE);
 			}
 		}
-		if (e.getSource() == resCarPriceButton) {
+		if (e.getSource() == reservationPriceButton) {
 			try {
-				Car.SetCarPrice(Double.parseDouble(resCarPriceField.getText().trim()));
-				resCarPriceField.setText("");
+				ResCar.setPriceReservation(Double.parseDouble(reservationPriceField.getText().trim()));
+				reservationPriceField.setText("");
 			} catch (Exception ex) {
 				JOptionPane.showMessageDialog(parent,
 					    "Ongeldige invoer in prijs gereserveerde auto/uur veld!",
@@ -257,7 +260,7 @@ public class SettingsController extends AbstractView implements ActionListener, 
 	@Override
 	public void stateChanged(ChangeEvent e) {
 		if (e.getSource() == extraJazzSlider) {
-			model.setsyntJazz(1.0 * extraJazzSlider.getValue()/10);
+			model.setsyntJazz(1.0 * extraJazzSlider.getValue());
 		}
 		
 	}

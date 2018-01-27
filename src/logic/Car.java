@@ -3,27 +3,23 @@ package logic;
 import java.awt.*;
 
 public abstract class Car {
-
     private Location location;
     private int minutesLeft;
     private boolean isPaying;
     private boolean hasToPay;
     protected int stayMinutes;
     protected double payment;
-    protected double paymentADH;
-    protected double paymentres;
-    public static double carprice;
-    
-
-    
+    //protected double paymentADH;
+    //protected double paymentres;
+    //public static double carprice;
     
     //auto's
     public Car() {
     }
     
-    public static void SetCarPrice(double setcarprice) {
-    	carprice = setcarprice;
-    }
+//    public static void SetCarPrice(double setcarprice) {
+//    	carprice = setcarprice;
+//    }
 
     //Haal de locatie op van de auto
     public Location getLocation() {
@@ -77,29 +73,29 @@ public abstract class Car {
     
  // Nieuwe getpayment
     public double getPayment() {
-    	return payment = paymentres + paymentADH;
+    	return payment;
     }
     
     // Nieuwe getpaymentADH
-    public double getPaymentADH() {
-    	return paymentADH;
-    }
+    //public double getPaymentADH() {
+    //	return paymentADH;
+    //}
     
-    public double getPaymentres() {
-    	return paymentres;
-    }
+    //public double getPaymentres() {
+    //	return paymentres;
+    //}
     
 
     public void tick() {
-    	if(this instanceof ResCar) {
-    		if(getStayMinute()-15 == getMinutesLeft()) {
-    	    	setColor();
-    		}
-    	}
+    	//if(this instanceof ResCar) {
+    	//	if(getStayMinute()-15 == getMinutesLeft()) {
+    	//    	setColor();
+    	//	}
+    	//}
     	minutesLeft--;
     }
     
     public abstract Color getColor();
-    public abstract void setColor();
+    //public abstract void setColor();
    	 
 }

@@ -49,8 +49,8 @@ public class PercentView extends AbstractView{
         text += "<tr><td>Profit avg per week: </td>" + "<td>" + formatter.format(model.getProfitAv() * 24 * 7)+ "</td></tr>";
         text += "<tr><td>Profit avg per maand:</td> " + "<td>" + formatter.format(model.getProfitAv() * 24 * 365 / 12)+ "</td></tr>";
         text += "<tr><td>Profit avg per jaar:</td> " + "<td>" + formatter.format(model.getProfitAv() * 24 * 365)+ "</td></tr>";
-        text += "<tr><td>Profit totaal normale/rode auto's: </td>" + "<td>" + formatter.format(model.getProfitADH())+ "</td></tr>";
-        text += "<tr><td>Profit totaal reserverende/blauw auto's: </td>" + "<td>" + formatter.format(model.getProfitres())+ "</td></tr>";
+        text += "<tr><td>Profit totaal normale/rode auto's: </td>" + "<td>" + formatter.format(model.getProfitAdHoc())+ "</td></tr>";
+        text += "<tr><td>Profit totaal reserverende/blauw auto's: </td>" + "<td>" + formatter.format(model.getProfitRes())+ "</td></tr>";
         text += "<tr><td>Profit misgelopen: </td>"+ "<td>" + formatter.format(model.getMissedProfit())+"</td></tr></html>";
         show.setText(text);
        
