@@ -53,8 +53,5 @@ public class SplashScreen extends JWindow{
 	
 	public void paint(Graphics g) {
 		g.drawImage(image, 0, 0, null);
-		g.setColor(Color.BLACK);
-		g.setFont(new Font("Arial", Font.PLAIN, 48));
-		g.drawString("", 0, 220);
 	}
 }

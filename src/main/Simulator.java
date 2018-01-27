@@ -24,7 +24,7 @@ import view.TimeView;
 import view.Labels;
 import view.LineGraphView;
 import view.NumberView;
-import view.PercentView;
+import view.ProfitView;
 import view.PieChartView;
 import view.QueueView;
 import view.LineGraphViewProfits;
@@ -78,7 +78,7 @@ public class Simulator extends JFrame implements ComponentListener{
 		carParkView = new CarParkView(model);
 		tijdView = new TimeView(model);
 		labels = new Labels(model);
-		percentView = new PercentView(model);
+		percentView = new ProfitView(model);
 		pieChartView = new PieChartView(model);
 		numberView = new NumberView(model);
 		histogramView = new HistogramView(model);

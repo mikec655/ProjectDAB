@@ -18,6 +18,7 @@ import javax.swing.event.ChangeListener;
 
 import logic.AdHocCar;
 import logic.Model;
+import logic.ParkingPassCar;
 import logic.ResCar;
 import view.AbstractView;
 
@@ -231,7 +232,7 @@ public class SettingsController extends AbstractView implements ActionListener, 
 		}
 		if (e.getSource() == passCarPriceButton) {
 			try {
-				//model.set(Integer.parseInt(passCarPriceField.getText().trim()));
+				ParkingPassCar.setPricePerMonth(Integer.parseInt(passCarPriceField.getText().trim()));
 				passCarPriceField.setText("");
 			} catch (Exception ex) {
 				JOptionPane.showMessageDialog(parent,

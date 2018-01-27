@@ -27,11 +27,11 @@ public class ParkingPassCar extends Car {
 		return "2";
 	}
 	
-	public double getPricePerMonth(){
+	public static double getPricePerMonth(){
     	return pricePerMonth;
     }
 	
-	public void setPricePerMonth(double price) {
+	public static void setPricePerMonth(double price) {
 		pricePerMonth = price;
 	}
     

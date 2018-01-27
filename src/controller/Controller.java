@@ -4,6 +4,9 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JProgressBar;
 import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -12,6 +15,7 @@ import logic.Model;
 
 public class Controller extends AbstractController implements ActionListener, ChangeListener{
 	private static final long serialVersionUID = -3877309321229212169L;
+	JLabel label;
 	JButton startButton;
 	JButton pauseButton;
 	JButton resetButton;
@@ -22,10 +26,12 @@ public class Controller extends AbstractController implements ActionListener, Ch
 	JButton plusThirtyDaysButton;
 	JButton plusOneYearButton;
 	JSlider speedSlider;
+	JProgressBar progressBar;
 	
 	//Constructor controller
 	public Controller(Model model) {
 		super(model);
+		label = new JLabel();
 		startButton = new JButton("Start");
 		pauseButton = new JButton("Pauze");
 		resetButton = new JButton("Reset");
@@ -36,6 +42,7 @@ public class Controller extends AbstractController implements ActionListener, Ch
 		plusThirtyDaysButton = new JButton("+30 dagen");
 		plusOneYearButton = new JButton("+1 jaar");
 		speedSlider = new JSlider(-3, 1, -2);
+		progressBar = new JProgressBar();
 		setUpPanel();
 	}
 	
@@ -52,6 +59,7 @@ public class Controller extends AbstractController implements ActionListener, Ch
 		plusThirtyDaysButton.addActionListener(this);
 		plusOneYearButton.addActionListener(this);
 		speedSlider.addChangeListener(this);
+		//add(label);
 		add(startButton);
 		add(pauseButton);
 		add(resetButton);
@@ -62,6 +70,7 @@ public class Controller extends AbstractController implements ActionListener, Ch
 		add(plusThirtyDaysButton);
 		add(plusOneYearButton);
 		add(speedSlider);
+		add(progressBar);
 	}
 	
 	private int calculateTickPause() {
@@ -81,13 +90,14 @@ public class Controller extends AbstractController implements ActionListener, Ch
 			model.reset(calculateTickPause());
 		}
 		if (e.getSource() == plusOneMinuteButton) {
-			model.skip(1);
+			int min = 1;
+			model.skip(min);
 		}
 		if (e.getSource() == plusOneHourButton) {
 			model.skip(60);
 		}
 		if (e.getSource() == plusOneDayButton) {
-			model.skip(24 *60);
+			model.skip(24*60);
 		}
 		if (e.getSource() == plusOneWeekButton) {
 			model.skip(24*60*7);

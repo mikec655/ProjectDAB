@@ -2,6 +2,10 @@ package logic;
  
 import java.util.Calendar;
 import java.util.Random;
+
+import javax.swing.JPanel;
+import javax.swing.JWindow;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -52,6 +56,7 @@ public class Model extends AbstractModel implements Runnable{
    
     //payment.
     private double profit;
+    private double averageProfit;
     private double missedProfit;
    
    //type auto in garage.
@@ -139,11 +144,11 @@ public class Model extends AbstractModel implements Runnable{
         exitSpeed = 5;
         
         //waardes profits etc terug naar 0.
-        profit = 0;
+        
         numberOfAdHocCars = 0;
         numberOfResCars = 0;
         numberOfPassCars = 0;
-        missedProfit =0;
+        
         
         //gegevens autos die queueleaven naar 0;
         leavingQueuePassCar = 0;
@@ -151,9 +156,12 @@ public class Model extends AbstractModel implements Runnable{
         leavingQueueAdHocCar = 0;
         
         //profit per auto.
+        profit = 0;
+        averageProfit = 0;
         profitAdHoc = 0;
         profitRes = 0;
         profitPass = 0;
+        missedProfit = 0;
         
         //Cars  numberOfFloor, numberOfRows, numberOfPlaces.
         cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
@@ -301,39 +309,35 @@ public class Model extends AbstractModel implements Runnable{
             car = getFirstLeavingCar();
         }
     }
-    //returned het aantal minuten van een auto die gebleven is.
-    public int gStayMinute() {
-        return getMinute();
-    }
    
     //Dit laat de auto's betalen.
     private void carsPaying(){
         int i = 0;
         while (paymentCarQueue.carsInQueue()>0 && i < paymentSpeed){
             Car car = paymentCarQueue.removeCar();
-            profit += car.getPayment();
-            System.out.println(car.getPayment());
             if(car instanceof AdHocCar) profitAdHoc += car.getPayment();
             if(car instanceof ResCar) profitRes += car.getPayment();
             carLeavesSpot(car);
             i++;
          }
     }
+    
     //returned de average profit.
     public double getProfitAverage() {
-        return profit / minutesRunning * 60;
+        if (getProfit() == 0) return 0;
+        return getProfit() / minutesRunning * 60;
     }
     
     //returned de profit.
     public double getProfit() {
-        return profit;
+        return profitAdHoc + profitRes + profitPass;
     }
     //returned de missing profit.
     public double getMissedProfit() {
     	return missedProfit;
     }
     
-    //set gemiste profit naar de totalepayment van alle auto's in de leavingqueue.
+    //update de getalen in de queues
     public void updateQueues() {
     	entranceCarQueue.updateNumbers();
     	entrancePassQueue.updateNumbers();
@@ -341,7 +345,7 @@ public class Model extends AbstractModel implements Runnable{
     
     //Laat de auto's verlaten.
     private void carsLeaving(){
-       int i=0;
+    	int i = 0;
         while (exitCarQueue.carsInQueue()>0 && i < exitSpeed){
             exitCarQueue.removeCar();
             i++;
@@ -351,8 +355,10 @@ public class Model extends AbstractModel implements Runnable{
     //Time methode
     private void advanceTime(){
         //Tijd gaat met 1 minuut omhoog.
+    	int month = getMonth();
         time.add(Calendar.MINUTE, 1);
         minutesRunning++;
+        if (month != getMonth()) updateProfitPass();
     }
    
     //Getters of time
@@ -460,6 +466,7 @@ public class Model extends AbstractModel implements Runnable{
     public void setQueueSize(int queueSize) {
     	this.queueSize = queueSize;
     }
+    //get de queueSize
     public int getQueueSize() {
     	return queueSize;
     }
@@ -486,7 +493,11 @@ public class Model extends AbstractModel implements Runnable{
     }
     //returned de profit van de abbonnementhouders auto's.
     public double getProfitPass() {
-    	return profitAdHoc;
+    	return profitPass;
+    }
+    
+    public void updateProfitPass() {
+    	profitPass += ParkingPassCar.getPricePerMonth() * getNumberOfRows() * getNumberOfPlaces();
     }
     
     //getters om auto hoeveelheden op te halen.
@@ -616,10 +627,10 @@ public class Model extends AbstractModel implements Runnable{
         }
         Car oldCar = getCarAt(location);
         if (oldCar == null) {
-        		cars[location.getFloor()][location.getRow()][location.getPlace()] = car;
-        			car.setLocation(location);
-        			numberOfOpenSpots--;
-        			return true;
+        	cars[location.getFloor()][location.getRow()][location.getPlace()] = car;
+			car.setLocation(location);
+			numberOfOpenSpots--;
+			return true;
         }
         return false;
     }

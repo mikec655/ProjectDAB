@@ -45,6 +45,9 @@ public class CarQueue {
     }
     
     public void updateNumbers() {
+    	numberOfResCars = 0;
+        numberOfAdHocCars = 0;
+        numberOfPassCars = 0;
     	for(Car carnaam: queue) {
         	if(carnaam instanceof ResCar) {
         		numberOfResCars++;

@@ -8,8 +8,6 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 
-import javax.swing.border.*;
-
 //Labels extends AbstractView.
 public class Labels extends AbstractView{
 	private static final long serialVersionUID = 1;
@@ -64,7 +62,7 @@ public class Labels extends AbstractView{
 		//g.setColor(Color.white);
 		//g.fillRect(0, 0, 300, 342); 
 		g.setColor(Color.BLACK);
-		g.drawRect(0, 0, 300, 342);
+		g.drawRect(0, 0, 300, 325);
     }
 	
 }

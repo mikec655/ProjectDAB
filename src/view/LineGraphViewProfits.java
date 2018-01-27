@@ -54,7 +54,7 @@ public class LineGraphViewProfits extends AbstractView{
 			}
 			g.setColor(Color.black);
 			g.drawString("0                                                                     <--Afgelopen 24 uur ",0,300);
-			g.drawString("avgprofit", 0, 30);
+			g.drawString("Gem. omzet/uur", 0, 30);
 			g.drawString("500",0,10);
 		} catch(Exception e) {
 		}
