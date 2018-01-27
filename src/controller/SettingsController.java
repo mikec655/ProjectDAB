@@ -19,6 +19,7 @@ import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import logic.Car;
 import logic.Model;
 import view.AbstractView;
 
@@ -66,9 +67,6 @@ public class SettingsController extends AbstractView implements ActionListener, 
 	public SettingsController(Model model, JFrame frame) {
 		super(model);
 		parent = frame;
-		//Prijs per auto
-		//Toegevoegde drukte per auto
-		//Waarschuwing schermen
 		enterSpeedPanel = new JPanel();
 		enterSpeedLabel = new JLabel("Binnenrij snelheid:");
 		enterSpeedField = new JTextField(12);
@@ -212,7 +210,7 @@ public class SettingsController extends AbstractView implements ActionListener, 
 		}
 		if (e.getSource() == adHocCarPriceButton) {
 			try {
-				//model.set(Integer.parseInt(adHocCarPriceField.getText().trim()));
+				Car.SetCarPrice(Double.parseDouble(adHocCarPriceField.getText().trim()));
 				adHocCarPriceField.setText("");
 			} catch (Exception ex) {
 				JOptionPane.showMessageDialog(parent,
@@ -223,7 +221,7 @@ public class SettingsController extends AbstractView implements ActionListener, 
 		}
 		if (e.getSource() == resCarPriceButton) {
 			try {
-				//model.set(Integer.parseInt(resCarPriceField.getText().trim()));
+				Car.SetCarPrice(Double.parseDouble(resCarPriceField.getText().trim()));
 				resCarPriceField.setText("");
 			} catch (Exception ex) {
 				JOptionPane.showMessageDialog(parent,
