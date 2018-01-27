@@ -67,7 +67,7 @@ public class LineGraphView extends AbstractView{
 				oldX += 1;
 				oldY = y;
 			}
-			g.setColor(Color.blue);
+			g.setColor(Color.green);
 			oldY = 0;
 			oldX = -6.0;
 			for(Integer y : pointsPass) {
@@ -75,7 +75,7 @@ public class LineGraphView extends AbstractView{
 				oldX += 1;
 				oldY = y;
 			}
-			g.setColor(Color.yellow);
+			g.setColor(Color.blue);
 			oldY = 0;
 			oldX = -6.0;
 			for(Integer y : pointsRes) {
@@ -83,10 +83,18 @@ public class LineGraphView extends AbstractView{
 				oldX += 1;
 				oldY = y;
 			}
+			g.setColor(Color.black);
+			g.drawString("0                                                                     <--Afgelopen 24 uur ",0,300);
+			g.drawString("360(MAX)", 0,10);
+			g.drawString("Aantal auto's", 0, 30);
+			
+			
+			
 		} catch(Exception e) {
 			
 		}
 
 	}
+	
+	}
 
-}

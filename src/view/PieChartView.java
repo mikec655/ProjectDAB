@@ -42,9 +42,9 @@ public class PieChartView extends AbstractView {
 		g.fillArc(50, 50, 200, 200, 0, 360 );
 		g.setColor(Color.RED);
 		g.fillArc(50, 50, 200, 200, 90, angleAdHoc);
-		g.setColor(Color.BLUE);
+		g.setColor(Color.GREEN);
 		g.fillArc(50, 50, 200, 200, 90 + angleAdHoc, anglePass);
-		g.setColor(Color.YELLOW);
+		g.setColor(Color.BLUE);
 		g.fillArc(50, 50, 200, 200, 90 + angleAdHoc + anglePass, angleRes);
 		g.setColor(Color.BLACK);
 		g.drawArc(50, 50, 200, 200, 90, 360 + 90);

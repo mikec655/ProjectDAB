@@ -13,7 +13,7 @@ public class ParkingPassCar extends Car {
         this.setStayMinute(stayMinutes);
         this.setHasToPay(false);
         payment = 0;
-        color = Color.blue;
+        color = Color.green;
     }
     
     public Color getColor(){
@@ -21,7 +21,7 @@ public class ParkingPassCar extends Car {
     }
     
     public void setColor(){
-    	color = Color.YELLOW;
+    	color = new Color(0,0,255);
     }
     
 }

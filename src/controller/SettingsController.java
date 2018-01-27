@@ -88,7 +88,7 @@ public class SettingsController extends AbstractView implements ActionListener, 
 		resCarPriceField = new JTextField(12);
 		resCarPriceButton = new JButton("Bevestig");
 		passCarPricePanel = new JPanel();
-		passCarPriceLabel = new JLabel("Prijs abbonnement auto/maand:");
+		passCarPriceLabel = new JLabel("Prijs abonnement auto/maand:");
 		passCarPriceField = new JTextField(12);
 		passCarPriceButton = new JButton("Bevestig");
 		queueSizePanel = new JPanel();
@@ -188,7 +188,7 @@ public class SettingsController extends AbstractView implements ActionListener, 
 		}
 		if (e.getSource() == paymentSpeedButton) {
 			try {
-				model.setpaymentSpeed(Integer.parseInt(enterSpeedField.getText().trim()));
+				model.setpaymentSpeed(Integer.parseInt(paymentSpeedField.getText().trim()));
 				paymentSpeedField.setText("");
 			} catch (Exception ex) {
 				JOptionPane.showMessageDialog(parent,
@@ -257,7 +257,7 @@ public class SettingsController extends AbstractView implements ActionListener, 
 	@Override
 	public void stateChanged(ChangeEvent e) {
 		if (e.getSource() == extraJazzSlider) {
-			model.setsyntJazz(1.0 * extraJazzSlider.getValue());
+			model.setsyntJazz(1.0 * extraJazzSlider.getValue()/10);
 		}
 		
 	}

@@ -1,8 +1,7 @@
 package view;
 
-import java.awt.*;
-import java.awt.Graphics;
-import javax.swing.*;
+import java.awt.Dimension;
+
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
@@ -17,6 +16,9 @@ public class QueueView extends AbstractView {
 	private JProgressBar progressBar;
 	private JProgressBar progressBarpas;
 	
+	public Dimension getPreferredSize() {
+        return new Dimension(300, 20);
+    }
 	
 	//Hier wordt de super aangeroepen van de klasse AbstractView.
 	public QueueView(Model model) {
@@ -29,17 +31,17 @@ public class QueueView extends AbstractView {
 	        show1.setVerticalTextPosition(JLabel.TOP);
 	        show1.setHorizontalTextPosition(JLabel.LEFT);
 	        
-	        progressBar = new JProgressBar(0, 20);
+	        progressBar = new JProgressBar(0, model.getQueueSize());
 	        progressBar.setValue(0);
-	        progressBar.setSize(10,2);
+	        progressBar.setPreferredSize(getPreferredSize());
 	        progressBar.setStringPainted(true);
-	        progressBar.setString("0");
+	        progressBar.setString(" 0");
 	        
 	        
-	        progressBarpas = new JProgressBar(0, 21);
+	        progressBarpas = new JProgressBar(0, model.getQueueSize());
 	        progressBarpas.setValue(0);
 	        progressBarpas.setStringPainted(true);
-	        progressBarpas.setString("0");
+	        progressBarpas.setString(" 0");
 	        setUpPanel();
 	}
 	 
@@ -61,15 +63,15 @@ public class QueueView extends AbstractView {
 		 	
 	        String text = "";
 	        text += "<html>";
-	        text += "<table BORDER=0.5 CELLSPACING=0 CELLPADDING=5><tr><th>Auto's in Entrance queue:</th><td>" + model.getentranceCarQueuesize()+ " Totaal.</td></tr>" ;
-	        text += "<tr><th rowspan=2 ALIGN=RIGHT VALIGN=TOP>waarvan:</th><td>"+ model.getamountofAdHocCarinEntrancequeue() +" AdHoccars.</td></tr>";
-	        text +=	"<tr><td>"+ model.getamountofResCarinEntrancequeue() + " Rescars.</td></tr></table>";
+	        text += "<table BORDER=0.5 CELLSPACING=0 CELLPADDING=5><tr><th>Auto's in Regulierewachtrij:</th><td >" + model.getentranceCarQueuesize()+ " Totaal.</td></tr>" ;
+	        text += "<tr><th rowspan=2 ALIGN=RIGHT VALIGN=TOP>waarvan:</th><td WIDTH=120>"+ model.getamountofAdHocCarinEntrancequeue() +" Normaalauto's.</td></tr>";
+	        text +=	"<tr><td  WIDTH=120>"+ model.getamountofResCarinEntrancequeue() + " Reserveerauto's.</td></tr></table>";
 
 	        show.setText(text);
 	        
 	        String text1 = "";
-	        text1 += "<html>";
-	        text1 += "<tr><td>Auto's in Pas queue:</td>"+ "<td>" + model.getentrancePassQueuesize()+ "</td></tr>";
+	        text1 += "<html><br>";
+	        text1 += "<table BORDER=0.5 CELLSPACING=0 CELLPADDING=5  ><tr><th WIDTH=166>Auto's in Abonnementenwachtrij:</th><td WIDTH=100  VALIGN=BOTTOM>" + model.getentrancePassQueuesize()+ " AboAuto's.</td></tr>" ;
 	        show1.setText(text1);
 	        
 	        progressBar.setValue(model.getentranceCarQueuesize());

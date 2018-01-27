@@ -22,7 +22,7 @@ public class SplashScreen extends JWindow{
 		//image = new BufferedImage();
 		panel = new JPanel();
 		getImage();
-		setBounds(0, 0, 1217, 913);
+		setBounds(0, 0, 1294, 580);
 		panel.repaint();
 		getContentPane().add(panel);
 		setLocationRelativeTo(null);
@@ -42,7 +42,7 @@ public class SplashScreen extends JWindow{
 	
 	private void getImage() {
 		try {
-			InputStream stream = Simulator.class.getClassLoader().getResourceAsStream("images/hanze.jpg");
+			InputStream stream = Simulator.class.getClassLoader().getResourceAsStream("images/hanzesplash.png");
 			image = ImageIO.read(stream);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -55,6 +55,6 @@ public class SplashScreen extends JWindow{
 		g.drawImage(image, 0, 0, null);
 		g.setColor(Color.BLACK);
 		g.setFont(new Font("Arial", Font.PLAIN, 48));
-		g.drawString("Version 1.0", 0, 220);
+		g.drawString("", 0, 220);
 	}
 }

@@ -39,9 +39,9 @@ public class NumberView extends AbstractView{
         text += "<tr><td>Aantal Abonnementhouders:</td>" + "<td>" + model.getAmountOfPassCars() + "</td></tr>";
         text += "<tr><td>Aantal Gereserveerde auto's:</td>" + "<td>" + model.getAmountOfResCars() + "</td></tr>";
         text += "<tr><td>Aantal Misgelopen auto's:</td>" + "<td>" + model.getNumberofLeaving() + "</td></tr>";
-        text += "<P ALIGN=LEFT><tr><td> - Waarvan AdhocCar:</td></p>" + "<td>" + model.getamountofAdHocCarleft() + "</td></tr>";
-        text += "<P ALIGN=LEFT><tr><td>- Waarvan ResCar:</td>" + "<td>" + model.getamountofResCarleft() + "</td></tr>";
-        text += "<P ALIGN=LEFT><tr><td> - Waarvan PassCar:</td>" + "<td>" + model.getamountofPassCarleft() + "</td></tr>";
+        text += "<P ALIGN=LEFT><tr><td> - Waarvan normale auto's:</td></p>" + "<td>" + model.getamountofAdHocCarleft() + "</td></tr>";
+        text += "<P ALIGN=LEFT><tr><td>- Waarvan gereserveerde auto's:</td>" + "<td>" + model.getamountofResCarleft() + "</td></tr>";
+        text += "<P ALIGN=LEFT><tr><td> - Waarvan abonnementhouders:</td>" + "<td>" + model.getamountofPassCarleft() + "</td></tr>";
         show.setText(text);
        
     }

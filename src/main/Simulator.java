@@ -66,13 +66,13 @@ public class Simulator extends JFrame implements ComponentListener{
 		settingsController = new SettingsController(model, this);
 		viewPanel = new JPanel();
 		carPanel = new JPanel();
-		carLabel = new JLabel("Auto weergaves");
+		carLabel = new JLabel("Auto weergaven");
 		carTabPane = new JTabbedPane();
 		financialPanel = new JPanel();
-		financialLabel = new JLabel("Financiele weergaves");
+		financialLabel = new JLabel("Financiele weergaven");
 		financialTabPane = new JTabbedPane();
 		queuesPanel = new JPanel();
-		queuesLabel = new JLabel("Wachtrijen weergaves");
+		queuesLabel = new JLabel("Wachtrijen weergaven");
 		queuesTabPane = new JTabbedPane();
 		//westPanel = new JPanel();
 		carParkView = new CarParkView(model);
@@ -108,8 +108,8 @@ public class Simulator extends JFrame implements ComponentListener{
 	private void createTabPanes() {
 		//car tabs
 		carTabPane.addTab("Tekst", null, numberView, "Tekst weergave van auto's");
-		carTabPane.addTab("Cirkel diagram", null, pieChartView, "Cirkeldiagram weergave van auto's");
-		carTabPane.addTab("Histogram", null, histogramView, "Histogramweergave van de auto's");
+		carTabPane.addTab("Cirkeldiagram", null, pieChartView, "Cirkeldiagram weergave van auto's");
+		carTabPane.addTab("Histogram", null, histogramView, "Histogram weergave van de auto's");
 		carTabPane.addTab("Lijngrafiek", null, lineGraphView, "Lijngrafiek weergave van de auto's");
 		
 		//finacial tabs
