@@ -34,9 +34,9 @@ public class PieChartView extends AbstractView {
 	//Paint een circle met daarin het percentage van de auto's.
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		int angleAdHoc = getAngle(model.getAmountOfAdHocCars());
-		int anglePass = getAngle(model.getAmountOfPassCars());
-		int angleRes = getAngle(model.getAmountOfResCars());
+		int angleAdHoc = getAngle(model.getNumberOfAdHocCars());
+		int anglePass = getAngle(model.getNumberOfPassCars());
+		int angleRes = getAngle(model.getNumberOfResCars());
 		
 	 	g.setColor(Color.WHITE);
 		g.fillArc(50, 50, 200, 200, 0, 360 );

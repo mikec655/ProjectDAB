@@ -13,7 +13,7 @@ public class ParkingPassCar extends Car {
         this.setMinutesLeft(stayMinutes);
         this.setStayMinute(stayMinutes);
         this.setHasToPay(false);
-        pricePerMonth = 30;
+        pricePerMonth = 30.0;
         payment = 0;
         color = Color.GREEN;
     }
@@ -21,5 +21,18 @@ public class ParkingPassCar extends Car {
     public Color getColor(){
     	return color;
     }
+
+	@Override
+	public String toString() {
+		return "2";
+	}
+	
+	public double getPricePerMonth(){
+    	return pricePerMonth;
+    }
+	
+	public void setPricePerMonth(double price) {
+		pricePerMonth = price;
+	}
     
 }

@@ -31,9 +31,9 @@ public class LineGraphView extends AbstractView{
 	
 	//Voegt de points toe voor de auto's in de LineGraph.
 	public void addPoints() {
-		pointsAdHoc.add(model.getAmountOfAdHocCars());
-		pointsPass.add(model.getAmountOfPassCars());
-		pointsRes.add(model.getAmountOfResCars());
+		pointsAdHoc.add(model.getNumberOfAdHocCars());
+		pointsPass.add(model.getNumberOfPassCars());
+		pointsRes.add(model.getNumberOfResCars());
 		Iterator<Integer> it = pointsAdHoc.iterator();
 		if (pointsAdHoc.size() == 295) {
 			it.next();

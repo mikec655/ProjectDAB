@@ -9,17 +9,10 @@ public abstract class Car {
     private boolean hasToPay;
     protected int stayMinutes;
     protected double payment;
-    //protected double paymentADH;
-    //protected double paymentres;
-    //public static double carprice;
     
     //auto's
     public Car() {
     }
-    
-//    public static void SetCarPrice(double setcarprice) {
-//    	carprice = setcarprice;
-//    }
 
     //Haal de locatie op van de auto
     public Location getLocation() {
@@ -67,35 +60,20 @@ public abstract class Car {
     
     }
     
-    public void setStayMinute(int stayMinutes1) {
-    	this.stayMinutes = stayMinutes1;
+    public void setStayMinute(int stayMinutes) {
+    	this.stayMinutes = stayMinutes;
     }
     
- // Nieuwe getpayment
+    //Nieuwe getpayment
     public double getPayment() {
     	return payment;
     }
-    
-    // Nieuwe getpaymentADH
-    //public double getPaymentADH() {
-    //	return paymentADH;
-    //}
-    
-    //public double getPaymentres() {
-    //	return paymentres;
-    //}
-    
 
     public void tick() {
-    	//if(this instanceof ResCar) {
-    	//	if(getStayMinute()-15 == getMinutesLeft()) {
-    	//    	setColor();
-    	//	}
-    	//}
     	minutesLeft--;
     }
     
     public abstract Color getColor();
-    //public abstract void setColor();
+    public abstract String toString();
    	 
 }

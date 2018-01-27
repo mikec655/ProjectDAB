@@ -25,9 +25,9 @@ public class HistogramView extends AbstractView {
 	//Paint een circle met daarin het percentage.
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		int sizeAdHoc = model.getAmountOfAdHocCars();
-		int sizePass = model.getAmountOfPassCars();
-		int sizeRes = model.getAmountOfResCars();
+		int sizeAdHoc = model.getNumberOfAdHocCars();
+		int sizePass = model.getNumberOfPassCars();
+		int sizeRes = model.getNumberOfResCars();
 		
 	 	g.setColor(Color.white);
 		g.fillRect(0, 0, 300, 300);
@@ -37,21 +37,21 @@ public class HistogramView extends AbstractView {
 		g.setColor(Color.black); //draw
 		g.drawRect(25,284-sizeAdHoc,50,sizeAdHoc); //x,y,breedte,lengte
 		g.setColor(Color.black);//nummer
-		g.drawString("" + model.getAmountOfAdHocCars(), 37, 283-sizeAdHoc);//x,y,breedte,lengte
+		g.drawString("" + model.getNumberOfAdHocCars(), 37, 283-sizeAdHoc);//x,y,breedte,lengte
 		
 		g.setColor(Color.blue); //fill
 		g.fillRect(125,284-sizeRes,50,sizeRes); //x,y,breedte,lengte
 		g.setColor(Color.black); //draw
 		g.drawRect(125,284-sizeRes,50,sizeRes); //x,y,breedte,lengte
 		g.setColor(Color.black); //nummer
-		g.drawString("" + model.getAmountOfResCars(), 137, 283-sizeRes);//x,y,breedte,lengte
+		g.drawString("" + model.getNumberOfResCars(), 137, 283-sizeRes);//x,y,breedte,lengte
 		
 		g.setColor(Color.green);//fill
 		g.fillRect(225,284-sizePass,50,sizePass); //x,y,breedte,lengte
 		g.setColor(Color.black); //draw
 		g.drawRect(225,284-sizePass,50,sizePass); //x,y,breedte,lengte
 		g.setColor(Color.black);//nummer
-		g.drawString("" + model.getAmountOfPassCars(), 237, 283-sizePass);//x,y,breedte,lengte
+		g.drawString("" + model.getNumberOfPassCars(), 237, 283-sizePass);//x,y,breedte,lengte
 		
 		
 

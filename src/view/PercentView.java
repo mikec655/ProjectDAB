@@ -43,12 +43,12 @@ public class PercentView extends AbstractView{
         String text = "<html>";
         double placepercent = getNumberOfPlaces();
         text += "<tr><td>Het percentage open plaatsen is:</td>" + "<td>" + formatter.format(placepercent) + "%</td></tr>";
-        text += "<tr><td>ProfitAvgPerUur: </td>"  + "<td>" + formatter.format(model.getProfitAv()) + "</td></tr>";
+        text += "<tr><td>ProfitAvgPerUur: </td>"  + "<td>" + formatter.format(model.getProfitAverage()) + "</td></tr>";
         text += "<tr><td>Profit totaal: </td>" +  "<td>" + formatter.format(model.getProfit()) + "</td></tr>";
-        text += "<tr><td>Profit avg per dag: </td>" + "<td>" + formatter.format(model.getProfitAv() * 24)+ "</td></tr>";
-        text += "<tr><td>Profit avg per week: </td>" + "<td>" + formatter.format(model.getProfitAv() * 24 * 7)+ "</td></tr>";
-        text += "<tr><td>Profit avg per maand:</td> " + "<td>" + formatter.format(model.getProfitAv() * 24 * 365 / 12)+ "</td></tr>";
-        text += "<tr><td>Profit avg per jaar:</td> " + "<td>" + formatter.format(model.getProfitAv() * 24 * 365)+ "</td></tr>";
+        text += "<tr><td>Profit avg per dag: </td>" + "<td>" + formatter.format(model.getProfitAverage() * 24)+ "</td></tr>";
+        text += "<tr><td>Profit avg per week: </td>" + "<td>" + formatter.format(model.getProfitAverage() * 24 * 7)+ "</td></tr>";
+        text += "<tr><td>Profit avg per maand:</td> " + "<td>" + formatter.format(model.getProfitAverage() * 24 * 365 / 12)+ "</td></tr>";
+        text += "<tr><td>Profit avg per jaar:</td> " + "<td>" + formatter.format(model.getProfitAverage() * 24 * 365)+ "</td></tr>";
         text += "<tr><td>Profit totaal normale/rode auto's: </td>" + "<td>" + formatter.format(model.getProfitAdHoc())+ "</td></tr>";
         text += "<tr><td>Profit totaal reserverende/blauw auto's: </td>" + "<td>" + formatter.format(model.getProfitRes())+ "</td></tr>";
         text += "<tr><td>Profit misgelopen: </td>"+ "<td>" + formatter.format(model.getMissedProfit())+"</td></tr></html>";

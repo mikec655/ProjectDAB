@@ -28,7 +28,7 @@ public class LineGraphViewProfits extends AbstractView{
 
 	//Voegt de points toe wat nodig is voor de profit van de LineGraph.
 	public void addPoints() {
-		pointsProfit.add((int)model.getProfitAv()/2);
+		pointsProfit.add((int)model.getProfitAverage()/2);
 		Iterator<Integer> it = pointsProfit.iterator();
 		if (pointsProfit.size() == 295) {
 			it.next();

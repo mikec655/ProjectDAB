@@ -40,5 +40,10 @@ public class ResCar extends Car {
     	}
     	super.tick();
     }
+
+	@Override
+	public String toString() {
+		return "3";
+	}
 }
 

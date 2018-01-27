@@ -1,13 +1,10 @@
 package controller;
 
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.AbstractButton;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -20,7 +17,6 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import logic.AdHocCar;
-import logic.Car;
 import logic.Model;
 import logic.ResCar;
 import view.AbstractView;
@@ -90,7 +86,7 @@ public class SettingsController extends AbstractView implements ActionListener, 
 		reservationPriceField = new JTextField(12);
 		reservationPriceButton = new JButton("Bevestig");
 		passCarPricePanel = new JPanel();
-		passCarPriceLabel = new JLabel("Prijs abbonnement per Smaand:");
+		passCarPriceLabel = new JLabel("Prijs abbonnement per maand:");
 		passCarPriceField = new JTextField(12);
 		passCarPriceButton = new JButton("Bevestig");
 		queueSizePanel = new JPanel();

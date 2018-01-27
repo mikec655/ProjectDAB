@@ -5,10 +5,15 @@ import java.util.Queue;
 
 public class CarQueue {
     private Queue<Car> queue = new LinkedList<>();
-    private double money =0;
-    private int numberofrescars = 0;
-    private int numberofadhoccars = 0;
-    private int numberofpasscars = 0;
+    private int numberOfResCars;
+    private int numberOfAdHocCars;
+    private int numberOfPassCars;
+    
+    public CarQueue() {
+    	numberOfResCars = 0;
+        numberOfAdHocCars = 0;
+        numberOfPassCars = 0;
+    }
     
     public boolean addCar(Car car) {
         return queue.add(car);
@@ -25,40 +30,32 @@ public class CarQueue {
     public Car peekCar() {
     	return queue.peek();
     }
+    
     //kan voor elke entrancequeue gebruikt worden.
-    public int getqueueResCar() {
-    	return  numberofrescars;
+    public int getNumberOfResCarsInQueue() {
+    	return numberOfResCars;
     }
     //kan voor elke entrancequeue gebruikt worden.
-    public int getqueueAdHocCar() {
-    	return  numberofadhoccars;
+    public int getNumberOfAdHocCarsInQueue() {
+    	return numberOfAdHocCars;
     }
     //kan voor elke entrancequeue gebruikt worden.
-    public int getqueuePassCar() {
-    	return  numberofpasscars;
+    public int getNumberOfPassCarsInQueue() {
+    	return numberOfPassCars;
     }
     
-    public double getmissedprofit() {
-     money = 0;
-     numberofrescars = 0;
-     numberofadhoccars = 0;
-     numberofpasscars = 0;
-   	 try {  	
-	     for(Car carnaam: queue) {
-	        	if(carnaam instanceof ResCar) {
-	        		numberofrescars +=1;
-	        	}
-	        	else if(carnaam instanceof ParkingPassCar){
-	        		 numberofpasscars +=1;
-	        	}
-	        	else if(carnaam instanceof AdHocCar){
-	        		numberofadhoccars +=1;
-	        	}
-	   	  }
-	   
-    } catch (Exception ex) {
-    	
-    } 
-   	return money;
+    public void updateNumbers() {
+    	for(Car carnaam: queue) {
+        	if(carnaam instanceof ResCar) {
+        		numberOfResCars++;
+        	}
+        	else if(carnaam instanceof ParkingPassCar){
+        		 numberOfPassCars++;
+        	}
+        	else if(carnaam instanceof AdHocCar){
+        		numberOfAdHocCars++;
+        	}
+   	  	}
     }
+    
 }

@@ -30,14 +30,14 @@ public class NumberView extends AbstractView{
     public void updateView() {
         String text = "";
         int total = model.getNumberOfFloors() * model.getNumberOfRows() * model.getNumberOfPlaces();
-        int totalautos = model.getAmountOfResCars() + model.getAmountOfPassCars() + model.getAmountOfAdHocCars();
+        int totalautos = model.getNumberOfResCars() + model.getNumberOfPassCars() + model.getNumberOfAdHocCars();
         text += "<html>";
         text += "<tr><td>Totaal Aantal plaatsen:</td>"+ "<td>" + total + "</td></tr>";
         text += "<tr><td>Totaal Aantal lege plekken:</td>" + "<td>" + model.getNumberOfOpenSpots() + "</td></tr>";
         text += "<tr><td>Totaal Aantal auto's:</td>" + "<td>" + totalautos + "</td></tr>";
-        text += "<tr><td>Aantal Normale auto's:</td>" + "<td>" + model.getAmountOfAdHocCars() + "</td></tr>";
-        text += "<tr><td>Aantal Abonnementhouders:</td>" + "<td>" + model.getAmountOfPassCars() + "</td></tr>";
-        text += "<tr><td>Aantal Gereserveerde auto's:</td>" + "<td>" + model.getAmountOfResCars() + "</td></tr>";
+        text += "<tr><td>Aantal Normale auto's:</td>" + "<td>" + model.getNumberOfAdHocCars() + "</td></tr>";
+        text += "<tr><td>Aantal Abonnementhouders:</td>" + "<td>" + model.getNumberOfPassCars() + "</td></tr>";
+        text += "<tr><td>Aantal Gereserveerde auto's:</td>" + "<td>" + model.getNumberOfResCars() + "</td></tr>";
         text += "<tr><td>Aantal Misgelopen auto's:</td>" + "<td>" + model.getNumberofLeaving() + "</td></tr>";
         text += "<P ALIGN=LEFT><tr><td> - Waarvan normale auto's:</td></p>" + "<td>" + model.getamountofAdHocCarleft() + "</td></tr>";
         text += "<P ALIGN=LEFT><tr><td>- Waarvan gereserveerde auto's:</td>" + "<td>" + model.getamountofResCarleft() + "</td></tr>";
