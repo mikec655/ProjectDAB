@@ -2,10 +2,6 @@ package logic;
  
 import java.util.Calendar;
 import java.util.Random;
-
-import javax.swing.JPanel;
-import javax.swing.JWindow;
-
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;

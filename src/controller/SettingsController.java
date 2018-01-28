@@ -79,7 +79,7 @@ public class SettingsController extends AbstractView implements ActionListener, 
 		exitSpeedField = new JTextField(12);
 		exitSpeedButton = new JButton("Bevestig");
 		pricePerHourPanel = new JPanel();
-		pricePerHourLabel = new JLabel("Prijs per uur:");
+		pricePerHourLabel = new JLabel("Prijs per uur:             ");
 		pricePerHourField = new JTextField(12);
 		pricePerHourButton = new JButton("Bevestig");
 		reservationPricePanel = new JPanel();

@@ -17,8 +17,6 @@ public class ProfitView extends AbstractView{
     public ProfitView(Model model) {
         super(model);
         show = new JLabel();
-        show.setVerticalTextPosition(JLabel.TOP);
-        show.setHorizontalTextPosition(JLabel.RIGHT);
         setUpPanel();
     }
     
@@ -30,6 +28,8 @@ public class ProfitView extends AbstractView{
     //Hier kan je de panel van de FlowLayout mee zien.
     private void setUpPanel(){
         setLayout(new FlowLayout());
+        show.setVerticalTextPosition(JLabel.TOP);
+        show.setHorizontalTextPosition(JLabel.RIGHT);
         add(show);
     }
    
@@ -49,18 +49,7 @@ public class ProfitView extends AbstractView{
         text += "<tr><td>Gem. omzet/week:</td>" + "<td>&euro;" + formatter.format(model.getProfitAverage() * 24 * 7)+ "</td></tr>";
         text += "<tr><td>Gem. omzet/maand:</td> " + "<td>&euro;" + formatter.format(model.getProfitAverage() * 24 * 365 / 12)+ "</td></tr>";
         text += "<tr><td>Gem. omzet/jaar:</td> " + "<td>&euro;" + formatter.format(model.getProfitAverage() * 24 * 365)+ "</td></tr>";
-       
         show.setText(text);
-       
     }
-   
-    //Dit vraagt op of er nog plaatsen over zijn in de CarPark.
-    private double getNumberOfPlaces() {
-    	double tempspots = 1.0 * (model.getNumberOfPlaces() * model.getNumberOfFloors() * model.getNumberOfRows());
-    	double placepercent = 1.0 * model.getNumberOfOpenSpots() / tempspots * 100.00;
-        return placepercent;         
-    }
-   
- 
-       
+     
 }

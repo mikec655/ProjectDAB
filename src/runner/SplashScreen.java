@@ -1,12 +1,10 @@
 package runner;
-import java.awt.Color;
-import java.awt.Font;
+
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import javax.imageio.ImageIO;
-import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JWindow;
 
@@ -16,7 +14,6 @@ public class SplashScreen extends JWindow{
 	private static final long serialVersionUID = -4943328726608367132L;
 	JPanel panel;
 	BufferedImage image;
-	JButton btn;
 	
 	public SplashScreen() {
 		//image = new BufferedImage();
@@ -35,7 +32,6 @@ public class SplashScreen extends JWindow{
 		}
 		
 		setVisible(false);
-		
 		new Simulator();
 		dispose();
 	}
