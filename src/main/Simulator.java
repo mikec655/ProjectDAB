@@ -17,17 +17,7 @@ import javax.swing.JTabbedPane;
 import controller.Controller;
 import controller.SettingsController;
 import logic.Model;
-import view.AbstractView;
-import view.CarParkView;
-import view.HistogramView;
-import view.TimeView;
-import view.Labels;
-import view.LineGraphView;
-import view.NumberView;
-import view.ProfitView;
-import view.ProfitsHistogramView;
-import view.PieChartView;
-import view.QueueView;
+import view.*;
 
 //extends maakt het window aan bij de frontend.
 public class Simulator extends JFrame implements ComponentListener{
@@ -55,6 +45,8 @@ public class Simulator extends JFrame implements ComponentListener{
 	private AbstractView queueView;
 	private AbstractView lineGraphView;
 	private AbstractView profitsHistogramView;
+	private AbstractView pricesView;
+	private AbstractView queueSettingsView;
 	
 	//super zorgt ervoor dat het een titel krijgt, die wordt boven in het frame weergegeven.
 	public Simulator() {
@@ -72,7 +64,6 @@ public class Simulator extends JFrame implements ComponentListener{
 		queuesPanel = new JPanel();
 		queuesLabel = new JLabel("Wachtrijen weergaven");
 		queuesTabPane = new JTabbedPane();
-		//westPanel = new JPanel();
 		carParkView = new CarParkView(model);
 		tijdView = new TimeView(model);
 		labels = new Labels(model);
@@ -83,6 +74,8 @@ public class Simulator extends JFrame implements ComponentListener{
 		queueView = new QueueView(model);
 		lineGraphView = new LineGraphView(model);
 		profitsHistogramView = new ProfitsHistogramView(model);
+		pricesView = new PricesView(model);
+		queueSettingsView = new QueueSettingsView(model);
 		setUpFrame();
 	}
 
@@ -111,11 +104,13 @@ public class Simulator extends JFrame implements ComponentListener{
 		carTabPane.addTab("Lijngrafiek", null, lineGraphView, "Lijngrafiek weergave van de auto's");
 		
 		//finacial tabs
-		financialTabPane.addTab("Tekst", null, percentView, "Tekst weergave van de omzet");
+		financialTabPane.addTab("Omzet", null, percentView, "Tekst weergave van de omzet");
+		financialTabPane.addTab("Prijzen", null, pricesView, "Tekst weergave van de prijzen");
 		financialTabPane.addTab("Diagram", null, profitsHistogramView, "Diagram weergave van de omzet van de afgelopen 12 maanden");
 		
 		//queues tabs
-		queuesTabPane.addTab("Tekst", null, queueView, "Tekst weergave van rijen");
+		queuesTabPane.addTab("Rijen", null, queueView, "Tekst weergave van de rijen");
+		queuesTabPane.addTab("Snelheid/Grootte", null, queueSettingsView, "Tekst weergave van de instellingen van de rijen");
 	}
 
 	private void setIcon() {

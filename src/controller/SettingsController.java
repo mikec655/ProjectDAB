@@ -91,7 +91,6 @@ public class SettingsController extends AbstractView implements ActionListener, 
 		extraJazzPanel = new JPanel();
 		extraJazzLabel = new JLabel("Extra drukte normale auto's:");
 		extraJazzSlider = new JSlider(0, 20, 0);
-		
 		setUpPanel();
 	}
 	
@@ -231,6 +230,7 @@ public class SettingsController extends AbstractView implements ActionListener, 
 					    JOptionPane.ERROR_MESSAGE);
 			}
 		}
+		model.notifyViews();
 	}
 
 	@Override

@@ -426,16 +426,16 @@ public class Model extends AbstractModel implements Runnable{
     }  
    
     //Getters of speeds
-    public void getenterSpeed(int enterSpeed) {
-        this.enterSpeed = enterSpeed;
+    public int getenterSpeed() {
+        return enterSpeed;
     }
     //Getter van de paymentSpeed.
-    public void getpaymentSpeed(int paymentSpeed) {
-        this.paymentSpeed = paymentSpeed;
+    public int getpaymentSpeed() {
+        return paymentSpeed;
     }
     //Getter van de exitSpeed.
-    public void getexitSpeed(int exitSpeed) {
-        this.exitSpeed = exitSpeed;
+    public int getexitSpeed() {
+        return exitSpeed;
     } 
    
     //Setters of speeds
