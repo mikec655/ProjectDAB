@@ -89,7 +89,7 @@ public class SettingsController extends AbstractView implements ActionListener, 
 		queueSizeField = new JTextField(12);
 		queueSizeButton = new JButton("Bevestig");
 		extraJazzPanel = new JPanel();
-		extraJazzLabel = new JLabel("Extra drukte normale auto's:");
+		extraJazzLabel = new JLabel("Extra drukte:                  ");
 		extraJazzSlider = new JSlider(0, 20, 0);
 		setUpPanel();
 	}
