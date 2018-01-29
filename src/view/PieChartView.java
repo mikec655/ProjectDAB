@@ -60,8 +60,6 @@ public class PieChartView extends AbstractView {
 		int NORES = angleRes;
 		int EMPTY = 540 - angleAdHoc - anglePass - angleRes;
 		
-		//System.out.println(angleAdHoc + anglePass + angleRes);
-		System.out.println(ADHCAR);
 	 	g.setColor(Color.WHITE);
 		g.fillArc(50, 50, 200, 200, 0, 360 );
 		String str = "grafiek";
