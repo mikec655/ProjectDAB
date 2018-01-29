@@ -4,7 +4,6 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
-import javax.swing.JProgressBar;
 import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -23,7 +22,6 @@ public class Controller extends AbstractController implements ActionListener, Ch
 	JButton plusThirtyDaysButton;
 	JButton plusOneYearButton;
 	JSlider speedSlider;
-	JProgressBar progressBar;
 	
 	//Constructor controller
 	public Controller(Model model) {
@@ -38,7 +36,6 @@ public class Controller extends AbstractController implements ActionListener, Ch
 		plusThirtyDaysButton = new JButton("+30 dagen");
 		plusOneYearButton = new JButton("+1 jaar");
 		speedSlider = new JSlider(-3, 0, -2);
-		progressBar = new JProgressBar();
 		setUpPanel();
 	}
 	
@@ -65,7 +62,6 @@ public class Controller extends AbstractController implements ActionListener, Ch
 		add(plusThirtyDaysButton);
 		add(plusOneYearButton);
 		add(speedSlider);
-		add(progressBar);
 	}
 	
 	private int calculateTickPause() {

@@ -40,7 +40,7 @@ public class Model extends AbstractModel implements Runnable{
     private int[][] arrivalsPass;
     private int[][] arrivalsAdHoc;
     private int[][] arrivalsRes;
-    private double syntJazz;
+    private int syntJazz;
    
     //Speed.
     private int enterSpeed; //Aantal auto's dat per minuut naar binnen mogen.
@@ -55,7 +55,7 @@ public class Model extends AbstractModel implements Runnable{
     private double averageProfit;
     private double missedProfit;
    
-   //type auto in garage.
+    //type auto in garage.
     private int numberOfAdHocCars;
     private int numberOfResCars;
     private int numberOfPassCars;
@@ -85,6 +85,7 @@ public class Model extends AbstractModel implements Runnable{
             } catch (Exception e) {}
         }
     }
+    
     //Skipt een minuut.
     public void skip(int minutes) {
     	boolean wasRunning = false;
@@ -132,7 +133,7 @@ public class Model extends AbstractModel implements Runnable{
         arrivalsAdHoc = readArrivalsFile("arrivalsAdHoc.txt");
         arrivalsPass = readArrivalsFile("arrivalsPass.txt");
         arrivalsRes = readArrivalsFile("arrivalsRes.txt");
-        syntJazz = 1.0;
+        syntJazz = 0;
        
         //Speeds.
         enterSpeed = 3;
@@ -404,7 +405,6 @@ public class Model extends AbstractModel implements Runnable{
     public int getNumberofLeaving() {
     	return leavingQueueAdHocCar + leavingQueuePassCar + leavingQueueResCar;
     }
-    
      
     //Setters of places
     //set de nummer van het aantal floors die er zijn.
@@ -435,11 +435,7 @@ public class Model extends AbstractModel implements Runnable{
     //Getter van de exitSpeed.
     public void getexitSpeed(int exitSpeed) {
         this.exitSpeed = exitSpeed;
-    }
-    //Getter van de synthJazz.
-    public void getsyntJazz(double syntJazz) {
-        this.syntJazz=syntJazz ;
-    }
+    } 
    
     //Setters of speeds
     //set de enteringSpeed.
@@ -455,8 +451,8 @@ public class Model extends AbstractModel implements Runnable{
         this.exitSpeed = exitSpeed;
     }
     //set de synthJazz?
-    public void setsyntJazz(double syntJazz) {
-        this.syntJazz=syntJazz ;
+    public void setSyntJazz(int syntJazz) {
+        this.syntJazz = syntJazz ;
     }
     //set de queueSize
     public void setQueueSize(int queueSize) {
@@ -554,7 +550,7 @@ public class Model extends AbstractModel implements Runnable{
     private int getNumberOfCars(int [][] arrivals){
         Random random = new Random();
         //Kijkt naar de average nummer van auto's die er dat uur geweest zijn.
-        double averageNumberOfCarsPerHour = arrivals[getDayOfWeek() - 1][getHour()] * syntJazz;
+        double averageNumberOfCarsPerHour = arrivals[getDayOfWeek() - 1][getHour()] + syntJazz;
         //Kijkt naar de average nummer van auto's die er in een minuut geweest zijn.
         double standardDeviation = averageNumberOfCarsPerHour * 0.3;
         double numberOfCarsPerHour = averageNumberOfCarsPerHour + random.nextGaussian() * standardDeviation;

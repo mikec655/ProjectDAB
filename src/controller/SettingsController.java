@@ -90,7 +90,7 @@ public class SettingsController extends AbstractView implements ActionListener, 
 		queueSizeButton = new JButton("Bevestig");
 		extraJazzPanel = new JPanel();
 		extraJazzLabel = new JLabel("Extra drukte normale auto's:");
-		extraJazzSlider = new JSlider(10, 20, 10);
+		extraJazzSlider = new JSlider(0, 20, 0);
 		
 		setUpPanel();
 	}
@@ -236,7 +236,7 @@ public class SettingsController extends AbstractView implements ActionListener, 
 	@Override
 	public void stateChanged(ChangeEvent e) {
 		if (e.getSource() == extraJazzSlider) {
-			model.setsyntJazz(1.0 * extraJazzSlider.getValue());
+			model.setSyntJazz(5 * extraJazzSlider.getValue());
 		}
 		
 	}

@@ -59,7 +59,8 @@ public class QueueView extends AbstractView {
 	 //Update de view waarbij je een legenda kan zien waarin je de:
 	 //Auto's die in de queue staan voor de normale ingang en auto's die in de queue staan voor abonnement plekken.
 	 public void updateView() {
-		 	
+		 	progressBar.setMaximum(model.getQueueSize());
+		 	progressBarpas.setMaximum(model.getQueueSize());
 		 	
 	        String text = "";
 	        text += "<html>";
