@@ -45,10 +45,6 @@ public class SettingsController extends AbstractView implements ActionListener, 
 	private JButton passCarPriceButton;
 	private JLabel extraJazzLabel;
 	private JSlider extraJazzSlider;
-	//private JLabel extraPassJazzLabel;
-	//private JSlider extraPassJazzSlider;
-	//private JLabel extraResJazzLabel;
-	//private JSlider extraResJazzSlider;
 	private JPanel enterSpeedPanel;
 	private JPanel paymentSpeedPanel;
 	private JPanel exitSpeedPanel;
@@ -57,8 +53,6 @@ public class SettingsController extends AbstractView implements ActionListener, 
 	private JPanel passCarPricePanel;
 	private JPanel extraJazzPanel;
 	private JPanel queueSizePanel;
-	//private JPanel extraPassJazzPanel;
-	//private JPanel extraResJazzPanel;
 	private JLabel queueSizeLabel;
 	private JTextField queueSizeField;
 	private JButton queueSizeButton;
@@ -98,13 +92,6 @@ public class SettingsController extends AbstractView implements ActionListener, 
 		extraJazzLabel = new JLabel("Extra drukte normale auto's:");
 		extraJazzSlider = new JSlider(10, 20, 10);
 		
-		//extraPassJazzPanel = new JPanel();
-		//extraPassJazzLabel = new JLabel("Extra drukte abbonnement auto's:");
-		//extraPassJazzSlider = new JSlider(10, 20, 10);
-		//extraResJazzPanel = new JPanel();
-		//extraResJazzLabel = new JLabel("Extra drukte gereserveerde auto's:");
-		//extraResJazzSlider = new JSlider(10, 20, 10);
-
 		setUpPanel();
 	}
 	
@@ -153,14 +140,6 @@ public class SettingsController extends AbstractView implements ActionListener, 
 		queueSizePanel.add(queueSizeLabel);
 		queueSizePanel.add(queueSizeField);
 		queueSizePanel.add(queueSizeButton);
-		//add(extraPassJazzPanel);
-		//extraPassJazzPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-		//extraPassJazzPanel.add(extraPassJazzLabel);
-		//extraPassJazzPanel.add(extraPassJazzSlider);
-		//add(extraResJazzPanel);
-		//extraResJazzPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-		//extraResJazzPanel.add(extraResJazzLabel);
-		//extraResJazzPanel.add(extraResJazzSlider);
 		enterSpeedButton.addActionListener(this);
 		paymentSpeedButton.addActionListener(this);
 		exitSpeedButton.addActionListener(this);
@@ -187,7 +166,7 @@ public class SettingsController extends AbstractView implements ActionListener, 
 		}
 		if (e.getSource() == paymentSpeedButton) {
 			try {
-				model.setpaymentSpeed(Integer.parseInt(enterSpeedField.getText().trim()));
+				model.setpaymentSpeed(Integer.parseInt(paymentSpeedField.getText().trim()));
 				paymentSpeedField.setText("");
 			} catch (Exception ex) {
 				JOptionPane.showMessageDialog(parent,
