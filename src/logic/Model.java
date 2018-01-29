@@ -353,7 +353,7 @@ public class Model extends AbstractModel implements Runnable{
         minutesRunning++;
         if (month != getMonth()) {
         	updateProfitPass();
-        	monthProfit += getProfitPass();
+        	monthProfit += ParkingPassCar.getPricePerMonth() * getNumberOfRows() * getNumberOfPlaces();
         	addProfit();
         	monthProfit = 0;
         }
