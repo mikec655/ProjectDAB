@@ -97,10 +97,14 @@ public class Controller extends AbstractController implements ActionListener, Ch
 			model.skip(24*60*7);
 		}
 		if (e.getSource() == plusThirtyDaysButton) {
+			plusThirtyDaysButton.setEnabled(false);
 			model.skip(24*60*30);
+			plusThirtyDaysButton.setEnabled(true);
 		}
 		if (e.getSource() == plusOneYearButton) {
+			plusOneYearButton.setEnabled(false);
 			model.skip(24*60*365);
+			plusOneYearButton.setEnabled(true);
 		}
 	}
 	
