@@ -3,7 +3,6 @@ package logic;
 import java.awt.*;
 
 public abstract class Car {
-
     private Location location;
     private int minutesLeft;
     private boolean isPaying;
@@ -13,9 +12,8 @@ public abstract class Car {
     
     //auto's
     public Car() {
-
     }
-    
+
     //Haal de locatie op van de auto
     public Location getLocation() {
         return location;
@@ -62,26 +60,20 @@ public abstract class Car {
     
     }
     
-    public void setStayMinute(int stayMinutes1) {
-    	this.stayMinutes = stayMinutes1;
+    public void setStayMinute(int stayMinutes) {
+    	this.stayMinutes = stayMinutes;
     }
     
-    // Nieuwe getpaymentADH
+    //Nieuwe getpayment
     public double getPayment() {
     	return payment;
     }
 
-
     public void tick() {
-    	if(this instanceof ResCar) {
-    		if(getStayMinute()-15 == getMinutesLeft()) {
-    	    	setColor();
-    		}
-    	}
     	minutesLeft--;
     }
     
     public abstract Color getColor();
-    public abstract void setColor();
+    public abstract String toString();
    	 
 }

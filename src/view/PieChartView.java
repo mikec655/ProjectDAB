@@ -1,5 +1,5 @@
 package view;
-//color draw a line or circel
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -7,45 +7,74 @@ import java.awt.Graphics;
 import logic.Model;
 
 
-//PieChartView extends AbstractView 
+/**
+ * Hier word de PieChart beschreven en hoe je de angel uit kan rekenen.
+ * @author bernt
+ * @version 1.0
+ *
+ */
 public class PieChartView extends AbstractView {
 	private static final long serialVersionUID = -3842302968396266777L;
 	
-//Hier word de super aangeroepen van de klasse AbstractView.
+/**
+ * Eerst word het model mee gegeven aan de PieChart.
+ * @param model
+ */
 	public PieChartView(Model model) {
 		super(model);
 	}
 	
 	
-	//Hier word de dimension van de car gezet.
+/**
+ * Hier word de Dimensie weergegeven qua lengte 300, 300
+ */
 	public Dimension getPreferredSize() {
-        return new Dimension(250, 250);
+        return new Dimension(300, 300);
     }
 
+/**
+ * Hier word de int gecast omdat je gewoon een integer nodig hebt.
+ * @param amountOfCars
+ * @return (int) angle 
+ */
 	private int getAngle(int amountOfCars) {
 		int total = model.getNumberOfFloors() * model.getNumberOfRows() * model.getNumberOfPlaces();
 		double angle =  1.0 * (double) amountOfCars / (double) total * 360.0;
-		//System.out.println("angel: " + angle);
 		return (int) angle;
 	}
 	
 	
-	//paint een circelmet daarin het percentage.
+/**
+ * Hier word het aantal auto's opgehaald. De auto's die worden ophgehaald worden gedeeld
+ * door het totaal aantal auto's En dat dan keer 360 gedaan. in getAngle. 
+ * @param Graphics g
+ */
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		int angleAdHoc = getAngle(model.getAmountOfAdHocCars());
-		//int anglePass = getAngle(model.getAmountOfPassCars());
-		int angleRes = getAngle(model.getAmountOfResCars());
-		int angleOpen = getAngle(model.getNumberOfOpenSpots());
+		int angleAdHoc = getAngle(model.getNumberOfAdHocCars());
+		int anglePass = getAngle(model.getNumberOfPassCars());
+		int angleRes = getAngle(model.getNumberOfResCars());
 		
-	 	g.setColor(Color.BLUE);
-		g.fillArc(25, 25, 200, 200, 90, 360 + 90);
+		int ADHCAR = angleAdHoc;
+		int NOPASS = anglePass;
+		int NORES = angleRes;
+		int EMPTY = 540 - angleAdHoc - anglePass - angleRes;
+		
+	 	g.setColor(Color.WHITE);
+		g.fillArc(50, 50, 200, 200, 0, 360 );
+		String str = "grafiek";
+		g.drawString("4. lege plekken"+ ADHCAR , 10, 55);
 		g.setColor(Color.RED);
-		g.fillArc(25, 25, 200, 200, 90, angleAdHoc);
-		g.setColor(Color.YELLOW);
-		g.fillArc(25, 25, 200, 200, 90 + angleAdHoc, angleRes);
-		g.setColor(Color.WHITE);
-		g.fillArc(25, 25, 200, 200, 90 + angleAdHoc + angleRes, angleOpen);
+		g.drawString("Auto's"+ ADHCAR, 10, 10);
+		g.fillArc(50, 50, 200, 200, 90, angleAdHoc);
+		g.setColor(Color.GREEN);
+		g.fillArc(50, 50, 200, 200, 90 + angleAdHoc, anglePass);
+		g.drawString("Auto's" + NOPASS, 10, 25);
+		g.setColor(Color.BLUE);
+		g.fillArc(50, 50, 200, 200, 90 + angleAdHoc + anglePass, angleRes);
+		g.drawString("Auto's"+ NORES, 10, 40);
+		g.setColor(Color.BLACK);
+		g.drawArc(50, 50, 200, 200, 90, 360 + 90);
 	}
 
 				

@@ -1,36 +1,33 @@
 package view;
 
-import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import logic.Model;
-
-import java.awt.Color;
 import java.awt.FlowLayout;
-import javax.swing.border.*;
+import java.awt.Font;
 
+//TimeView extends AbstractView.
 public class TimeView extends AbstractView{
 	private static final long serialVersionUID = 1;
-	private Border blackline;
 	private JLabel tijdshow;
-	
+
+	//Hier wordt de super aangeroepen van de klasse AbstractView.
 	public TimeView(Model model) {
 		super(model);
-		
-		blackline = BorderFactory.createLineBorder(Color.black, 1 );
 		tijdshow = new JLabel();
 		tijdshow.setVerticalTextPosition(JLabel.BOTTOM);
 		tijdshow.setHorizontalTextPosition(JLabel.CENTER);
 		tijdshow.setOpaque(true);
-		tijdshow.setBackground(Color.WHITE);
-		tijdshow.setBorder(new CompoundBorder((blackline),BorderFactory.createEmptyBorder(20,20,20,20)));
 		setUpPanel();
 	}
 	
+	//Hier kan je de panel van de FlowLayout mee zien, er wordt ook een tijdshow toegevoegd.
 	private void setUpPanel(){
 		setLayout(new FlowLayout());
+		tijdshow.setFont(new Font(null, Font.PLAIN, 24));
 		add(tijdshow);
 	}
 	
+	//Update de view waarin je de minuut, uur, dag, week, maand en jaar zit dat je op het moment hebt.
 	public void updateView() {
 		String timeString = "";
 		timeString += getClockString(model.getHour(), model.getMinute()) + " ";
@@ -41,6 +38,7 @@ public class TimeView extends AbstractView{
 		tijdshow.setText(timeString);
 	}
 	
+	//Hier wordt de string van de klok aangemaakt voor de uren en minuten die je kan zien.
 	private String getClockString(int hours, int minutes) {
 		String clockString = "";
 		if (model.getHour() < 10) {
@@ -57,6 +55,7 @@ public class TimeView extends AbstractView{
 		return clockString;
 	}
 	
+	//Switchcase voor de dagen in de week.
 	private String getDayString(int day) {
 		switch(day) {
 			case 1 : return "zondag";
@@ -69,7 +68,7 @@ public class TimeView extends AbstractView{
 			default: return "";
 		}
 	}
-	
+	//Switchcase voor de maanden in een jaar.
 	private String getMonthString(int month) {
 		switch(month) {
 			case 0 : return "januari";

@@ -1,37 +1,47 @@
 package view;
 
-import java.awt.GridLayout;
+import java.awt.FlowLayout;
 import javax.swing.JLabel;
 import logic.Model;
 
+//NumberView extends AbstractView
 public class NumberView extends AbstractView{
 	private static final long serialVersionUID = 1337;
     private JLabel show;
    
+   //Hier wordt de super aangeroepen van de klasse AbstractView.
     public NumberView(Model model) {
         super(model);
         show = new JLabel();
         show.setVerticalTextPosition(JLabel.TOP);
-        show.setHorizontalTextPosition(JLabel.RIGHT);
+        show.setHorizontalTextPosition(JLabel.LEFT);
         setUpPanel();
     }
-   
+    
+    //Hier kan je de panel van de FlowLayout mee zien.
     private void setUpPanel(){
-        setLayout(new GridLayout(0, 1));
+        setLayout(new FlowLayout());
         add(show);
     }
    
+    //Update de view met daarbij het aantal plaatsen:
+    //Aantal lege plekken, aantal auto's, abonnementhouders, gereserveerde auto's.
+    //Misgelopen auto's waarbij je kan zien welke auto het is.
     public void updateView() {
         String text = "";
         int total = model.getNumberOfFloors() * model.getNumberOfRows() * model.getNumberOfPlaces();
-        int totalautos = model.getAmountOfResCars() + model.getAmountOfPassCars() + model.getAmountOfAdHocCars();
-        text += "<html> ";
-        text += "Totaal aantal plaatsen: " + total + "<br>";
-        text += "Aantal normale auto's: " + model.getAmountOfAdHocCars() + "<br>";
-        text += "Aantal abbonnementhouder auto's: " + model.getAmountOfPassCars() + "<br>";
-        text += "Aantal gereserveerde auto's: " + model.getAmountOfResCars() + "<br>";
-        text += "Totaal aantal auto's: " + totalautos + "<br>";
-        text += "Aantal lege plekken: " + model.getNumberOfOpenSpots() + "</html>";
+        int totalautos = model.getNumberOfResCars() + model.getNumberOfPassCars() + model.getNumberOfAdHocCars();
+        text += "<html>";
+        text += "<tr><td>Totaal Aantal plaatsen:</td>"+ "<td>" + total + "</td></tr>";
+        text += "<tr><td>Totaal Aantal lege plekken:</td>" + "<td>" + model.getNumberOfOpenSpots() + "</td></tr>";
+        text += "<tr><td>Totaal Aantal auto's:</td>" + "<td>" + totalautos + "</td></tr>";
+        text += "<tr><td>Aantal Normale auto's:</td>" + "<td>" + model.getNumberOfAdHocCars() + "</td></tr>";
+        text += "<tr><td>Aantal Abonnementhouders:</td>" + "<td>" + model.getNumberOfPassCars() + "</td></tr>";
+        text += "<tr><td>Aantal Gereserveerde auto's:</td>" + "<td>" + model.getNumberOfResCars() + "</td></tr>";
+        text += "<tr><td>Aantal Misgelopen auto's:</td>" + "<td>" + model.getNumberofLeaving() + "</td></tr>";
+        text += "<P ALIGN=LEFT><tr><td> - Waarvan normale auto's:</td></p>" + "<td>" + model.getamountofAdHocCarleft() + "</td></tr>";
+        text += "<P ALIGN=LEFT><tr><td>- Waarvan gereserveerde auto's:</td>" + "<td>" + model.getamountofResCarleft() + "</td></tr>";
+        text += "<P ALIGN=LEFT><tr><td> - Waarvan abonnementhouders:</td>" + "<td>" + model.getamountofPassCarleft() + "</td></tr>";
         show.setText(text);
        
     }
