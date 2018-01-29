@@ -25,9 +25,9 @@ import view.Labels;
 import view.LineGraphView;
 import view.NumberView;
 import view.ProfitView;
+import view.ProfitsHistogramView;
 import view.PieChartView;
 import view.QueueView;
-import view.LineGraphViewProfits;
 
 //extends maakt het window aan bij de frontend.
 public class Simulator extends JFrame implements ComponentListener{
@@ -45,7 +45,6 @@ public class Simulator extends JFrame implements ComponentListener{
 	private JPanel queuesPanel;
 	private JLabel queuesLabel;
 	private JTabbedPane queuesTabPane;
-	//private JPanel westPanel;
 	private AbstractView carParkView;
 	private AbstractView tijdView;
 	private AbstractView labels;
@@ -55,8 +54,7 @@ public class Simulator extends JFrame implements ComponentListener{
 	private AbstractView histogramView;
 	private AbstractView queueView;
 	private AbstractView lineGraphView;
-	private AbstractView lineGraphViewProfits;
-
+	private AbstractView profitsHistogramView;
 	
 	//super zorgt ervoor dat het een titel krijgt, die wordt boven in het frame weergegeven.
 	public Simulator() {
@@ -84,7 +82,7 @@ public class Simulator extends JFrame implements ComponentListener{
 		histogramView = new HistogramView(model);
 		queueView = new QueueView(model);
 		lineGraphView = new LineGraphView(model);
-		lineGraphViewProfits = new LineGraphViewProfits(model);
+		profitsHistogramView = new ProfitsHistogramView(model);
 		setUpFrame();
 	}
 
@@ -113,8 +111,8 @@ public class Simulator extends JFrame implements ComponentListener{
 		carTabPane.addTab("Lijngrafiek", null, lineGraphView, "Lijngrafiek weergave van de auto's");
 		
 		//finacial tabs
-		financialTabPane.addTab("Tekst", null, percentView, "Tekst weergave van omzet");
-		financialTabPane.addTab("Lijngrafiek", null, lineGraphViewProfits, "Lijngrafiek weergave van de gemiddelde omzet");
+		financialTabPane.addTab("Tekst", null, percentView, "Tekst weergave van de omzet");
+		financialTabPane.addTab("Diagram", null, profitsHistogramView, "Diagram weergave van de omzet van de afgelopen 12 maanden");
 		
 		//queues tabs
 		queuesTabPane.addTab("Tekst", null, queueView, "Tekst weergave van rijen");

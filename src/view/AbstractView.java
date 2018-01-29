@@ -23,4 +23,8 @@ public abstract class AbstractView extends JPanel {
 	public void addPoints() {
 		
 	}
+	
+	public void addProfit() {
+		
+	}
 }

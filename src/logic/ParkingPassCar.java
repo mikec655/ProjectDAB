@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class ParkingPassCar extends Car {
 	private Color color;
-	private static double pricePerMonth; 
+	private static double pricePerMonth = 30.0; 
     
 	public ParkingPassCar() {
     	Random random = new Random();
@@ -13,7 +13,6 @@ public class ParkingPassCar extends Car {
         this.setMinutesLeft(stayMinutes);
         this.setStayMinute(stayMinutes);
         this.setHasToPay(false);
-        pricePerMonth = 30.0;
         payment = 0;
         color = Color.GREEN;
     }

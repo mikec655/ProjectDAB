@@ -50,20 +50,17 @@ public class Model extends AbstractModel implements Runnable{
     //Cars in een multidimensionale array.
     private Car[][][] cars;
    
-    //payment.
-    private double profit;
-    private double averageProfit;
-    private double missedProfit;
-   
     //type auto in garage.
     private int numberOfAdHocCars;
     private int numberOfResCars;
     private int numberOfPassCars;
     
     //profit per auto.
+    private int monthProfit;
     private double profitAdHoc;
     private double profitRes;
     private double profitPass;
+    private double missedProfit;
     
     //leavingqueue int's.
     private int leavingQueuePassCar;
@@ -141,7 +138,6 @@ public class Model extends AbstractModel implements Runnable{
         exitSpeed = 5;
         
         //waardes profits etc terug naar 0.
-        
         numberOfAdHocCars = 0;
         numberOfResCars = 0;
         numberOfPassCars = 0;
@@ -153,8 +149,7 @@ public class Model extends AbstractModel implements Runnable{
         leavingQueueAdHocCar = 0;
         
         //profit per auto.
-        profit = 0;
-        averageProfit = 0;
+        monthProfit = 0;
         profitAdHoc = 0;
         profitRes = 0;
         profitPass = 0;
@@ -312,6 +307,7 @@ public class Model extends AbstractModel implements Runnable{
         int i = 0;
         while (paymentCarQueue.carsInQueue()>0 && i < paymentSpeed){
             Car car = paymentCarQueue.removeCar();
+            monthProfit += car.getPayment();
             if(car instanceof AdHocCar) profitAdHoc += car.getPayment();
             if(car instanceof ResCar) profitRes += car.getPayment();
             carLeavesSpot(car);
@@ -355,7 +351,12 @@ public class Model extends AbstractModel implements Runnable{
     	int month = getMonth();
         time.add(Calendar.MINUTE, 1);
         minutesRunning++;
-        if (month != getMonth()) updateProfitPass();
+        if (month != getMonth()) {
+        	updateProfitPass();
+        	monthProfit += getProfitPass();
+        	addProfit();
+        	monthProfit = 0;
+        }
     }
    
     //Getters of time
@@ -474,6 +475,10 @@ public class Model extends AbstractModel implements Runnable{
     //returned hoeveel gereserveerde auto's er zijn.
     public int getNumberOfResCars() {
         return numberOfResCars;
+    }
+  //returned de profit van normale auto's.
+    public int getMonthProfit() {
+    	return monthProfit;
     }
     //returned de profit van normale auto's.
     public double getProfitAdHoc() {
