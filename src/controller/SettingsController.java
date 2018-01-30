@@ -81,7 +81,7 @@ public class SettingsController extends AbstractView implements ActionListener, 
 		reservationPriceField = new JTextField(12);
 		reservationPriceButton = new JButton("Bevestig");
 		passCarPricePanel = new JPanel();
-		passCarPriceLabel = new JLabel("Prijs abbonnement per maand:");
+		passCarPriceLabel = new JLabel("Prijs abonnement per maand:");
 		passCarPriceField = new JTextField(12);
 		passCarPriceButton = new JButton("Bevestig");
 		queueSizePanel = new JPanel();

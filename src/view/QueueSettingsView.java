@@ -25,7 +25,7 @@ public class QueueSettingsView extends AbstractView {
     public void updateView() {
         String text = "";
         text += "<html>";
-        text += "<tr><td>Grootte van de Rijen:</td>"+ "<td>" + model.getQueueSize() + "</td></tr>";
+        text += "<tr><td>Grootte van de rijen:</td>"+ "<td>" + model.getQueueSize() + "</td></tr>";
         text += "<tr><td>Binnenrij snelheid</td>" + "<td>" + model.getenterSpeed() + "</td></tr>";
         text += "<tr><td>Betaal snelheid</td>" + "<td>" + model.getpaymentSpeed() + "</td></tr>";
         text += "<tr><td>Uitrij snelheid</td>" + "<td>" + model.getexitSpeed() + "</td></tr>";

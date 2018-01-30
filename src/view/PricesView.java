@@ -34,7 +34,7 @@ public class PricesView extends AbstractView {
         text += "<html>";
         text += "<tr><td>Prijs per uur:</td>"+ "<td>&euro;" + formatter.format(ResCar.pricePerHour) + "</td></tr>";
         text += "<tr><td>Prijs voor reserveren:</td>" + "<td>&euro;" + formatter.format(ResCar.priceReservation) + "</td></tr>";
-        text += "<tr><td>Abbonement prijs per maand:</td>" + "<td>&euro;" + formatter.format(ParkingPassCar.getPricePerMonth()) + "</td></tr>";
+        text += "<tr><td>Abonnement prijs per maand:</td>" + "<td>&euro;" + formatter.format(ParkingPassCar.getPricePerMonth()) + "</td></tr>";
         show.setText(text);
        
     }
